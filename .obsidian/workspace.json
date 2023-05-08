@@ -11,12 +11,8 @@
             "id": "bbe8e6f744ed1672",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PG Data Types.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PG Data Types.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PG Data Types.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "PG Data Types.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -148,10 +140,11 @@
   },
   "active": "bbe8e6f744ed1672",
   "lastOpenFiles": [
+    "Redis.md",
+    "PG Data Types.md",
+    "README.md",
     "PostgreSQL.md",
     "DataBases.md",
-    "PG Data Types.md",
-    "Redis.md",
     "MicrosoftSQL.md",
     "MySQL.md",
     "NoSQL.md",
