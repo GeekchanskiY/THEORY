@@ -27,12 +27,6 @@ Detail info: https://refactoring.guru/design-patterns/factory-method
 
 UML
 ![[Factory Method.png]]
-<p style='font-size: 32px; font-weight: bold;'> Lazy initialization </p>
-
-<p style='font-size: 32px; font-weight: bold;'> Multitone </p>
-
-<p style='font-size: 32px; font-weight: bold;'> Object Pool </p>
-
 <p style='font-size: 32px; font-weight: bold;'> Prototype </p>
 **Prototype** is a creational design pattern that lets you copy existing objects without making your code dependent on their classes.
 
