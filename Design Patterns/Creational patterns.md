@@ -1,0 +1,3 @@
+[[Design Patterns]]
+
+They used to create new instances, which can be previously specified, or just an abstract objects. Abstract the process of instantiation. They make it possible to make the system independent of the method of creating, composing and presenting objects. The template that generates classes uses inheritance to modify the class being instantiated, while the template that generates objects delegates the instantiation to another object.
