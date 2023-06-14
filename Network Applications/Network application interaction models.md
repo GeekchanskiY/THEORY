@@ -1,4 +1,7 @@
-<p style='font-size: 32px; font-weight: bold;'>ISO/OSI</p>
+## ISO/OSI
+
+OSI stands for **Open Systems Interconnection**. It has been developed by ISO – ‘**International Organization for Standardization**‘, in the year 1984. It is a 7-layer architecture with each layer having specific functionality to perform. All these 7 layers work collaboratively to transmit the data from one person to another across the globe.
+
 ![[ISO_OSI+TCP_IP.png]]
 
 Consists of 7 primary levels:
@@ -47,4 +50,19 @@ At the representative level, the data format is defined by applications. The pro
 The main purpose of the level: to determine the ways of interaction
 actions of users with the system (define the interface).
 
-<p style='font-size: 32px; font-weight: bold;'>TCP/IP</p>
+## TCP/IP
+
+![[OSI->TCP_IP.png]]
+
+
+
+
+
+## Difference between TCP/IP and OSI Model
+
+1. TCP refers to Transmission Control Protocol. OSI refers to Open Systems Interconnection.
+2. TCP/IP uses both the session and presentation layer in the application layer itself.OSI uses different session and presentation layers.
+3. TCP/IP follows connectionless a horizontal approach. OSI follows a vertical approach.
+4. The Transport layer in TCP/IP does not provide assurance delivery of packets. In the OSI model, the transport layer provides assurance delivery of packets.
+5. Protocols cannot be replaced easily in TCP/IP model. While in the OSI model, Protocols are better covered and are easy to replace with the technology change.
+6. TCP/IP model network layer only provides connectionless services. Connectionless and connection-oriented services are provided by the network layer in the OSI model.
