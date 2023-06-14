@@ -1,5 +1,3 @@
-[[Hard Skills Roadmap]]
-
 An design pattern is a repeatable architectural design in the field of software design that offers a solution to a design problem within some frequently occurring context
 
 Best sources: 

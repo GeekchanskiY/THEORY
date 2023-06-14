@@ -4,6 +4,10 @@ I'm not sure that the road will be not chaotic because of my current level of kn
 ## Main Topics of this Roadmap:
 
 **1. [[Network applications]]**
-**2. [[Architecture]]**
+**2. [[Architecture Patterns]]**
 **3. [[DataBases]]**
 **4. [[Design Patterns]]**
+**5. [[Development methodology]]**
+**6. [[Python]]**
+**7. [[Programming Basics]]**
+**8. [[Cloud Computing Services]]**

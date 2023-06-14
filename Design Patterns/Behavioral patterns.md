@@ -1,5 +1,3 @@
-[[Design Patterns]]
-
 They used to define the interaction between objects, increasing the flexibility
 
 <p style='font-size: 32px; font-weight: bold;'> Chain of Responsibility </p>
