@@ -1,1 +1,3 @@
-[[Hard Skills Roadmap]]
+
+[[NoSQL]]
+[[SQL]]
