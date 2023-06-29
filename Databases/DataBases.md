@@ -17,3 +17,5 @@ In theoretical computer science, the **CAP theorem**, also named **Brewer's t
 [[NoSQL]]
 
 [[SQL]]
+
+[[SQL vs NoSQL]]

@@ -10,7 +10,7 @@ The following diagram shows an example VPC. The VPC has one subnet in each of th
 ## SERVICE LIST:
 
 ### **1. [[RDS]]**
-
+(relational database service)
 ### **2. [[EKS]]**
 
 ### **3. [[SQS]]**
