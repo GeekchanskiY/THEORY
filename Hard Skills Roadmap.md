@@ -11,3 +11,5 @@ I'm not sure that the road will be not chaotic because of my current level of kn
 **6. [[Python]]**
 **7. [[Programming Basics]]**
 **8. [[Cloud Computing Services]]**
+**9. [[Message Brokers]]**
+**10. [[Math Programming]]**
