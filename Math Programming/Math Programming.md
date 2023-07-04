@@ -22,3 +22,7 @@ Task classification:
 - According to the number of criteria for evaluating alternatives: (Simple single-criteria tasks, Complex multicriteria tasks)
 
 Linear programming problem: find the minimum or maximum of the objective function under constraints.
+
+
+### Typical problems:
+[[Transport problem]]
