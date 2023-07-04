@@ -14,7 +14,7 @@ A _virtual private cloud_ (VPC) is a virtual network dedicated to your AWS acc
 
 A _subnet_ is a range of IP addresses in your VPC. You launch AWS resources, such as Amazon [[EC2]] instances, into your subnets. You can connect a subnet to the internet, other VPCs, and your own data centers, and route traffic to and from your subnets using route tables.
 
-#### Ip adressing for vpc's and subnets
+#### IP adressing for vpc's and subnets
 
 IP addresses enable resources in your VPC to communicate with each other, and with resources over the internet.
 
@@ -30,3 +30,5 @@ Classless Inter-Domain Routing (CIDR) notation is a way of representing an IP ad
 
 #### IPv4 vs IPv6
 ![[AWS_VPC_3.png]]
+
+You can bring part or all of your own public IPv4 address range or IPv6 address range to your AWS account. You continue to own the address range, but AWS advertises it on the internet by default. After you bring the address range to AWS, it appears in your account as an address pool. You can create an Elastic IP address from your IPv4 address pool, and you can associate an IPv6 CIDR block from your IPv6 address pool with a VPC.
