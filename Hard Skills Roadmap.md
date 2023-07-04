@@ -13,3 +13,6 @@ I'm not sure that the road will be not chaotic because of my current level of kn
 **8. [[Cloud Computing Services]]**
 **9. [[Message Brokers]]**
 **10. [[Math Programming]]**
+
+
+[[TODO]]
