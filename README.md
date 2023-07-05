@@ -13,13 +13,4 @@ If you want to fork and complete this repo, here's an style document: [[Styles]]
 
 
 
-TODO:
 
-MVCC 
-microservice
-replication kafka
-меньше перечислений, больше рассказ
-explain,
-explain analyze,
-lambda ограничения
-s3 , классы хранилищ s3, versioning, шифрование,
