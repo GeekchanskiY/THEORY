@@ -44,5 +44,34 @@ if __name__ == '__main__':
 ```
 
 ```python {post}
-print('see you later!')
+pass
+```
+
+### Descriptors
+
+Descriptors let objects customize attribute lookup, storage, and deletion.
+
+They use [[Magic Methods]] like: __ get __ , __ set __ , __ delete __
+
+descr. __ get __ (self, obj, type=None) -> value
+descr. __ set __ (self, obj, value) -> None
+descr. __ delete __ (self, obj) -> None
+
+```run-python
+import os
+
+class DirectorySize:
+
+    def __get__(self, obj, objtype=None):
+        return len(os.listdir(obj.dirname))
+
+class Directory:
+
+    size = DirectorySize()              # Descriptor instance
+
+    def __init__(self, dirname):
+        self.dirname = dirname          # Regular instance attribute
+        
+s = Directory(@vault_path)
+print(f'Objects in the init directory: {s.size}')
 ```
