@@ -1,7 +1,6 @@
 
 The development methodology **consists of multiple sequential phases in a project lifecycle, with some phases being optional, and the order of phases being dependent on the project being undertaken**.
 
-
 ## TDD
 Test-driven development (TDD) is a software development methodology in which developers write tests for their code before they write the code itself. The goal of TDD is to ensure that the code is correct and meets the requirements of the project. TDD follows a specific workflow:
 1. Write a test: The developer writes a test that defines the desired behavior of the code. 
