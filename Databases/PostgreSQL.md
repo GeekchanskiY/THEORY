@@ -17,3 +17,73 @@ In PostgreSQL, an index is a data structure that allows efficient access to spec
 Multi-Version Concurrency Control (MVCC) is an advanced technique for improving database performance in a multi-user environment.Unlike most other database systems which use locks for concurrency control, Postgres maintains data consistency by using a multiversion model. This means that while querying a database each transaction sees a snapshot of data (a _database version_) as it was some time ago, regardless of the current state of the underlying data. This protects the transaction from viewing inconsistent data that could be caused by (other) concurrent transaction updates on the same data rows, providing _transaction isolation_ for each database session.
 
 The main difference between multiversion and lock models is that in MVCC locks acquired for querying (reading) data don't conflict with locks acquired for writing data and so reading never blocks writing and writing never blocks reading.
+
+The ANSI/ISO SQL standard defines four levels of transaction isolation in terms of three phenomena that must be prevented between concurrent transactions. These undesirable phenomena are:
+
+dirty reads
+
+A transaction reads data written by concurrent uncommitted transaction.
+
+non-repeatable reads
+
+A transaction re-reads data it has previously read and finds that data has been modified by another transaction (that committed since the initial read).
+
+phantom read
+
+A transaction re-executes a query returning a set of rows that satisfy a search condition and finds that the set of rows satisfying the condition has changed due to another recently-committed transaction.
+The four isolation levels and the corresponding behaviors are described below.
+<table border="1" class="CALSTABLE">
+      <thead>
+        <tr>
+          <th align="left" valign="top">Isolation Level</th>
+
+          <th align="left" valign="top">Dirty Read</th>
+
+          <th align="left" valign="top">Non-Repeatable Read</th>
+
+          <th align="left" valign="top">Phantom Read</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td align="left" valign="top">Read uncommitted</td>
+
+          <td align="left" valign="top">Possible</td>
+
+          <td align="left" valign="top">Possible</td>
+
+          <td align="left" valign="top">Possible</td>
+        </tr>
+
+        <tr>
+          <td align="left" valign="top">Read committed</td>
+
+          <td align="left" valign="top">Not possible</td>
+
+          <td align="left" valign="top">Possible</td>
+
+          <td align="left" valign="top">Possible</td>
+        </tr>
+
+        <tr>
+          <td align="left" valign="top">Repeatable read</td>
+
+          <td align="left" valign="top">Not possible</td>
+
+          <td align="left" valign="top">Not possible</td>
+
+          <td align="left" valign="top">Possible</td>
+        </tr>
+
+        <tr>
+          <td align="left" valign="top">Serializable</td>
+
+          <td align="left" valign="top">Not possible</td>
+
+          <td align="left" valign="top">Not possible</td>
+
+          <td align="left" valign="top">Not possible</td>
+        </tr>
+      </tbody>
+    </table>

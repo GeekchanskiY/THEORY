@@ -17,3 +17,30 @@ Domain-driven design (DDD) is a software development approach that focuses on mo
 3. The model should guide the design: The model should be used to guide the design of the system, rather than the other way around. 
 4. The model should be iterative: The model should be developed and refined iteratively, through a process of collaboration and feedback between developers and domain experts.
 DDD can be useful for developing complex systems in which the business domain is a key driver of the design. It can help to ensure that the system accurately reflects the needs and requirements of the business and is easy for domain experts to understand and use. However, it can require a significant investment of time and effort, and it may not be suitable for all projects.
+
+## Agile
+Based on their combined experience of developing software and helping others do that, the authors of the manifesto declared that they valued:
+
+- _**Individuals and interactions** over processes and tools_
+- _**Working software** over comprehensive documentation_
+- _**Customer collaboration** over contract negotiation_
+- _**Responding to change** over following a plan_
+
+That is to say, while both sides have value and the items on the right should be considered, the authors felt that the items on the left should have more influence on how people approach their work.
+
+The _Manifesto for Agile Software Development_ is based on twelve principles:
+
+1. Customer satisfaction by early and continuous delivery of valuable software.
+2. Welcome changing requirements, even in late development.
+3. Deliver working software frequently (weeks rather than months).
+4. Close, daily cooperation between business people and developers.
+5. Projects are built around motivated individuals, who should be trusted.
+6. Face-to-face conversation is the best form of communication (co-location).
+7. Working software is the primary measure of progress.
+8. Sustainable development, able to maintain a constant pace.
+9. Continuous attention to technical excellence and good design.
+10. Simplicity—the art of maximizing the amount of work not done—is essential.
+11. Best architectures, requirements, and designs emerge from self-organizing teams.
+12. Regularly, the team reflects on how to become more effective, and adjusts accordingly.
+
+### How to setup scrum
