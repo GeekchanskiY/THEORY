@@ -57,3 +57,21 @@ class Directory:
 s = Directory(@vault_path)
 print(f'Objects in the init directory: {s.size}')
 ```
+
+
+## Python data types:
+There are different types of data types in Python. Some built-in Python data types are:
+
+- **Numeric data types**: _int, float, complex_
+
+- **String data types**: _str_
+
+- **Sequence types**: _list, tuple, range_
+
+- **Binary types**: _bytes, bytearray, memoryview_
+
+- **Mapping data type**: _dict_
+
+- **Boolean type**: _bool_
+
+- **Set data types**: _set, frozenset_

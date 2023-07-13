@@ -19,18 +19,13 @@ Multi-Version Concurrency Control (MVCC) is an advanced technique for improving 
 The main difference between multiversion and lock models is that in MVCC locks acquired for querying (reading) data don't conflict with locks acquired for writing data and so reading never blocks writing and writing never blocks reading.
 
 The ANSI/ISO SQL standard defines four levels of transaction isolation in terms of three phenomena that must be prevented between concurrent transactions. These undesirable phenomena are:
+1. **dirty reads**
+ - A transaction reads data written by concurrent uncommitted transaction.
+2. **non-repeatable reads**
+ - A transaction re-reads data it has previously read and finds that data has been modified by another transaction (that committed since the initial read).
+3. **phantom read**
+ - A transaction re-executes a query returning a set of rows that satisfy a search condition and finds that the set of rows satisfying the condition has changed due to another recently-committed transaction.
 
-dirty reads
-
-A transaction reads data written by concurrent uncommitted transaction.
-
-non-repeatable reads
-
-A transaction re-reads data it has previously read and finds that data has been modified by another transaction (that committed since the initial read).
-
-phantom read
-
-A transaction re-executes a query returning a set of rows that satisfy a search condition and finds that the set of rows satisfying the condition has changed due to another recently-committed transaction.
 The four isolation levels and the corresponding behaviors are described below.
 <table border="1" class="CALSTABLE">
       <thead>
