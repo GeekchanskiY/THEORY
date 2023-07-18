@@ -19,3 +19,6 @@ In Django, signals are used to allow certain actions to be taken when certain ev
 In Django, signals are triggered when certain events occur in the application. These events can be triggered by a variety of actions, such as saving an object to the database, deleting an object, or updating a field on an object. For example, the post_save signal is triggered every time an object is saved to the database. The pre_delete signal is triggered just before an object is deleted from the database. And the pre_save signal is triggered just before an object is saved to the database.
 
 To summarize, signals in Django are used to allow certain actions to be taken when certain events occur in the application. They're defined using the Signal object, connected to events using the @receiver decorator, and sent using the send() method
+
+Django + [[Amazon Web Services]] setup:
+https://dev.to/vaddimart/deploy-django-app-on-aws-lambda-using-serverless-part-1-1i90
