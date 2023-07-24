@@ -26,3 +26,5 @@ The following diagram shows an example VPC. The VPC has one subnet in each of th
 ### **8. [[EC2]]**
 
 ### 9. [[Amazon API Gateway]]
+
+### 10. [[Amazon Cognito]]

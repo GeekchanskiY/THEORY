@@ -1,3 +1,4 @@
+## Most common stages
 - The trigger.
 - Code checkout.
 - Compile the code.
