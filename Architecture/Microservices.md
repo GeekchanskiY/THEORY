@@ -36,3 +36,5 @@ Microservice architecture typically consists of a set of independent and loosely
     
 
 It's important to note that the specific services and components in a microservice architecture can vary based on the requirements and design choices of the application or system. The architecture aims to decompose a monolithic application into smaller, more manageable services that can be developed and maintained independently.
+
+[[Microservice patterns]]
