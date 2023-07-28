@@ -1,6 +1,7 @@
 With Amazon Cognito, you can add user sign-up and sign-in features and control access to your web and mobile applications. Amazon Cognito provides an identity store that scales to millions of users, supports social and enterprise identity federation, and offers advanced security features to protect your consumers and business. Built on open identity standards, Amazon Cognito supports various compliance regulations and integrates with frontend and backend development resources.
 
 ## User pools vs Identity Pools
+
 ### **User Pools**:
 - User pools are user directories that provide sign-up and sign-in options for your application users.
 - They are used to manage user accounts and authentication for your application.
