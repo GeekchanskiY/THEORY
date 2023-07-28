@@ -7,3 +7,5 @@ Most popular ones are:
 [[Redis as MB]]
 [[SQS]]
 
+Features:
+[[Dead letter queue]]
