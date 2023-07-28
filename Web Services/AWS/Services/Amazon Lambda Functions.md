@@ -18,8 +18,3 @@ A cold start occurs when a new instance of a Lambda function is created to run a
 ● Allocate enough memory to your function to reduce startup time, but not so much that it becomes too expensive to run. 
 ● Use a function warming tool to keep your functions warm and reduce the frequency of cold starts.
 ● Use Provisioned Concurrency to keep a certain number of instances of your function running and warmed up at all times. Cold starts can introduce latency in your serverless applications, but there are ways to optimize cold start performance and minimize the impact on your application's performance.
-
-
-Provision concurrency
-
-React hooks, redux, lifecycle
