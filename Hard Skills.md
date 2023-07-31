@@ -10,6 +10,6 @@
 **7. [[Programming Basics]]**
 **8. [[Cloud Computing Services]]**
 **9. [[Message Brokers]]**
-
+**10. [[JavaScript]]**
 
 [[TODO]]
