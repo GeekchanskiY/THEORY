@@ -82,3 +82,38 @@ useEffect(() => {
   };
 }, [props.friend.id]); // Only re-subscribe if props.friend.id changes
 ```
+
+Custom hooks:
+**A custom Hook is a JavaScript function whose name starts with ”`use`” and that may call other Hooks.** For example, `useFriendStatus` below is our first custom Hook:
+
+```jsx
+import { useState, useEffect } from 'react';
+
+function useFriendStatus(friendID) {  const [isOnline, setIsOnline] = useState(null);
+
+  useEffect(() => {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+
+    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
+    return () => {
+      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
+    };
+  });
+
+  return isOnline;
+}
+```
+
+Now that we’ve extracted this logic to a `useFriendStatus` hook, we can _just use it:_
+
+```jsx
+function FriendStatus(props) {
+  const isOnline = useFriendStatus(props.friend.id);
+  if (isOnline === null) {
+    return 'Loading...';
+  }
+  return isOnline ? 'Online' : 'Offline';
+}
+```
