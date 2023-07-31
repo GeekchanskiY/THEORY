@@ -83,7 +83,21 @@ useEffect(() => {
 }, [props.friend.id]); // Only re-subscribe if props.friend.id changes
 ```
 
-Custom hooks:
+### Use Memo
+`useMemo` is a React Hook that lets you cache the result of a calculation between re-renders.
+
+```jsx
+const cachedValue = useMemo(calculateValue, dependencies)
+
+```
+
+### Use Reducer
+`useReducer` is a React Hook that lets you add a [reducer](https://react.dev/learn/extracting-state-logic-into-a-reducer) to your component.
+
+```jsx
+const [state, dispatch] = useReducer(reducer, initialArg, init?)
+```
+### Custom hooks:
 **A custom Hook is a JavaScript function whose name starts with ”`use`” and that may call other Hooks.** For example, `useFriendStatus` below is our first custom Hook:
 
 ```jsx
@@ -116,4 +130,14 @@ function FriendStatus(props) {
   }
   return isOnline ? 'Online' : 'Offline';
 }
+```
+
+## HOCs
+
+A higher-order component (HOC) is an advanced technique in React for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React’s compositional nature.
+
+Concretely, **a higher-order component is a function that takes a component and returns a new component.**
+
+```jsx
+const EnhancedComponent = higherOrderComponent(WrappedComponent);
 ```
