@@ -39,6 +39,11 @@ Key points about Kafka offsets:
 
 5. Offsets storage: Consumers can store offsets in different ways. The two common approaches are:
    a. **Kafka Broker**: Kafka provides a built-in offset management mechanism called "consumer group offsets." Consumer offsets are committed to a Kafka topic named "__consumer_offsets" and are managed by Kafka itself. This option is convenient as it allows Kafka to handle offset management, but it might not be as flexible as other options.
-   b. **Externally managed storage**: Consumers can choose to manage offsets externally in their own storage systems. This approach provides more flexibility and control over offset management but requires additional implementation effort.
+   b. **Externally managed storage** : Consumers can choose to manage offsets externally in their own storage systems. This approach provides more flexibility and control over offset management but requires additional implementation effort.
 
 Overall, Kafka offsets play a vital role in maintaining the state of consumers and ensuring reliable, fault-tolerant message processing in Kafka-based applications.
+
+ZooKeeper
+Kafka connections
+DataLake
+

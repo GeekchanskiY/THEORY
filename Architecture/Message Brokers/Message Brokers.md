@@ -9,3 +9,4 @@ Most popular ones are:
 
 Features:
 [[Dead letter queue]]
+[[Routing key]]
