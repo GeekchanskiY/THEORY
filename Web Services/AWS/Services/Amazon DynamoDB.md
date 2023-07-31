@@ -43,3 +43,34 @@ DynamoDB supports two different kinds of primary keys:
     The _Music_ table described in [Tables, items, and attributes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.TablesItemsAttributes) is an example of a table with a composite primary key (_Artist_ and _SongTitle_). You can access any item in the _Music_ table directly, if you provide the _Artist_ and _SongTitle_ values for that item.
     
     A composite primary key gives you additional flexibility when querying data. For example, if you provide only the value for _Artist_, DynamoDB retrieves all of the songs by that artist. To retrieve only a subset of songs by a particular artist, you can provide a value for _Artist_ along with a range of values for _SongTitle_.
+
+
+## Secondary indexes
+
+You can create one or more secondary indexes on a table. A _secondary index_ lets you query the data in the table using an alternate key, in addition to queries against the primary key. DynamoDB doesn't require that you use indexes, but they give your applications more flexibility when querying your data. After you create a secondary index on a table, you can read data from the index in much the same way as you do from the table.
+
+DynamoDB supports two kinds of indexes:
+
+- Global secondary index – An index with a partition key and sort key that can be different from those on the table.
+    
+- Local secondary index – An index that has the same partition key as the table, but a different sort key.
+
+
+## DynamoDB Streams
+
+DynamoDB Streams is an optional feature that captures data modification events in DynamoDB tables. The data about these events appear in the stream in near-real time, and in the order that the events occurred.
+
+Each event is represented by a _stream record_. If you enable a stream on a table, DynamoDB Streams writes a stream record whenever one of the following events occurs:
+
+- A new item is added to the table: The stream captures an image of the entire item, including all of its attributes.
+    
+- An item is updated: The stream captures the "before" and "after" image of any attributes that were modified in the item.
+    
+- An item is deleted from the table: The stream captures an image of the entire item before it was deleted.
+    
+
+Each stream record also contains the name of the table, the event timestamp, and other metadata. Stream records have a lifetime of 24 hours; after that, they are automatically removed from the stream.
+
+You can use DynamoDB Streams together with AWS Lambda to create a _trigger_—code that runs automatically whenever an event of interest appears in a stream. For example, consider a _Customers_ table that contains customer information for a company. Suppose that you want to send a "welcome" email to each new customer. You could enable a stream on that table, and then associate the stream with a Lambda function. The Lambda function would run whenever a new stream record appears, but only process new items added to the _Customers_ table. For any item that has an `EmailAddress` attribute, the Lambda function would invoke Amazon Simple Email Service (Amazon SES) to send an email to that address.
+
+![[Amazon DynamoDB streams.png]]
