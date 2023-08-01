@@ -7,7 +7,8 @@ Math and BigData stuff:
 **Web frameworks:**
 [[Django]] + [[Django Rest Framework]]
 
-
+WM:
+	[[Qtile]]
 
 [[FastAPI]]
 
