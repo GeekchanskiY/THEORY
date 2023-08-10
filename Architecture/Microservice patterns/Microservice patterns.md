@@ -11,15 +11,15 @@
 6. **Circuit Breaker**: Implement circuit breakers to prevent cascading failures when a service is not responding. It helps to fail fast and provides fallback mechanisms when a service is unavailable.
 
 7. **Centralized Configuration**: Use a centralized configuration management system to manage the configuration of microservices, allowing for dynamic updates without requiring service restarts.
-    
+
 8. **Distributed Tracing**: Implement distributed tracing to monitor and troubleshoot the flow of requests across microservices, gaining insights into the performance and behavior of the entire system.
 
 9. **Bulkhead**: Isolate critical services from non-critical services, ensuring that failures in one part of the system do not bring down the entire application.
 
 10. **Polyglot Persistence**: Choose the most suitable database technology for each microservice, depending on its specific requirements, instead of a one-size-fits-all approach.
 
-11. **Saga Pattern**: Implement the saga pattern to manage distributed transactions across multiple services, ensuring consistency in the system.
-    
+11. **[[Saga Pattern]]**: Implement the saga pattern to manage distributed transactions across multiple services, ensuring consistency in the system.
+
 12. **Versioning**: Implement versioning in APIs to manage backward compatibility as microservices evolve and change over time.
 
 13. **Containerization and Orchestration**: Use containerization technologies like Docker and container orchestration platforms like Kubernetes to simplify deployment and scaling of microservices.

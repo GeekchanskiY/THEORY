@@ -19,7 +19,11 @@ Both RabbitMQ and Kafka can be deployed on-premises or in the cloud, and both ha
 
 Delivery guarantees:
 Kafka provides several delivery guarantees, including at least once delivery, at most once delivery, and exactly once delivery. The specific guarantee provided depends on the configuration of the Kafka producer and consumer, as well as the configuration of the Kafka cluster. Kafka also provides configurable retention periods for messages, allowing developers to specify how long to retain messages on the server before they are deleted.
+1. **At Most Once**: Messages can be delivered "at most once." In this case, a message might be lost, but it won't be delivered more than once. This level is suitable for situations where losing some messages is acceptable.
 
+2. **At Least Once**: Messages will be delivered "at least once." This means that messages might be delivered multiple times, but they won't be lost. This level provides higher reliability but can lead to message duplication.
+    
+3. **Exactly Once**: This level guarantees that messages will be delivered exactly once and won't be duplicated. It's the strictest level of delivery guarantee and provides the highest reliability but requires additional mechanisms and control.
 
 ## Kafka offsets
 (source: chatgpt, prompt: kafka offsets)
