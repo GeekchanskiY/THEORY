@@ -44,6 +44,25 @@ There are several principles that are important to consider when designing a dat
 3. Repeatable read: This isolation level guarantees that a transaction will see the same data every time it reads a row, even if the data is modified by other transactions. This prevents dirty reads and non-repeatable reads, but it does not prevent phantom reads. 
 4. Serializable: This is the highest isolation level, and it guarantees that transactions will be executed in a serializable order, as if they had been executed one at a time. This prevents dirty reads, non-repeatable reads, and phantom reads.
 
+### WAL
+WAL stands for "Write-Ahead Log," and it's a concept used in computer science and databases to ensure data durability and consistency, particularly in systems that manage persistent data.
+
+Here's how it works:
+
+1. **Logging Changes:** When data is modified in a system, instead of immediately writing the changes directly to the main data store (like a database file), the changes are first recorded in a separate log called the Write-Ahead Log. This log contains a record of the changes that need to be applied to the data.
+
+2. **Sequential Write:** The Write-Ahead Log is designed for sequential writes, which are typically faster and more efficient than random writes to the main data store. This helps improve performance and reduces the impact of disk fragmentation.
+
+3. **Durability:** The Write-Ahead Log provides durability guarantees. Before acknowledging a write operation as complete, the system ensures that the corresponding log entry has been successfully written to disk. This ensures that even if a system crashes or loses power, the changes recorded in the log can be replayed to recover the data to a consistent state.
+
+4. **Atomicity and Recovery:** In case of system failure, the Write-Ahead Log plays a crucial role in recovery. The system can replay the log entries and apply the changes to the main data store to bring it back to the state it was in just before the failure occurred. This ensures that the system maintains the ACID properties (Atomicity, Consistency, Isolation, Durability) even in the face of failures.
+
+
+Write-Ahead Logs are used in various systems, including databases, file systems, and distributed data stores. They are essential for maintaining data integrity and consistency, especially in environments where failures can occur at any time.
+
+
+### Different topics
+
 [[NoSQL]]
 
 [[SQL]]
