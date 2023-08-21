@@ -69,7 +69,6 @@ The ANSI/ISO SQL standard defines four levels of transaction isolation in ter
     </table>
 
 
-
 ## How MVCC works
 
 (Source: [Heroku DevCenter](https://devcenter.heroku.com/articles/postgresql-concurrency))
