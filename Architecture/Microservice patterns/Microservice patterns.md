@@ -1,6 +1,6 @@
 1. **Service Decomposition**: Identify the boundaries and responsibilities of each service, breaking down the monolithic application into smaller services that can be developed, deployed, and scaled independently.
 
-2. **API Gateway**: Use an API Gateway to act as the entry point for clients to interact with the microservices. It handles client requests, performs authentication, and routes requests to the appropriate microservices.
+2. **[[API Gateway]]**: Use an API Gateway to act as the entry point for clients to interact with the microservices. It handles client requests, performs authentication, and routes requests to the appropriate microservices.
 
 3. **Service Registry and Discovery**: Implement a service registry where services can register themselves and a service discovery mechanism that allows services to find and communicate with each other dynamically.
 

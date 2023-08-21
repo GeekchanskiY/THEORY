@@ -1,4 +1,5 @@
 
+
 Architecture:
 Kafka is based on a publish-subscribe model, where producers send messages to topics, and consumers subscribe to one or more topics and receive messages from them
 
