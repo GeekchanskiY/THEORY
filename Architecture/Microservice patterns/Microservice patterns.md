@@ -2,7 +2,7 @@
 
 2. **[[API Gateway]]**: Use an API Gateway to act as the entry point for clients to interact with the microservices. It handles client requests, performs authentication, and routes requests to the appropriate microservices.
 
-3. **Service Registry and Discovery**: Implement a service registry where services can register themselves and a service discovery mechanism that allows services to find and communicate with each other dynamically.
+3. **[[Service Registry and Discovery]]**: Implement a service registry where services can register themselves and a service discovery mechanism that allows services to find and communicate with each other dynamically.
 
 4. **Database per Service**: Each microservice should have its database, ensuring that each service can manage its data independently. This helps to avoid tight coupling between services through a shared database.
 
