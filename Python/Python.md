@@ -75,3 +75,32 @@ There are different types of data types in Python. Some built-in Python data typ
 - **Boolean type**: _bool_
 
 - **Set data types**: _set, frozenset_
+
+
+## LEGB
+LEGB rule in Python, which stands for "Local, Enclosing, Global, Built-in." This rule describes the order in which Python searches for variable names and identifiers when they are used within the code. It's relevant for understanding variable scope and how Python resolves names.
+
+Here's what each part of LEGB represents:
+
+1. **Local (L):** This refers to the current function's local scope. Variables defined within a function are considered local and have the highest priority when the interpreter looks for a variable.
+
+2. **Enclosing (E):** This refers to any enclosing functions' scopes. In other words, if you have nested functions, the inner function can access variables from its own scope, as well as from the scope of its containing (enclosing) functions.
+
+3. **Global (G):** This refers to the global scope of the module or script. Variables defined at the top level of a script or module are in the global scope.
+
+4. **Built-in (B):** This refers to the built-in scope, which contains Python's pre-defined names and functions that are available globally, like `print()`, `len()`, and so on.
+
+```python
+x = 10  # Global scope
+
+def outer_function():
+    y = 20  # Enclosing scope
+
+    def inner_function():
+        z = 30  # Local scope
+        print(x, y, z)  # x is in global, y is in enclosing, z is in local
+
+    inner_function()
+
+outer_function()
+```
