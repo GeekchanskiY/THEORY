@@ -33,3 +33,39 @@ PostgreSQL supports several types of replication, each designed to address speci
     - **pglogical:** pglogical is a third-party logical replication solution for PostgreSQL. It allows you to replicate data between PostgreSQL databases efficiently, with features like conflict resolution and filtering.
 
 The choice of replication type depends on your specific requirements, such as data consistency, read scaling, failover capabilities, and system complexity. PostgreSQL's flexibility and the availability of third-party tools provide a range of options for designing a replication solution tailored to your needs.
+
+## Scans
+1. **Sequential Scan (Table Scan):**
+    
+    - **Description:** A sequential scan is the most basic form of data retrieval in PostgreSQL. It involves scanning the entire table row by row to find the required data.
+    - **When to Use:** Sequential scans are typically used when no indexes are available or when the query condition matches a large portion of the table, making it more efficient to read all rows sequentially.
+    - **Example:** `SELECT * FROM customers WHERE age > 30;`
+2. **Index Scan:**
+    
+    - **Description:** An index scan involves using an index structure (e.g., B-tree, GiST, GIN) to quickly locate and retrieve data rows that match the query condition.
+    - **When to Use:** Index scans are efficient when querying for specific rows or ranges of data, especially for columns with high selectivity.
+    - **Example:** `SELECT * FROM products WHERE product_id = 123;`
+3. **Bitmap Index Scan:**
+    
+    - **Description:** Bitmap index scans use multiple indexes to create bitmaps for each index, and then perform a bitwise operation to combine the bitmaps to identify matching rows.
+    - **When to Use:** Bitmap index scans are useful when multiple conditions need to be combined using logical operators (AND, OR) in a query.
+    - **Example:** `SELECT * FROM employees WHERE department = 'HR' AND salary > 50000;`
+4. **Index-Only Scan:**
+    
+    - **Description:** This scan type is similar to an index scan, but it retrieves data directly from the index without the need to access the table itself, resulting in improved performance.
+    - **When to Use:** Index-only scans are suitable when all the columns needed in the query are included in the index.
+    - **Example:** `SELECT employee_id, salary FROM employees WHERE department = 'IT';`
+5. **Bitmap Heap Scan:**
+    
+    - **Description:** Bitmap heap scans are used in combination with bitmap index scans. They retrieve data from the table after identifying matching rows using bitmaps.
+    - **When to Use:** When multiple conditions are combined using bitmap indexes, a bitmap heap scan may be used to access the corresponding table rows.
+    - **Example:** Complex queries with multiple conditions and bitmap index scans.
+6. **Sequential Bitmap Heap Scan:**
+    
+    - **Description:** This is similar to a bitmap heap scan but retrieves rows in the order they appear in the table. It is used when the order of retrieved rows matters.
+    - **When to Use:** When the result set must be ordered in a specific way based on the bitmap index conditions.
+    - **Example:** Queries with ORDER BY clauses that match indexed conditions.
+7. **Index-Scan Types (e.g., Index-Only, Bitmap Index Scan):**
+    
+    - **Description:** These are variations of index scans optimized for specific use cases, such as index-only scans for retrieving data directly from the index.
+    - **When to Use:** Use specialized index-scan types when they provide performance benefits for your specific query.

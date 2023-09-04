@@ -12,6 +12,10 @@ The physical layer defines the properties of the data transmission medium (coaxi
 cable adapters: cable specifications (resistance, capacitance,
 isolation, etc.), a list of valid connectors, signal processing methods, etc.
 
+<span style='color: #FFFF00;'>  RU </span>
+
+
+
 **Link level.**
 
 At the link level of the model, two sublevels are considered:
@@ -24,9 +28,14 @@ There are two points to note here:
 depend on the data transmission medium;
 2) to organize a local network, only physical and channel levels, but such a network will not be scalable (cannot expand), because has a limited specific addressing capabilities and does not have routing functions.
 
+<span style='color: #FFFF00;'>  RU </span>
+
 **Network layer.**
 
 The network layer defines addressing and routing methods for the computers on the network. Unlike the link layer, the network layer defines a single addressing method for all computers on the network regardless of the method of data transmission. This level defines how computer networks are connected. The result of the procedures of the network layer is the packet that is processed by the transport layer procedures.
+
+<span style='color: #FFFF00;'>  RU </span>
+
 
 **Transport layer.**
 
@@ -35,27 +44,40 @@ preparation and delivery of data packets between endpoints without errors and in
 random sequence. The transport layer procedures generate files for the session
 layer from packets received from the network layer.
 
+<span style='color: #FFFF00;'> RU </span>
+
+
 **Session level.** 
 
 The session layer will determine how to set up and tear down
 connections (called sessions) between two applications running on a network.
 It should be noted that the session layer is the point of interaction between programs and computer network.
 
+<span style='color: #FFFF00;'>  RU </span>
+
 **Presentation level.** 
 
 At the representative level, the data format is defined by applications. The procedures at this level describe how to encrypt, compress and transform of data character sets.
+
+<span style='color: #FFFF00;'>  RU </span>
+
+
 
 **Application level.**
 
 The main purpose of the level: to determine the ways of interaction
 actions of users with the system (define the interface).
 
+<span style='color: #FFFF00;'>  RU </span>
+
+**Физический уровень**
+
+Определяет способы взаимодейтсвия пользователя с системой (интерфейс), позволяет получать приложениям удалённый доступ к файлам или бд, предоставляет информацию об ошибках, формирует запросы к уровню представления.
+Протоколы: HTTP, SMTP, POP3, TelNet, etc.
+
 ## TCP/IP
 
 ![[OSI->TCP_IP.png]]
-
-
-
 
 
 ## Difference between TCP/IP and OSI Model
