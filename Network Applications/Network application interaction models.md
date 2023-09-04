@@ -15,6 +15,7 @@ isolation, etc.), a list of valid connectors, signal processing methods, etc.
 <span style='color: #FFFF00;'>  RU </span>
 
 
+**---**
 
 **Link level.**
 
@@ -30,12 +31,15 @@ depend on the data transmission medium;
 
 <span style='color: #FFFF00;'>  RU </span>
 
+**---**
+
 **Network layer.**
 
 The network layer defines addressing and routing methods for the computers on the network. Unlike the link layer, the network layer defines a single addressing method for all computers on the network regardless of the method of data transmission. This level defines how computer networks are connected. The result of the procedures of the network layer is the packet that is processed by the transport layer procedures.
 
 <span style='color: #FFFF00;'>  RU </span>
 
+**---**
 
 **Transport layer.**
 
@@ -46,6 +50,7 @@ layer from packets received from the network layer.
 
 <span style='color: #FFFF00;'> RU </span>
 
+**---**
 
 **Session level.** 
 
@@ -55,18 +60,26 @@ It should be noted that the session layer is the point of interaction between pr
 
 <span style='color: #FFFF00;'>  RU </span>
 
+**---**
+
 **Presentation level.** 
 
 At the representative level, the data format is defined by applications. The procedures at this level describe how to encrypt, compress and transform of data character sets.
 
 <span style='color: #FFFF00;'>  RU </span>
 
+**Представительский уровень**
 
+
+
+**---**
 
 **Application level.**
 
 The main purpose of the level: to determine the ways of interaction
 actions of users with the system (define the interface).
+
+Protocols: HTTP, SMTP, POP3, TelNet, etc.
 
 <span style='color: #FFFF00;'>  RU </span>
 
