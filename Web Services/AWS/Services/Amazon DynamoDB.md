@@ -74,3 +74,23 @@ Each stream record also contains the name of the table, the event timestamp, and
 You can use DynamoDB Streams together with AWS Lambda to create a _trigger_—code that runs automatically whenever an event of interest appears in a stream. For example, consider a _Customers_ table that contains customer information for a company. Suppose that you want to send a "welcome" email to each new customer. You could enable a stream on that table, and then associate the stream with a Lambda function. The Lambda function would run whenever a new stream record appears, but only process new items added to the _Customers_ table. For any item that has an `EmailAddress` attribute, the Lambda function would invoke Amazon Simple Email Service (Amazon SES) to send an email to that address.
 
 ![[Amazon DynamoDB streams.png]]
+
+## Optimization
+1. **Read/Write Capacity Units (RCUs/WCUs):** If you are using the provisioned throughput model, you need to consider the number of RCUs (Read Capacity Units) and WCUs (Write Capacity Units) that your query consumes. DynamoDB charges you based on the provisioned capacity, so understanding the capacity units used by your query is crucial. You can monitor this in the AWS Management Console or using AWS CloudWatch metrics.
+    
+2. **Data Model and Indexing:** The structure of your data and the use of secondary indexes impact query efficiency. Well-designed DynamoDB tables and indexes can reduce the query weight. Be mindful of how you model your data and which indexes you create to optimize query performance.
+    
+3. **Query Patterns:** The specific query pattern you use can have different query weights. For example, querying items by their primary key is more efficient and consumes fewer RCUs than scanning the entire table. You can use the `Query` operation for efficient key-based queries.
+    
+4. **Batching:** Consider using batch operations like `BatchGetItem` or `BatchWriteItem` to reduce the number of individual requests, which can help optimize cost and performance.
+    
+5. **Filter Expressions:** Be cautious when using filter expressions with queries. Filtering on non-key attributes can consume additional RCUs as DynamoDB has to read more data to apply the filter. It's often more efficient to design your data model to minimize the need for filtering.
+    
+6. **Projection Expressions:** Carefully select which attributes to retrieve from the database. If you only need specific attributes, use projection expressions to reduce the amount of data retrieved.
+    
+7. **On-Demand Capacity:** If you're using the on-demand capacity mode, you don't need to provision RCUs/WCUs explicitly. However, you should still monitor your query performance and cost.
+    
+8. **Monitoring and Optimization:** Use AWS CloudWatch and DynamoDB metrics to monitor query performance and capacity usage. Adjust your provisioned capacity or switch to on-demand as needed based on usage patterns.
+    
+9. **Throttling and Auto-Scaling:** Be aware of DynamoDB's throttling mechanisms. If your queries are being throttled, it's an indicator that your table may need more provisioned capacity. DynamoDB can also auto-scale provisioned capacity based on your configured settings.
+10. **Cost Explorer:** AWS Cost Explorer can help you analyze the cost of your DynamoDB queries over time. It can provide insights into which queries are consuming the most resources and incurring the highest costs.
