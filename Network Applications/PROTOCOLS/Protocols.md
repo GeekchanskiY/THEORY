@@ -24,7 +24,8 @@ TCP (Transmission Control Protocol)
 [[Ethernet]]
 [[PPP]]
 [[IPv4]]
-
+[[IPv6]]
+[[SLIP]]
 
 
 
