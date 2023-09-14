@@ -6,6 +6,8 @@ HTTP, SMTP, POP3, TELNET
 ASCII, EBCDIC, SSL, gzip
 Сессионный
 
+[[Packet(DataGram)]]
+
 # ISO/OSI
 
 OSI stands for **Open Systems Interconnection**. It has been developed by ISO – ‘**International Organization for Standardization**‘, in the year 1984. It is a 7-layer architecture with each layer having specific functionality to perform. All these 7 layers work collaboratively to transmit the data from one person to another across the globe.
