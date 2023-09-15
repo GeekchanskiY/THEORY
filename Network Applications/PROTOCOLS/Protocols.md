@@ -28,7 +28,7 @@ TCP (Transmission Control Protocol)
 [[SLIP]]
 [[ICMP]]
 [[ARP+RARP]]
-[[DHCP]]
+[[Network Applications/PROTOCOLS/DHCP]]
 [[RPC]]
 [[SOAP]]
 [[IPC]]

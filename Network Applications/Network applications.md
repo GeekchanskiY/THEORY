@@ -4,7 +4,6 @@
 [[NAT]]
 [[Networking Console Utils]]
 
-
 Netstat -b
 Критическая секция, функция блокировки
 
