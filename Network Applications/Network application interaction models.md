@@ -132,7 +132,7 @@ Protocols: HTTP, SMTP, POP3, TelNet, etc.
 
 # TCP/IP
 
-![[OSI->TCP_IP.png]]
+![[OSI-_TCP_IP.png]]
 
 
 ## Difference between TCP/IP and OSI Model
