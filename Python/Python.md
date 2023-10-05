@@ -1,5 +1,5 @@
 [[Python frameworks & Libs]]
-test
+
 ### Python + Obsidian example
 (To have a better experience install 'Execute code' plugin: https://github.com/twibiral/obsidian-execute-code)
 
