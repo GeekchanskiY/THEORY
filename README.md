@@ -10,5 +10,3 @@ DataView:
 CustomJS:
 
 If you want to fork and complete this repo, here's an style document: [[Styles]]
-
-<span> 123 </span>
