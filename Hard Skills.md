@@ -11,5 +11,6 @@
 **8. [[Cloud Computing Services]]**
 **9. [[Message Brokers]]**
 **10. [[JavaScript]]**
+**11. [[Applications&platforms%etc.]]**
 
 [[TODO]]
