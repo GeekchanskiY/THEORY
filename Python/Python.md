@@ -103,3 +103,7 @@ def outer_function():
 
 outer_function()
 ```
+
+
+## USEFUL STUFF
+[[OOP in python]]
