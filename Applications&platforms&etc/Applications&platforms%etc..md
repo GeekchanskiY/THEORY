@@ -7,3 +7,5 @@ ELK stack:
 	[[ElasticSearch]]
 	[[LogStash]]
 	[[Kibana]]
+
+[[Terraform]]
