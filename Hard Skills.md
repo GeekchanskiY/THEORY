@@ -12,5 +12,6 @@
 **9. [[Message Brokers]]**
 **10. [[JavaScript]]**
 **11. [[Applications&platforms%etc.]]**
+**12. [[Golang]]** 
 
 [[TODO]]
