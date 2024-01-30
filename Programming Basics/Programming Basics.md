@@ -1,5 +1,5 @@
 [[Pogramming Languages]]
 [[Data Structures]]
-[[Algorithmes]]
+[[Algorithms]]
 [[Testing]]
 [[Math Programming]]
