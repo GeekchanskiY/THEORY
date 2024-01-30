@@ -17,3 +17,7 @@ Several message brokers support MQTT. Some of the popular message brokers that s
 6. **ActiveMQ**: Another popular message broker that supports MQTT among other messaging protocols. It's a Java-based broker with support for a wide range of messaging features and protocols.
     
 7. **IBM MQ**: IBM MQ supports MQTT alongside its traditional messaging capabilities. It's often used in enterprise-level deployments where reliability and scalability are crucial.
+
+Note:
+There is MQTT-SN (for sensor networks), which fits better if there is low resource network,
+MQTT over WebSockets for 2-directional message queue, MQTT-TLS - adds Transport Layer Security protocol to ensure safety
