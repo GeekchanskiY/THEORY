@@ -13,5 +13,5 @@
 **10. [[JavaScript]]**
 **11. [[Applications&platforms%etc.]]**
 **12. [[Golang]]** 
-asd
+
 [[TODO]]
