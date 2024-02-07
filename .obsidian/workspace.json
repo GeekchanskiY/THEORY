@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ruby/OOP in Ruby.md",
+                "file": "Ruby/Ruby.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ruby/OOP in Ruby.md",
+                "file": "Ruby/Ruby.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ruby/OOP in Ruby.md",
+                "file": "Ruby/Ruby.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ruby/OOP in Ruby.md"
+                "file": "Ruby/Ruby.md"
               }
             }
           }
@@ -149,13 +149,13 @@
   },
   "active": "fe29278bc303cc5c",
   "lastOpenFiles": [
+    "Ruby/Modules in Ruby.md",
+    "Ruby/OOP in Ruby.md",
     "Network Applications/Network application interaction models.md",
     "Network Applications/Packet(DataGram).md",
     "Hard Skills.md",
     "2024-01-30.md",
     "Templates(for the note design)/Styles.md",
-    "Ruby/Modules in Ruby.md",
-    "Ruby/OOP in Ruby.md",
     "Ruby/Ruby.md",
     "Ruby/Ruby tips, hints and tricks.md",
     "Ruby/Rails.md",
