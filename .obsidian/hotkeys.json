@@ -5,6 +5,12 @@
         "Mod"
       ],
       "key": "Home"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Numpad7"
     }
   ],
   "obsidian-git:pull": [
@@ -13,6 +19,12 @@
         "Mod"
       ],
       "key": "ArrowUp"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Numpad8"
     }
   ],
   "obsidian-git:push2": [
@@ -21,6 +33,12 @@
         "Mod"
       ],
       "key": "PageUp"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Numpad9"
     }
   ],
   "workspace:previous-tab": [

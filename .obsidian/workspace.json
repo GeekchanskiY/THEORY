@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Templates(for the note design)/Styles.md",
+                "file": "Hard Skills.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Templates(for the note design)/Styles.md",
+                "file": "Hard Skills.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Templates(for the note design)/Styles.md",
+                "file": "Hard Skills.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Templates(for the note design)/Styles.md"
+                "file": "Hard Skills.md"
               }
             }
           }
@@ -148,6 +148,7 @@
   },
   "active": "fe29278bc303cc5c",
   "lastOpenFiles": [
+    "Templates(for the note design)/Styles.md",
     "Ruby/Modules in Ruby.md",
     "Ruby/OOP in Ruby.md",
     "Ruby/Ruby.md",
