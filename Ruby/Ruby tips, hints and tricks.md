@@ -41,3 +41,12 @@ up-build:
 ```
 
 
+### Howto: if __ name __ == "__ main __ "
+```ruby
+if $0 == __FILE__
+	puts "articles is being run directly."
+else
+	puts "articles is being required as a module."
+end
+```
+**Important:** it's not rubysh at all, better use modules

@@ -8,3 +8,19 @@ Modules may be mixed in to classes and other modules. The mixed in module’s co
 A class may inherit from another class, but ***not from a module***.
 
 A module may not inherit from anything.
+
+```ruby
+module MyModule
+  CONSTANT = 42
+
+  def self.module_method
+    puts "This is a module method"
+  end
+
+  class MyClass
+    def class_method
+      puts "This is a class method"
+    end
+  end
+end
+```
