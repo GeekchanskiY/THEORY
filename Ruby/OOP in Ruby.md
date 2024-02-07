@@ -17,3 +17,17 @@ Or, using another way:
     @number = self.class.instances
   end
 ```
+
+
+
+
+Getters: 
+
+```ruby
+def var_name
+	@var_name
+end
+# OR
+attr_reader :var_name
+```
+
