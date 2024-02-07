@@ -31,3 +31,13 @@ depends_on:
 config.hosts << "0.0.0.0"
 and in Dockerfile CMD must be:
 CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
+
+### Howto: auto-migrate in docker-compose
+Using makefile is the most optimal solution:
+```Makefile
+up-build:
+	sudo docker-compose up --build -d \
+	&& sudo docker-compose run container_name bin/rails db:migrate
+```
+
+

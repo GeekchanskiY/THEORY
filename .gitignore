@@ -1,6 +1,6 @@
 # Ignore Obsidian cache and meta files
-/.obsidian
-*.obsidian
+# /.obsidian
+# *.obsidian
 *.md.meta
 
 # Ignore Obsidian workspace files
