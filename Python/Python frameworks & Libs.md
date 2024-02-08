@@ -13,3 +13,5 @@ WM:
 [[FastAPI]]
 
 [[Flask]]
+
+[[SQLAlchemy]]
