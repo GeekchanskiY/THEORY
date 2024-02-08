@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ruby/Rails.md",
+                "file": "Python/Python frameworks & Libs.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ruby/Rails.md",
+                "file": "Python/Python frameworks & Libs.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ruby/Rails.md",
+                "file": "Python/Python frameworks & Libs.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ruby/Rails.md"
+                "file": "Python/Python frameworks & Libs.md"
               }
             }
           }
@@ -147,11 +147,12 @@
   },
   "active": "fe29278bc303cc5c",
   "lastOpenFiles": [
+    "Python/Python.md",
+    "Ruby/Rails.md",
     "Applications&platforms&etc/Makefile.md",
     "Applications&platforms&etc/Applications&platforms%etc..md",
     "Python/SQLAlchemy/Alembic.md",
     "Python/SQLAlchemy/SQLAlchemy.md",
-    "Python/Python.md",
     "Python/Python frameworks & Libs.md",
     "Python/FastAPI/FastAPI best practices.md",
     "Python/SQLAlchemy",
@@ -167,7 +168,6 @@
     "Hard Skills.md",
     "2024-01-30.md",
     "Templates(for the note design)/Styles.md",
-    "Ruby/Rails.md",
     "Templates/{{title}}.md"
   ]
 }

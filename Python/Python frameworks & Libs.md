@@ -15,3 +15,8 @@ WM:
 [[Flask]]
 
 [[SQLAlchemy]]
+
+### Connection to DB and utils:
+
+[[Redis]]:
+ - https://redis-py.readthedocs.io/en/stable/examples/asyncio_examples.html
