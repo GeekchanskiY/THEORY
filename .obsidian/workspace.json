@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Applications&platforms&etc/Makefile.md",
+                "file": "Ruby/Rails.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Applications&platforms&etc/Makefile.md",
+                "file": "Ruby/Rails.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Applications&platforms&etc/Makefile.md",
+                "file": "Ruby/Rails.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Applications&platforms&etc/Makefile.md"
+                "file": "Ruby/Rails.md"
               }
             }
           }
@@ -147,8 +147,8 @@
   },
   "active": "fe29278bc303cc5c",
   "lastOpenFiles": [
-    "Applications&platforms&etc/Applications&platforms%etc..md",
     "Applications&platforms&etc/Makefile.md",
+    "Applications&platforms&etc/Applications&platforms%etc..md",
     "Python/SQLAlchemy/Alembic.md",
     "Python/SQLAlchemy/SQLAlchemy.md",
     "Python/Python.md",
