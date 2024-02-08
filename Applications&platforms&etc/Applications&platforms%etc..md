@@ -1,7 +1,9 @@
-Containerization:
+Containerization & build:
 	[[Docker]]
 	[[Docker-compose]]
 	[[Kubernetes]]
+	[[Makefile]]
+	
 
 ELK stack:
 	[[ElasticSearch]]
