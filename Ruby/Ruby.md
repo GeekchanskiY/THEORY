@@ -4,7 +4,7 @@ https://www.ruby-lang.org/en/documentation/
 
 [[Rails]]
 [[OOP in Ruby]]
-[[RSpec]]
+[[Ruby/RSpec]]
 [[Ruby tips, hints and tricks]]
 
 
