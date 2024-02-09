@@ -1,3 +1,7 @@
+
+**Documentation**
+https://www.ruby-lang.org/en/documentation/
+
 [[Rails]]
 [[OOP in Ruby]]
 [[RSpec]]
@@ -40,3 +44,4 @@ puts domains[:hu]
 ```
 Symbols also are also used for different purpose than string
 Detail info: https://www.rubyguides.com/2018/02/ruby-symbols/
+
