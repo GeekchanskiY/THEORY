@@ -19,3 +19,12 @@ config/environments:
 ```ruby
 config.hosts << /.*/ # allow any hosts
 ```
+
+
+#TODO: n+1 problem (bullet)
+factorybot
+pry (gem pry)
+asset compile
+active admin
+tests 
+especially
