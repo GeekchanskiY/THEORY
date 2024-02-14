@@ -1,6 +1,27 @@
 ActiveRecord is the M in [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) - the model - which is the layer of the system responsible for representing business data and logic. Active Record facilitates the creation and use of business objects whose data requires persistent storage to a database. It is an implementation of the Active Record pattern which itself is a description of an Object Relational Mapping system.
 
 [[ActiveRecord migrations]]
+
+### Working with models
+```ruby
+# Create
+
+article = Article.new(title: "My First Article", content: "This is my first article in Rails.")
+article.save
+
+# Retrieve
+  
+all_articles = Article.all
+first_article = Article.first
+
+# Update 
+
+article.update(title: "123")
+
+# Delete
+
+article.destroy
+```
 ## Naming Convention
 
 By default, Active Record uses some naming conventions to find out how the mapping between models and database tables should be created. Rails will pluralize your class names to find the respective database table. So, for a class `Book`, you should have a database table called **books**. The Rails pluralization mechanisms are very powerful, being capable of pluralizing (and singularizing) both regular and irregular words. When using class names composed of two or more words, the model class name should follow the Ruby conventions, using the CamelCase form, while the table name must use the snake_case form. Examples:

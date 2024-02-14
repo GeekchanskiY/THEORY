@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord migrations.md",
+                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord migrations.md",
+                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord migrations.md",
+                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord migrations.md"
+                "file": "Ruby/Ruby on Rails/ActiveRecord.md"
               }
             }
           }
@@ -145,10 +145,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fe29278bc303cc5c",
+  "active": "79ec8efe6a2bd696",
   "lastOpenFiles": [
-    "Ruby/Ruby on Rails/ActiveRecord.md",
     "Ruby/Ruby on Rails/ActiveRecord migrations.md",
+    "Ruby/Ruby on Rails/ActiveRecord.md",
     "Ruby/Ruby on Rails/Rails.md",
     "Ruby/Ruby on Rails/Rails project structure.md",
     "Ruby/RSpec.md",
