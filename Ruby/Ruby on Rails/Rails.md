@@ -20,7 +20,7 @@ config.hosts << /.*/ # allow any hosts
 ```
 
 
-#TODO: n+1 problem (bullet)
+#TODO:
 factorybot
 pry (gem pry)
 asset compile
