@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ruby/Ruby on Rails/Rails.md",
+                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ruby/Ruby on Rails/Rails.md",
+                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ruby/Ruby on Rails/Rails.md",
+                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ruby/Ruby on Rails/Rails.md"
+                "file": "Ruby/Ruby on Rails/ActiveRecord.md"
               }
             }
           }
@@ -147,15 +147,16 @@
   },
   "active": "fe29278bc303cc5c",
   "lastOpenFiles": [
+    "Ruby/Ruby on Rails/Rails.md",
+    "Ruby/Ruby on Rails/ActiveRecord.md",
+    "Ruby/Ruby on Rails/Rails project structure.md",
+    "Ruby/RSpec.md",
     "Ruby/OOP in Ruby.md",
     "Ruby/Ruby.md",
     "Hard Skills.md",
     "JavaScript & TypeScript/Frameworks/React Native.md",
-    "Ruby/RSpec.md",
-    "Ruby/Ruby on Rails/Rails project structure.md",
     "Ruby/RSpec 1.md",
     "Ruby/Ruby tips, hints and tricks.md",
-    "Ruby/Ruby on Rails/Rails.md",
     "Ruby/Ruby on Rails",
     "Python/Python frameworks & Libs.md",
     "Python/Python.md",
