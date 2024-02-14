@@ -1,4 +1,4 @@
-
+[[{{title}}]]
 https://github.com/Dmytro-Shulha/obsidian-css-snippets
 
 

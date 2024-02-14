@@ -11,12 +11,8 @@
             "id": "fe29278bc303cc5c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -69,7 +65,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 223.5
+    "width": 223.5,
+    "collapsed": true
   },
   "right": {
     "id": "98cc5f97e0ab3537",
@@ -85,7 +82,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +98,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +119,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -145,15 +138,26 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "79ec8efe6a2bd696",
+  "active": "fe29278bc303cc5c",
   "lastOpenFiles": [
-    "Ruby/Ruby on Rails/ActiveRecord migrations.md",
+    "Templates/{{title}}.md",
+    "Templates(for the note design)/Styles.md",
+    "Untitled.md",
+    "Web Services/Microsoft Azure/Microsoft Azure.md",
+    "JavaScript & TypeScript/JavaScript.md",
+    "Ruby/Ruby.md",
+    "Architecture/Architecture Patterns.md",
+    "Architecture/Security/Security.md",
+    "Architecture/Microservices.md",
+    "Architecture/Microservice vs Monolith.md",
+    "Architecture/Infrastructure as Code.md",
     "Ruby/Ruby on Rails/ActiveRecord.md",
+    "Architecture/Security",
+    "Ruby/Ruby on Rails/ActiveRecord migrations.md",
     "Ruby/Ruby on Rails/Rails.md",
     "Ruby/Ruby on Rails/Rails project structure.md",
     "Ruby/RSpec.md",
     "Ruby/OOP in Ruby.md",
-    "Ruby/Ruby.md",
     "Hard Skills.md",
     "JavaScript & TypeScript/Frameworks/React Native.md",
     "Ruby/RSpec 1.md",
@@ -164,16 +168,6 @@
     "Applications&platforms&etc/Makefile.md",
     "Applications&platforms&etc/Applications&platforms%etc..md",
     "Python/SQLAlchemy/Alembic.md",
-    "Python/SQLAlchemy/SQLAlchemy.md",
-    "Python/FastAPI/FastAPI best practices.md",
-    "Python/SQLAlchemy",
-    "Python/FastAPI/FastAPI.md",
-    "Golang/Golang.md",
-    "Golang/GIN.md",
-    "Ruby/Modules in Ruby.md",
-    "Network Applications/Network application interaction models.md",
-    "Network Applications/Packet(DataGram).md",
-    "2024-01-30.md",
-    "Templates(for the note design)/Styles.md"
+    "Python/SQLAlchemy"
   ]
 }

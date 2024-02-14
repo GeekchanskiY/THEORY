@@ -6,7 +6,7 @@ https://www.ruby-lang.org/en/documentation/
 [[OOP in Ruby]]
 [[Ruby/RSpec]]
 [[Ruby tips, hints and tricks]]
-
+[[Modules in Ruby]]
 
 ### Data types
 - Numbers
