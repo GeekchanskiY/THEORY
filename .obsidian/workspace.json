@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
+                "file": "Ruby/Ruby on Rails/ActiveRecord migrations.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
+                "file": "Ruby/Ruby on Rails/ActiveRecord migrations.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord.md",
+                "file": "Ruby/Ruby on Rails/ActiveRecord migrations.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ruby/Ruby on Rails/ActiveRecord.md"
+                "file": "Ruby/Ruby on Rails/ActiveRecord migrations.md"
               }
             }
           }
@@ -147,8 +147,9 @@
   },
   "active": "fe29278bc303cc5c",
   "lastOpenFiles": [
-    "Ruby/Ruby on Rails/Rails.md",
     "Ruby/Ruby on Rails/ActiveRecord.md",
+    "Ruby/Ruby on Rails/ActiveRecord migrations.md",
+    "Ruby/Ruby on Rails/Rails.md",
     "Ruby/Ruby on Rails/Rails project structure.md",
     "Ruby/RSpec.md",
     "Ruby/OOP in Ruby.md",
@@ -173,7 +174,6 @@
     "Network Applications/Network application interaction models.md",
     "Network Applications/Packet(DataGram).md",
     "2024-01-30.md",
-    "Templates(for the note design)/Styles.md",
-    "Templates/{{title}}.md"
+    "Templates(for the note design)/Styles.md"
   ]
 }
