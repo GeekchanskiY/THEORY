@@ -7,7 +7,7 @@
 **4. [[Design Patterns]]**
 **5. [[Development methodology]]**
 **6. [[Python]]**
-**7. [[Programming Basics]]**
+**7. [[Computer Science]]**
 **8. [[Cloud Computing Services]]**
 **9. [[Message Brokers]]**
 **10. [[JavaScript]]**

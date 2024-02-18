@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Network Applications/Packet(DataGram).md",
+                "file": "Computer science/Computer Science.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Network Applications/Packet(DataGram).md",
+                "file": "Computer science/Computer Science.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Network Applications/Packet(DataGram).md",
+                "file": "Computer science/Computer Science.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Network Applications/Packet(DataGram).md"
+                "file": "Computer science/Computer Science.md"
               }
             }
           }
@@ -147,6 +147,9 @@
   },
   "active": "fe29278bc303cc5c",
   "lastOpenFiles": [
+    "Computer science/Algorithms.md",
+    "Computer Science/Computer Science.md",
+    "Network Applications/Packet(DataGram).md",
     "Network Applications/Security stuff.md",
     "Network Applications/Network application interaction models.md",
     "Network Applications/Network applications.md",
@@ -155,7 +158,6 @@
     "Hard Skills.md",
     "Network Applications/Networking Console Utils/PING.md",
     "Network Applications/Networking Console Utils/Networking Console Utils.md",
-    "Network Applications/Packet(DataGram).md",
     "Network Applications/CIDR.md",
     "Network Applications/PROTOCOLS/SOAP.md",
     "Network Applications/PROTOCOLS/SLIP.md",
@@ -170,10 +172,8 @@
     "Network Applications/PROTOCOLS/Ethernet.md",
     "Network Applications/PROTOCOLS/ARP+RARP.md",
     "TODOs/TODO.md",
-    "Computer Science/Computer Science.md",
     "Computer Science",
     "Architecture/Infrastructure as Code.md",
-    "Databases/MicrosoftSQL.md",
     "Architecture/Security",
     "Ruby/Ruby on Rails",
     "Python/SQLAlchemy"
