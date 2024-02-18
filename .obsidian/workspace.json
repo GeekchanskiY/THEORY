@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Network Applications/PROTOCOLS/SOAP.md",
+                "file": "Network Applications/Security stuff.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Network Applications/PROTOCOLS/SOAP.md",
+                "file": "Network Applications/Security stuff.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Network Applications/PROTOCOLS/SOAP.md",
+                "file": "Network Applications/Security stuff.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Network Applications/PROTOCOLS/SOAP.md"
+                "file": "Network Applications/Security stuff.md"
               }
             }
           }
@@ -160,6 +160,11 @@
   },
   "active": "11a99d8152eec4ae",
   "lastOpenFiles": [
+    "Network Applications/Packet(DataGram).md",
+    "Network Applications/Network application interaction models.md",
+    "Network Applications/NAT.md",
+    "Network Applications/CIDR.md",
+    "Network Applications/PROTOCOLS/SOAP.md",
     "Network Applications/PROTOCOLS/SLIP.md",
     "Network Applications/PROTOCOLS/RPC.md",
     "Network Applications/PROTOCOLS/Protocols.md",
@@ -182,11 +187,6 @@
     "Templates/{{title}}.md",
     "Templates(for the note design)/Styles.md",
     "Untitled.md",
-    "Web Services/Microsoft Azure/Microsoft Azure.md",
-    "JavaScript & TypeScript/JavaScript.md",
-    "Ruby/Ruby.md",
-    "Architecture/Architecture Patterns.md",
-    "Architecture/Security/Security.md",
     "Architecture/Security",
     "Ruby/Ruby on Rails",
     "Python/SQLAlchemy"

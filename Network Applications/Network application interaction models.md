@@ -1,10 +1,4 @@
-# Protocols
-ISO/OSI
-Прикладной
-HTTP, SMTP, POP3, TELNET
-Представительский
-ASCII, EBCDIC, SSL, gzip
-Сессионный
+
 
 [[Packet(DataGram)]]
 
@@ -18,15 +12,11 @@ Consists of 7 primary levels:
 
 ## **Physical level.**
 
+Let's start from the lowest level. It is responsible for the exchange of physical signals between physical devices, hardware. Computer hardware does not understand what a picture is or what is depicted on it; the hardware understands the picture only in the form of a set of zeros and ones, that is, bits.
+Physical layer devices operate on bits. They are transmitted over cables (for example, through optical fiber) or without - for example, through Bluetooth or IRDA, Wi-Fi, GSM, 4G and so on.
 The physical layer defines the properties of the data transmission medium (coaxial cable, twisted pair, fiber optic channel, etc.) and methods of its connection
 cable adapters: cable specifications (resistance, capacitance,
 isolation, etc.), a list of valid connectors, signal processing methods, etc.
-
-<span style='color: #FFFF00;'>  RU </span>
-Начнем с самого нижнего уровня. Он отвечает за обмен физическими сигналами между физическими устройствами, «железом». Компьютерное железо не понимает, что такое картинка или что на ней изображено, «железу» картинка понятна только в виде набора нулей и единиц, то есть бит.
-Устройства физического уровня оперируют битами. Они передаются по кабелям (например, через оптоволокно) или без — например, через Bluetooth или IRDA, Wi-Fi, GSM, 4G и так далее.
-
-**---**
 
 ## **Link layer.**
 
@@ -40,30 +30,26 @@ There are two points to note here:
 depend on the data transmission medium;
 2) to organize a local network, only physical and channel levels, but such a network will not be scalable (cannot expand), because has a limited specific addressing capabilities and does not have routing functions.
 
-<span style='color: #FFFF00;'>  RU </span>
-Когда два пользователя находятся в одной сети, состоящей только из двух устройств, — это идеальный случай. Но что если этих устройств больше?
+When two users are on the same network, consisting of only two devices, this is the ideal case. But what if there are more of these devices?
 
-Второй уровень решает проблему адресации при передаче информации. Канальный уровень получает биты и превращает их в кадры (frame, также «фреймы»). Задача здесь — сформировать кадры с адресом отправителя и получателя, после чего отправить их по сети.
+The second level solves the problem of addressing when transmitting information. The link layer receives bits and turns them into frames (frames). The task here is to generate frames with the address of the sender and recipient, and then send them over the network.
 
-У канального уровня есть два подуровня — это MAC и LLC. MAC (Media Access Control, контроль доступа к среде) отвечает за присвоение физических MAC-адресов, а LLC (Logical Link Control, контроль логической связи) занимается проверкой и исправлением данных, управляет их передачей. Для упрощения мы указываем LLC на втором уровне модели, но, если быть точными, LLC нельзя отнести полностью ни к первому, ни ко второму уровню — он между.
+The link layer has two sublayers: MAC and LLC. MAC (Media Access Control) is responsible for assigning physical MAC addresses, and LLC (Logical Link Control) checks and corrects data and controls its transmission. To simplify, we indicate LLC at the second level of the model, but, to be precise, LLC cannot be completely attributed to either the first or second level - it is in between.
 
-На втором уровне OSI работают коммутаторы, их задача — передать сформированные кадры от одного устройства к другому, используя в качестве адресов только физические MAC-адреса.
+Switches operate at the second OSI level; their task is to transmit generated frames from one device to another, using only physical MAC addresses as addresses.
 
-На канальном уровне активно используется протокол ARP (Address Resolution Protocol — протокол определения адреса). С помощью него 64-битные MAC-адреса сопоставляются с 32-битными IP-адресами и наоборот, тем самым обеспечивается инкапсуляция и декапсуляция данных.
-**---**
+At the data link layer, the ARP protocol (Address Resolution Protocol) is actively used. It maps 64-bit MAC addresses to 32-bit IP addresses and vice versa, thereby encapsulating and decapsulating data.
 
 ## **Network layer.**
 
 The network layer defines addressing and routing methods for the computers on the network. Unlike the link layer, the network layer defines a single addressing method for all computers on the network regardless of the method of data transmission. This level defines how computer networks are connected. The result of the procedures of the network layer is the packet that is processed by the transport layer procedures.
 
-<span style='color: #FFFF00;'>  RU </span>
-На третьем уровне появляется новое понятие — маршрутизация. Для этой задачи были созданы устройства третьего уровня — маршрутизаторы (их еще называют роутерами). Маршрутизаторы получают MAC-адрес от коммутаторов с предыдущего уровня и занимаются построением маршрута от одного устройства к другому с учетом всех потенциальных неполадок в сети.
-Над канальным уровнем находится следующий – сетевой. На этой ступени вводятся понятия «маршрутизация» и «IP-адрес». Для трансформации MAC-адресов в IP применяется протокол ARP.
+At the third level, a new concept appears - routing. For this task, third-level devices were created - routers (they are also called routers). Routers receive a MAC address from switches from the previous layer and are engaged in building a route from one device to another, taking into account all potential problems in the network.
+Above the data link layer is the next one - the network layer. At this stage, the concepts of “routing” and “IP address” are introduced. The ARP protocol is used to transform MAC addresses into IP.
 
-Здесь осуществляется маршрутизация трафика. Когда пользователь, к примеру, желает перейти на сайт и вводит его адрес, отправляется DNS-запрос. Ответом на него будет IP-адрес, который подставляется в пакет. Пакет данных – это новый термин, который появляется на 3-м сетевом уровне.
+This is where traffic is routed. When a user, for example, wants to go to a website and enters its address, a DNS query is sent. The response to it will be the IP address that is inserted into the packet. Data packet is a new term that appears at Layer 3 of the network.
 
-Устройствами здесь являются роутер или маршрутизатор.
-**---**
+The devices here are a router or router.
 
 ## **Transport layer.**
 
@@ -72,24 +58,22 @@ preparation and delivery of data packets between endpoints without errors and in
 random sequence. The transport layer procedures generate files for the session
 layer from packets received from the network layer.
 
-<span style='color: #FFFF00;'> RU </span>
-Все семь уровней модели OSI можно условно разделить на две группы:
+All seven layers of the OSI model can be divided into two groups:
 
-- Media layers (уровни среды),
-- Host layers (уровни хоста).
+- Media layers (environment levels),
+- Host layers.
 
-Уровни группы Media Layers (L1, L2, L3) занимаются передачей информации (по кабелю или беспроводной сети), используются сетевыми устройствами, такими как коммутаторы, маршрутизаторы и т.п. Уровни группы Host Layers (L4, L5, L6, L7) используются непосредственно на устройствах, будь то стационарные компьютеры или мобильные устройства.
+The levels of the Media Layers group (L1, L2, L3) are responsible for transmitting information (via cable or wireless network) and are used by network devices such as switches, routers, etc. The levels of the Host Layers group (L4, L5, L6, L7) are used directly on devices, be they desktop computers or mobile devices.
 
-Четвертый уровень — это посредник между Host Layers и Media Layers, относящийся скорее к первым, чем к последним. Его главной задачей является транспортировка пакетов. Естественно, при транспортировке возможны потери, но некоторые типы данных более чувствительны к потерям, чем другие. Например, если в тексте потеряются гласные, то будет сложно понять смысл, а если из видеопотока пропадет пара кадров, то это практически никак не скажется на конечном пользователе. Поэтому при передаче данных, наиболее чувствительных к потерям на транспортном уровне, используется протокол TCP, контролирующий целостность доставленной информации.
+The fourth level is an intermediary between Host Layers and Media Layers, related more to the former than to the latter. Its main task is to transport packages. Naturally, losses may occur during transit, but some types of data are more susceptible to loss than others. For example, if vowels are lost in the text, it will be difficult to understand the meaning, and if a couple of frames disappear from the video stream, this will have virtually no effect on the end user. Therefore, when transmitting data that is most sensitive to losses at the transport level, the TCP protocol is used, which monitors the integrity of the delivered information.
 
-Для мультимедийных файлов небольшие потери не так важны, гораздо критичнее будет задержка. Для передачи таких данных, наиболее чувствительных к задержкам, используется протокол UDP, позволяющий организовать связь без установки соединения.
+For multimedia files, small losses are not so important; the delay will be much more critical. To transmit such data, which is most sensitive to delays, the UDP protocol is used, which allows communication without establishing a connection.
 
-При передаче по протоколу TCP данные делятся на сегменты. Сегмент — это часть пакета. Когда приходит пакет данных, который превышает пропускную способность сети, пакет делится на сегменты допустимого размера. Сегментация пакетов также требуется в ненадежных сетях, когда существует большая вероятность того, что большой пакет будет потерян. При передаче данных по протоколу UDP пакеты данных делятся уже на датаграммы. Датаграмма (datagram) — это тоже часть пакета, но ее нельзя путать с сегментом.
+When transmitted over TCP, data is divided into segments. A segment is a part of a package. When a data packet arrives that exceeds the network capacity, the packet is divided into segments of acceptable size. Packet segmentation is also required on unreliable networks when there is a high probability that a large packet will be lost. When transmitting data via the UDP protocol, data packets are divided into datagrams. A datagram is also part of a packet, but should not be confused with a segment.
 
-Главное отличие датаграмм — в автономности. Каждая датаграмма содержит все необходимые заголовки, чтобы дойти до конечного адресата, поэтому они не зависят от сети, могут доставляться разными маршрутами и в разном порядке. При потере датаграмм или сегментов получаются «битые» куски данных, которые не получится корректно обработать.
+The main difference between datagrams is their autonomy. Each datagram contains all the necessary headers to reach the final destination, so they are independent of the network and can be delivered by different routes and in different orders. When datagrams or segments are lost, you end up with “broken” pieces of data that cannot be processed correctly.
 
-Первые четыре уровня — специализация сетевых инженеров. С последними тремя они не так часто сталкиваются, потому что пятым, шестым и седьмым занимаются разработчики.
-**---**
+The first four levels are the specialization of network engineers. They don't encounter the last three as often, because the fifth, sixth and seventh are handled by developers.
 
 ## **Session level.** 
 
@@ -97,25 +81,18 @@ The session layer will determine how to set up and tear down
 connections (called sessions) between two applications running on a network.
 It should be noted that the session layer is the point of interaction between programs and computer network.
 
-<span style='color: #FFFF00;'>  RU </span>
-Пятый уровень оперирует чистыми данными. Помимо пятого, чистые данные используются также на шестом и седьмом уровне. Сеансовый уровень отвечает за поддержку сеанса или сессии связи. Пятый уровень оказывает услугу следующему: управляет взаимодействием между приложениями, открывает возможности синхронизации задач, завершения сеанса, обмена информации.
+The fifth level operates with pure data. In addition to the fifth, clean data is also used at the sixth and seventh levels. The session layer is responsible for maintaining a session or communication session. The fifth level provides the following services: it manages the interaction between applications, opens up the possibility of synchronizing tasks, ending a session, and exchanging information.
 
-Службы сеансового уровня зачастую применяются в средах приложений, требующих удаленного вызова процедур, т.е. чтобы запрашивать выполнение действий на удаленных компьютерах или независимых системах на одном устройстве (при наличии нескольких ОС).
+Session-level services are often used in application environments that require remote procedure calls, i.e. to request actions to be performed on remote computers or independent systems on the same device (if there is multiple OS).
 
-Примером работы пятого уровня может служить видеозвонок по сети. Во время видеосвязи необходимо, чтобы два потока данных (аудио и видео) шли синхронно. Когда к разговору двоих человек прибавится третий — получится уже конференция. Задача пятого уровня — сделать так, чтобы собеседники могли понять, кто сейчас говорит.
-**---**
+An example of how the fifth level works is a video call over a network. During a video call, it is necessary that two data streams (audio and video) flow synchronously. When a third person is added to a conversation between two people, it becomes a conference. The task of the fifth level is to make sure that the interlocutors can understand who is speaking now.
+
 
 ## **Presentation level.** 
 
 At the representative level, the data format is defined by applications. The procedures at this level describe how to encrypt, compress and transform of data character sets.
 
-<span style='color: #FFFF00;'>  RU </span>
-
-**Представительский уровень**
-
-О задачах уровня представления вновь говорит его название. Шестой уровень отвечает за преобразование протоколов и кодирование/декодирование данных. Шестой уровень также занимается представлением картинок (в JPEG, GIF и т.д.), а также видео-аудио (в MPEG, QuickTime). А помимо этого → шифрованием данных, когда при передаче их необходимо защитить.
-
-**---**
+The tasks of the presentation layer are again indicated by its name. The sixth level is responsible for protocol conversion and data encoding/decoding. The sixth level also deals with the presentation of pictures (in JPEG, GIF, etc.), as well as video and audio (in MPEG, QuickTime). And in addition to this → data encryption, when it needs to be protected during transmission.
 
 ## **Application level.**
 
@@ -124,10 +101,10 @@ actions of users with the system (define the interface).
 
 Protocols: HTTP, SMTP, POP3, TelNet, etc.
 
-<span style='color: #FFFF00;'>  RU </span>
-Седьмой уровень иногда еще называют уровень приложений, но чтобы не запутаться можно использовать оригинальное название — application layer. Прикладной уровень — это то, с чем взаимодействуют пользователи, своего рода графический интерфейс всей модели OSI, с другими он взаимодействует по минимуму.
+The seventh level is sometimes also called the application layer, but to avoid confusion, you can use the original name - application layer. The application layer is what users interact with, a kind of graphical interface for the entire OSI model; it interacts with others to a minimum.
 
-Все услуги, получаемые седьмым уровнем от других, используются для доставки данных до пользователя. Протоколам седьмого уровня не требуется обеспечивать маршрутизацию или гарантировать доставку данных, когда об этом уже позаботились предыдущие шесть. Задача седьмого уровня — использовать свои протоколы, чтобы пользователь увидел данные в понятном ему виде.
+All services received by the seventh layer from others are used to deliver data to the user. Layer seven protocols do not need to provide routing or guarantee data delivery when the previous six have already taken care of this. The task of the seventh level is to use its protocols so that the user sees the data in a form that is understandable to him.
+
 
 
 # TCP/IP
