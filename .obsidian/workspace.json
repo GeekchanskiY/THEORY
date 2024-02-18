@@ -13,13 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Network Applications/Security stuff.md",
+                "file": "Hard Skills.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "11a99d8152eec4ae",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "TODOs/TODO.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Network Applications/Security stuff.md",
+                "file": "TODOs/TODO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Network Applications/Security stuff.md",
+                "file": "TODOs/TODO.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Network Applications/Security stuff.md"
+                "file": "TODOs/TODO.md"
               }
             }
           }
@@ -145,8 +158,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fe29278bc303cc5c",
+  "active": "11a99d8152eec4ae",
   "lastOpenFiles": [
+    "Hard Skills.md",
+    "Computer Science/Computer Science.md",
+    "Computer Science",
     "Network Applications/Security stuff.md",
     "Architecture/Infrastructure as Code.md",
     "Databases/MicrosoftSQL.md",
@@ -167,14 +183,12 @@
     "Ruby/Ruby on Rails/Rails project structure.md",
     "Ruby/RSpec.md",
     "Ruby/OOP in Ruby.md",
-    "Hard Skills.md",
     "JavaScript & TypeScript/Frameworks/React Native.md",
     "Ruby/RSpec 1.md",
     "Ruby/Ruby tips, hints and tricks.md",
     "Ruby/Ruby on Rails",
     "Python/Python frameworks & Libs.md",
     "Python/Python.md",
-    "Applications&platforms&etc/Makefile.md",
     "Python/SQLAlchemy"
   ]
 }
