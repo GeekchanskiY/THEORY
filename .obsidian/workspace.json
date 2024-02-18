@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "TODOs/TODO.md",
+                "file": "Network Applications/PROTOCOLS/DHCP.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "TODOs/TODO.md",
+                "file": "Network Applications/PROTOCOLS/DHCP.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "TODOs/TODO.md",
+                "file": "Network Applications/PROTOCOLS/DHCP.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TODOs/TODO.md"
+                "file": "Network Applications/PROTOCOLS/DHCP.md"
               }
             }
           }
@@ -160,6 +160,7 @@
   },
   "active": "11a99d8152eec4ae",
   "lastOpenFiles": [
+    "TODOs/TODO.md",
     "Hard Skills.md",
     "Computer Science/Computer Science.md",
     "Computer Science",
@@ -188,7 +189,6 @@
     "Ruby/Ruby tips, hints and tricks.md",
     "Ruby/Ruby on Rails",
     "Python/Python frameworks & Libs.md",
-    "Python/Python.md",
     "Python/SQLAlchemy"
   ]
 }
