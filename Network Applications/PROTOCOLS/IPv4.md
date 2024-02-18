@@ -1,24 +1,23 @@
-## IPv4
-IPv4 (Internet Protocol version 4) - это четвертая версия протокола Internet Protocol, которая была одной из первых версий и по-прежнему широко используется в сетях по всему миру. Вот основные характеристики IPv4:
+IPv4 (Internet Protocol version 4) is the fourth version of the Internet Protocol, which was one of the first versions and is still widely used on networks around the world. Here are the main characteristics of IPv4:
 
-1. **32-битные адреса:** IPv4 использует 32-битные (четырехбайтные) адреса, что ограничивает количество доступных уникальных IP-адресов до примерно 4,3 миллиарда.
+1. **32-bit addresses:** IPv4 uses 32-bit (four-byte) addresses, which limits the number of unique IP addresses available to approximately 4.3 billion.
 
-2. **Десятичная нотация:** IPv4-адреса представлены в десятичной нотации, состоящей из четырех чисел, разделенных точками, например, 192.168.0.1.
+2. **Decimal Notation:** IPv4 addresses are represented in decimal notation, consisting of four numbers separated by dots, for example, 192.168.0.1.
 
-3. **Иерархическая структура:** IPv4-адреса имеют иерархическую структуру, включая сетевую часть и устройство (хост) внутри этой сети. Сетевая часть идентифицирует сеть, а хостовая часть - конкретное устройство в этой сети.
+3. **Hierarchical structure:** IPv4 addresses have a hierarchical structure, including the network part and the device (host) within that network. The network part identifies the network, and the host part identifies a specific device on that network.
 
-4. **Классовая адресация:** В IPv4 существуют классы адресов: A, B, C, D и E. Классы определяют, какая часть адреса используется для сети и хоста. Однако классовая адресация устарела и была заменена более гибкой адресацией CIDR (Classless Inter-Domain Routing).
+4. **Classful Addressing:** In IPv4, there are classes of addresses: A, B, C, D, and E. The classes determine which part of the address is used for the network and the host. However, classful addressing has become obsolete and has been replaced by the more flexible CIDR (Classless Inter-Domain Routing) addressing.
 
-5. **CIDR (Classless Inter-Domain Routing):** CIDR предоставляет более гибкий способ выделения IP-адресов, позволяя использовать переменную длину префикса, что позволяет более эффективно использовать адресное пространство.
+5. **CIDR (Classless Inter-Domain Routing):** CIDR provides a more flexible way to allocate IP addresses by allowing the use of variable prefix lengths, which allows for more efficient use of address space.
 
-6. **Натуральный исчерпываемый ресурс:** Из-за ограниченного числа доступных IPv4-адресов сетевое сообщество переходит к IPv6 (Internet Protocol version 6), чтобы обеспечить увеличение адресного пространства.
+6. **Naturally Exhaustible Resource:** Due to the limited number of available IPv4 addresses, the networking community is moving to IPv6 (Internet Protocol version 6) to accommodate increased address space.
 
-7. **Поддержка разных типов сервисов:** IPv4 поддерживает различные службы, такие как передача данных, голосовые и видео-связи, мультимедийные потоки и другие виды данных.
+7. **Supports different types of services:** IPv4 supports various services, such as data transmission, voice and video communications, multimedia streams and other types of data.
 
-8. **Поддержка протоколов верхнего уровня:** IPv4 является основой для протоколов верхнего уровня, таких как TCP (Transmission Control Protocol) и UDP (User Datagram Protocol), которые обеспечивают надежную и ненадежную доставку данных соответственно.
+8. **Support for upper layer protocols:** IPv4 is the basis for upper layer protocols such as TCP (Transmission Control Protocol) and UDP (User Datagram Protocol), which provide reliable and unreliable data delivery respectively.
 
-9. **Маршрутизация:** IPv4-адресация поддерживает маршрутизацию, позволяя данным проходить через несколько сетей и маршрутизаторов, чтобы достичь их конечного пункта назначения.
+9. **Routing:** IPv4 addressing supports routing, allowing data to pass through multiple networks and routers to reach its final destination.
 
-10. **Распространение в Интернете:** IPv4 был долгое время основным протоколом для маршрутизации пакетов данных в Интернете. Однако исчерпание адресов и переход к IPv6 привел к снижению его значимости.
+10. **Internet Proliferation:** IPv4 has long been the primary protocol for routing data packets on the Internet. However, the exhaustion of addresses and the transition to IPv6 led to a decrease in its importance.
 
-Хотя IPv4 продолжает использоваться, с учетом исчерпания адресов, было разработано IPv6, который обеспечивает значительно большее адресное пространство и другие улучшения. С течением времени IPv6 становится все более распространенным и важным протоколом для сетей.
+Although IPv4 continues to be used, given address exhaustion, IPv6 was developed, which provides significantly larger address space and other improvements. Over time, IPv6 has become an increasingly common and important protocol for networks.
