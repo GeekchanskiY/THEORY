@@ -1,35 +1,34 @@
-## ARP
-ARP (Address Resolution Protocol) - это протокол уровня канального доступа в сети, который используется для поиска MAC-адреса (Media Access Control) устройства на основе его IP-адреса в локальных сетях Ethernet или других сетях с подобной архитектурой. ARP позволяет устройствам в локальной сети определить, какой MAC-адрес соответствует конкретному IP-адресу. Вот основные характеристики и функции ARP:
+ARP (Address Resolution Protocol) is a network access layer protocol that is used to find the MAC address (Media Access Control) of a device based on its IP address on Ethernet LANs or other networks with a similar architecture. ARP allows devices on a local network to determine which MAC address corresponds to a specific IP address. Here are the main characteristics and functions of ARP:
 
-1. **Резолюция IP-адресов:** Основной целью ARP является преобразование 32-битных IP-адресов в 48-битные MAC-адреса. Это необходимо, чтобы передача данных в локальных сетях была возможной, так как коммутаторы и маршрутизаторы в сети используют MAC-адреса для доставки пакетов на уровне канального доступа.
+1. **IP Address Resolution:** The main purpose of ARP is to resolve 32-bit IP addresses to 48-bit MAC addresses. This is necessary for data transmission on local networks to be possible, since switches and routers on the network use MAC addresses to deliver packets at the link access level.
 
-2. **ARP-запросы и ARP-ответы:** ARP-запрос - это сообщение, отправляемое устройством в сети для запроса MAC-адреса, соответствующего определенному IP-адресу. Когда устройство, имеющее запрошенный IP-адрес, получает такой запрос, оно отправляет ARP-ответ, содержащий свой MAC-адрес, обратно инициатору запроса.
+2. **ARP Requests and ARP Responses:** An ARP request is a message sent by a device on a network to request the MAC address corresponding to a specific IP address. When a device that has a requested IP address receives such a request, it sends an ARP response containing its MAC address back to the requester.
 
-3. **ARP-кэширование:** Устройства в сети поддерживают ARP-кэш, в котором хранятся соответствия между IP- и MAC-адресами. Это позволяет избегать частых ARP-запросов для одних и тех же устройств, так как кэш содержит недавно полученную информацию.
+3. **ARP Caching:** Devices on the network maintain an ARP cache, which stores mappings between IP and MAC addresses. This avoids frequent ARP requests for the same devices because the cache contains recently retrieved information.
 
-4. **ARP-атаки:** ARP уязвим к атакам, таким как ARP-отравление (ARP poisoning) или ARP-флуд (ARP flooding), которые могут нарушить нормальную работу сети, введя некорректные соответствия IP- и MAC-адресов в ARP-кэш устройств.
+4. **ARP Attacks:** ARP is vulnerable to attacks such as ARP poisoning or ARP flooding, which can disrupt normal network operation by introducing incorrect IP and MAC address mappings into Device ARP cache.
 
-5. **Типы ARP-сообщений:** Существует несколько разновидностей ARP-сообщений, включая ARP-запрос, ARP-ответ, Reverse ARP (RARP) и Inverse ARP (InARP). Каждый из них имеет свои особенности и использование.
+5. **Types of ARP Messages:** There are several types of ARP messages, including ARP Request, ARP Reply, Reverse ARP (RARP), and Inverse ARP (InARP). Each of them has its own characteristics and uses.
 
-6. **Протоколы верхнего уровня:** ARP используется вместе с протоколами верхнего уровня, такими как IPv4 и IPv6, чтобы обеспечивать маршрутизацию данных в локальной сети.
+6. **Upper Layer Protocols:** ARP is used in conjunction with upper layer protocols such as IPv4 and IPv6 to provide data routing within a local area network.
 
-ARP является важной частью процесса маршрутизации и обеспечивает правильную доставку пакетов в локальных сетях. Он позволяет сетевым устройствам определить, какому физическому устройству соответствует конкретный IP-адрес, и обеспечивает корректную коммутацию данных внутри сети.
+ARP is an important part of the routing process and ensures that packets are delivered correctly on local networks. It allows network devices to determine which physical device a specific IP address corresponds to and ensures correct data switching within the network.
 
 
 
 ## RARP
-RARP (Reverse Address Resolution Protocol) - это устаревший сетевой протокол, который использовался для обратного преобразования (расшифровки) MAC-адресов в IP-адреса в локальных сетях. В отличие от ARP (Address Resolution Protocol), который преобразует IP-адреса в MAC-адреса, RARP выполняет обратную операцию. Этот протокол был разработан для устройств, которые не имели назначенных им IP-адресов и должны были получить их динамически из RARP-сервера в локальной сети.
+RARP (Reverse Address Resolution Protocol) is a legacy network protocol that was used to reverse (decrypt) MAC addresses to IP addresses on local area networks. Unlike ARP (Address Resolution Protocol), which converts IP addresses to MAC addresses, RARP does the opposite. This protocol was designed for devices that did not have IP addresses assigned to them and had to obtain them dynamically from a RARP server on the local network.
 
-Основные характеристики RARP:
+Main characteristics of RARP:
 
-1. **Запросы RARP:** Устройство, которое не имеет назначенного IP-адреса и хочет получить его, отправляет запрос RARP в локальной сети. Этот запрос содержит MAC-адрес устройства.
+1. **RARP Requests:** A device that does not have an assigned IP address and wants to obtain one sends a RARP request on the local network. This request contains the MAC address of the device.
 
-2. **RARP-сервер:** В сети должен присутствовать RARP-сервер, который может принимать запросы RARP и отправлять ответы. RARP-сервер обычно находится в той же локальной сети, что и клиенты RARP.
+2. **RARP server:** There must be a RARP server on the network that can accept RARP requests and send responses. The RARP server is usually located on the same local network as the RARP clients.
 
-3. **Выделение IP-адресов:** Когда RARP-сервер получает запрос от клиента, он ищет соответствующий IP-адрес для данного MAC-адреса в своей базе данных и отправляет его в ответе на клиентский запрос. Таким образом, клиент получает IP-адрес, который ему назначен.
+3. **IP Address Allocation:** When the RARP server receives a request from a client, it looks up the corresponding IP address for the given MAC address in its database and sends it in response to the client request. Thus, the client receives the IP address that is assigned to it.
 
-4. **Ограниченное использование:** RARP был разработан во времена, когда статическая адресация была распространена, и устройства требовали явного назначения IP-адресов. С появлением DHCP (Dynamic Host Configuration Protocol), который предоставляет более гибкий и эффективный способ назначения IP-адресов динамически, RARP стал устаревшим и не используется практически в современных сетях.
+4. **Limited Use:** RARP was developed at a time when static addressing was common and devices required explicit assignment of IP addresses. With the advent of DHCP (Dynamic Host Configuration Protocol), which provides a more flexible and efficient way to assign IP addresses dynamically, RARP has become obsolete and is not used in much modern networks.
 
-5. **Проблемы безопасности:** RARP не предоставляет механизмов аутентификации или шифрования, что делает его уязвимым к атакам и подмене IP-адресов. Это одна из причин его отказа в пользу более безопасных протоколов.
+5. **Security Issues:** RARP does not provide authentication or encryption mechanisms, making it vulnerable to attacks and IP spoofing. This is one of the reasons for its abandonment in favor of more secure protocols.
 
-Следует отметить, что RARP был заменен DHCP и BOOTP (Bootstrap Protocol), которые предоставляют более современные и безопасные методы для назначения IP-адресов и другой сетевой конфигурации устройствам в локальных сетях.
+It should be noted that RARP has been replaced by DHCP and BOOTP (Bootstrap Protocol), which provide more modern and secure methods for assigning IP addresses and other network configuration to devices on local networks.

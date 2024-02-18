@@ -1,4 +1,3 @@
-## DHCP
 DHCP (Dynamic Host Configuration Protocol) is a network protocol that automatically assigns IP addresses and other network settings to devices on a local network. DHCP allows network administrators to manage and optimize the IP address allocation process, making it easier to configure and maintain networks. Here's how the DHCP service works and what functions it performs:
 
 1. **Automatic assignment of IP addresses:** One of the main functions of DHCP is to automatically assign IP addresses to devices connected to the network. When a device connects to a network, it sends a DHCP request (DHCP Discover), and a DHCP server on the network provides the device with an available IP address.
