@@ -1,16 +1,15 @@
-## RPC
-RPC (Remote Procedure Call) - это механизм, который позволяет одному компьютерному процессу вызывать функции или процедуры на удаленной машине, как если бы они были локальными. Это абстракция, которая упрощает удаленное взаимодействие между программными компонентами в сети. Вот основные характеристики и функции RPC:
+RPC (Remote Procedure Call) is a mechanism that allows one computer process to call functions or procedures on a remote machine as if they were local. It is an abstraction that facilitates remote communication between software components on a network. Here are the main characteristics and functions of RPC:
 
-1. **Вызов удаленных процедур:** Основная идея RPC заключается в том, что клиентский процесс может вызывать функции или методы, находящиеся на удаленной машине, точно так же, как если бы они находились на локальной машине. Для клиента это выглядит как вызов локальной процедуры, хотя фактически происходит удаленный вызов.
+1. **Remote Procedure Calls:** The basic idea of RPC is that a client process can call functions or methods residing on a remote machine just as if they were residing on a local machine. To the client, this looks like a local procedure call, although in fact it is a remote call.
 
-2. **Прозрачность:** RPC стремится обеспечить прозрачность для клиента. Это означает, что клиент не должен заботиться о деталях удаленного вызова, таких как передача данных через сеть, сериализация и десериализация данных и т.д.
+2. **Transparency:** RPC is committed to providing transparency to the client. This means that the client does not have to worry about the details of the remote call, such as transferring data over the network, serializing and deserializing data, etc.
 
-3. **Интерфейс и стабы:** RPC обычно использует интерфейс для определения удаленных процедур и их параметров. Затем генерируются стабы (stubs) для клиентской и серверной сторон, которые обеспечивают преобразование локальных вызовов в сетевые запросы и обратно.
+3. **Interface and Stubs:** RPC usually uses an interface to define remote procedures and their parameters. Then stubs are generated for the client and server sides, which ensure the conversion of local calls to network requests and vice versa.
 
-4. **Протоколы и транспортные средства:** RPC может использовать различные сетевые протоколы и транспортные средства для передачи данных, включая TCP/IP, HTTP, CORBA и другие.
+4. **Protocols and Transports:** RPC can use a variety of network protocols and transports to transmit data, including TCP/IP, HTTP, CORBA, and others.
 
-5. **Примеры:** Примерами RPC-технологий являются gRPC, Apache Thrift, Java RMI (Remote Method Invocation), XML-RPC и многие другие.
+5. **Examples:** Examples of RPC technologies are gRPC, Apache Thrift, Java RMI (Remote Method Invocation), XML-RPC and many others.
 
-6. **Сериализация данных:** Передача данных между клиентом и сервером требует сериализации (преобразования в байтовый поток) параметров функций и результатов. Это необходимо для передачи данных через сеть.
+6. **Data Serialization:** Data transfer between client and server requires serialization (conversion into a byte stream) of function parameters and results. This is necessary for transmitting data over the network.
 
-RPC широко используется в распределенных системах, веб-службах и многих других приложениях, где требуется удаленное взаимодействие между компонентами программного обеспечения. Это упрощает создание приложений, которые могут работать на разных машинах и обмениваться данными и функциональностью.
+RPC is widely used in distributed systems, web services, and many other applications that require remote communication between software components. This makes it easy to create applications that can run on different machines and share data and functionality.

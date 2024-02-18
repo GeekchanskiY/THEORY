@@ -1,18 +1,17 @@
-## SOAP
-SOAP (Simple Object Access Protocol) - это протокол обмена структурированными сообщениями в распределенных вычислительных средах, основанный на XML (eXtensible Markup Language). SOAP используется для обмена данными между компонентами программного обеспечения, работающими на разных платформах и в разных языках программирования через сеть, чаще всего по протоколу HTTP или SMTP. Вот основные характеристики и функции SOAP:
+SOAP (Simple Object Access Protocol) is a protocol for exchanging structured messages in distributed computing environments, based on XML (eXtensible Markup Language). SOAP is used to exchange data between software components running on different platforms and in different programming languages over the network, most often using HTTP or SMTP. Here are the main characteristics and functions of SOAP:
 
-1. **Простота и расширяемость:** SOAP был разработан как простой и легко читаемый протокол на основе XML. Это делает его доступным и понятным для разработчиков, и его структурированный формат позволяет легко добавлять и расширять новые элементы данных.
+1. **Simplicity and Extensibility:** SOAP was designed to be a simple and easy to read XML based protocol. This makes it accessible and understandable to developers, and its structured format makes it easy to add and expand new data elements.
 
-2. **Независимость от платформы и языка:** SOAP позволяет различным компонентам программного обеспечения, написанным на разных языках и работающим на разных платформах, обмениваться данными и вызывать методы удаленных объектов через сеть. Это делает SOAP идеальным для создания распределенных приложений.
+2. **Platform and Language Independence:** SOAP allows different software components, written in different languages and running on different platforms, to communicate and call methods on remote objects over the network. This makes SOAP ideal for creating distributed applications.
 
-3. **Прозрачность и безопасность:** SOAP поддерживает различные методы аутентификации и шифрования данных, что делает его безопасным для передачи конфиденциальных или чувствительных данных через сеть.
+3. **Transparency and Security:** SOAP supports various authentication and data encryption methods, making it secure for transmitting confidential or sensitive data over the network.
 
-4. **Интероперабельность:** SOAP протокол является стандартизированным, что означает, что разные реализации SOAP на разных платформах должны поддерживать общие стандарты, что обеспечивает высокую интероперабельность между различными системами.
+4. **Interoperability:** The SOAP protocol is standardized, which means that different implementations of SOAP on different platforms must support common standards, which ensures high interoperability between different systems.
 
-5. **Работа с удаленными процедурами (RPC):** SOAP поддерживает вызов удаленных процедур, что позволяет приложениям вызывать методы и функции на удаленных серверах так, как если бы они были локальными.
+5. **Remote Procedure Call (RPC):** SOAP supports remote procedure calls, which allows applications to call methods and functions on remote servers as if they were local.
 
-6. **Прокси-серверы и обработчики (Handlers):** SOAP может использовать прокси-серверы и обработчики для обработки сообщений до и после их отправки, что дает дополнительную гибкость в управлении данными.
+6. **Proxies and Handlers:** SOAP can use proxies and handlers to process messages before and after they are sent, giving additional flexibility in data management.
 
-7. **Основа для веб-служб:** SOAP является одним из протоколов, используемых для создания веб-служб (web services), которые предоставляют функциональность и данные через Интернет, используя стандартизированные протоколы и форматы данных.
+7. **Basis for Web Services:** SOAP is one of the protocols used to create web services that provide functionality and data over the Internet using standardized protocols and data formats.
 
-SOAP широко применяется в распределенных системах, веб-службах, интеграции приложений и других сценариях, где требуется обмен данными между удаленными компонентами программного обеспечения.
+SOAP is widely used in distributed systems, web services, application integration, and other scenarios where data exchange between remote software components is required.
