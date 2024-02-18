@@ -31,3 +31,6 @@ DHCP (Dynamic Host Configuration Protocol) works like this:
 6. **Lease Renewal:** The assigned IP address has a temporary lease and the client must periodically renew this lease in order to continue using the IP address. If a client leaves the network or is shut down, the IP address returns to the DHCP server pool and can be assigned to another client.
 
 The DHCP process allows devices to automatically obtain network settings and IP addresses, making the process of configuring network settings simple and efficient. DHCP also allows network administrators to centrally manage IP address allocation and other network settings, making it an essential service for managing networks of all sizes.
+
+## DHCP commands:
+Discover offer request ack nack decline release
