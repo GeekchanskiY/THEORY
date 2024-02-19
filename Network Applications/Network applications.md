@@ -2,7 +2,7 @@
 [[Protocols]]
 [[CIDR]]
 [[NAT]]
-[[Networking Console Utils]] #TODO add
+[[Networking Console Utils]]
 
 Netstat -b
 

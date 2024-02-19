@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "c6e1c218813cdd16",
+        "id": "08bb4cd8c952bb7d",
         "type": "tabs",
         "children": [
           {
-            "id": "fe29278bc303cc5c",
+            "id": "d3709572c865dfa7",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#TODO",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -129,7 +129,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -145,15 +146,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fe29278bc303cc5c",
+  "active": "d3709572c865dfa7",
   "lastOpenFiles": [
+    "Computer science/Interpreting Programming Languages.md",
+    "Ruby/Ruby.md",
+    "Network Applications/Network applications.md",
+    "Computer science/Pogramming Languages.md",
+    "Computer science/Testing.md",
+    "Computer science/Data Structures.md",
     "Computer science/Algorithms.md",
     "Computer science/Computer Science.md",
     "Computer Science/Computer Science.md",
     "Network Applications/Packet(DataGram).md",
     "Network Applications/Security stuff.md",
     "Network Applications/Network application interaction models.md",
-    "Network Applications/Network applications.md",
     "Network Applications/NAT.md",
     "Network Applications/PROTOCOLS/DHCP.md",
     "Hard Skills.md",
@@ -168,11 +174,6 @@
     "Network Applications/PROTOCOLS/MQTT.md",
     "Network Applications/PROTOCOLS/IPv6.md",
     "Network Applications/PROTOCOLS/IPv4.md",
-    "Network Applications/PROTOCOLS/IPC.md",
-    "Network Applications/PROTOCOLS/ICMP.md",
-    "Network Applications/PROTOCOLS/Ethernet.md",
-    "Network Applications/PROTOCOLS/ARP+RARP.md",
-    "TODOs/TODO.md",
     "Computer Science",
     "Architecture/Security",
     "Ruby/Ruby on Rails",
