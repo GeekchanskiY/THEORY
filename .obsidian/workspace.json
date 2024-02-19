@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Applications&platforms&etc/Version control systems.md",
+                "file": "Applications&platforms&etc/Git.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Applications&platforms&etc/Version control systems.md",
+                "file": "Applications&platforms&etc/Git.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Applications&platforms&etc/Version control systems.md",
+                "file": "Applications&platforms&etc/Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Applications&platforms&etc/Version control systems.md"
+                "file": "Applications&platforms&etc/Git.md"
               }
             }
           }
@@ -148,8 +148,8 @@
   },
   "active": "d3709572c865dfa7",
   "lastOpenFiles": [
-    "Applications&platforms&etc/Git.md",
     "Applications&platforms&etc/Version control systems.md",
+    "Applications&platforms&etc/Git.md",
     "Applications&platforms&etc/Applications&platforms%etc..md",
     "Computer science/Data Structures.md",
     "Computer science/Interpreting Programming Languages.md",
