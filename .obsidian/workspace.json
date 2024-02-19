@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer science/Data Structures.md",
+                "file": "Applications&platforms&etc/Version control systems.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Computer science/Data Structures.md",
+                "file": "Applications&platforms&etc/Version control systems.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Computer science/Data Structures.md",
+                "file": "Applications&platforms&etc/Version control systems.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Computer science/Data Structures.md"
+                "file": "Applications&platforms&etc/Version control systems.md"
               }
             }
           }
@@ -148,12 +148,14 @@
   },
   "active": "d3709572c865dfa7",
   "lastOpenFiles": [
+    "Applications&platforms&etc/Applications&platforms%etc..md",
+    "Applications&platforms&etc/Version control systems.md",
+    "Computer science/Data Structures.md",
     "Computer science/Interpreting Programming Languages.md",
     "Ruby/Ruby.md",
     "Network Applications/Network applications.md",
     "Computer science/Pogramming Languages.md",
     "Computer science/Testing.md",
-    "Computer science/Data Structures.md",
     "Computer science/Algorithms.md",
     "Computer science/Computer Science.md",
     "Computer Science/Computer Science.md",
@@ -172,8 +174,6 @@
     "Network Applications/PROTOCOLS/Protocols.md",
     "Network Applications/PROTOCOLS/PPP.md",
     "Network Applications/PROTOCOLS/MQTT.md",
-    "Network Applications/PROTOCOLS/IPv6.md",
-    "Network Applications/PROTOCOLS/IPv4.md",
     "Computer Science",
     "Architecture/Security",
     "Ruby/Ruby on Rails",
