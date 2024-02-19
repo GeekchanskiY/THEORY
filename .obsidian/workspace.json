@@ -148,8 +148,9 @@
   },
   "active": "d3709572c865dfa7",
   "lastOpenFiles": [
-    "Applications&platforms&etc/Applications&platforms%etc..md",
+    "Applications&platforms&etc/Git.md",
     "Applications&platforms&etc/Version control systems.md",
+    "Applications&platforms&etc/Applications&platforms%etc..md",
     "Computer science/Data Structures.md",
     "Computer science/Interpreting Programming Languages.md",
     "Ruby/Ruby.md",
@@ -173,7 +174,6 @@
     "Network Applications/PROTOCOLS/RPC.md",
     "Network Applications/PROTOCOLS/Protocols.md",
     "Network Applications/PROTOCOLS/PPP.md",
-    "Network Applications/PROTOCOLS/MQTT.md",
     "Computer Science",
     "Architecture/Security",
     "Ruby/Ruby on Rails",
