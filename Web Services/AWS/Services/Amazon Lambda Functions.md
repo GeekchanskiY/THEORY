@@ -1,4 +1,13 @@
 
+Restrictions:
+ - Concurrent executions: 100
+ - Function and layer storage: 75GB
+ - Elastic network interfaces per VPC: 250
+P.S. About elastic networks: 
+There are use cases where a Lambda function needs VPC resources such as RDS -mysql. In that case, you need to configure the VPC subnet and AZs for the Lambda function. The Lambda function connects to these VPC resources through the Elastic Network Interface (ENI).
+
+Hard Limits:
+![[Pasted image 20240220172443.png]]
 
 ### Lambda layers
 AWS Lambda layers are a distribution mechanism for libraries, custom runtimes, and custom extensions. Layers let you manage your in-development function code independently from the unchanging code and resources that it uses. Lambda layers are a distribution mechanism for libraries, custom runtimes, and custom extensions. They allow you to manage your in-development function code independently from the unchanging code and resources that it uses. This can make it easier to manage and deploy your serverless applications. Here are some benefits of using Lambda layers:
