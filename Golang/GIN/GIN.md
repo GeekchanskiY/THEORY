@@ -10,6 +10,9 @@ Error management
 Rendering built-in
 Extendable
 
+### Cool almost complete guide I found
+https://www.allhandsontech.com/programming/golang/web-app-sqlite-go/
+
 
 ### Quickstart
 
