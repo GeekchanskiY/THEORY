@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "08bb4cd8c952bb7d",
+        "id": "148fc1211a7ce390",
         "type": "tabs",
         "children": [
           {
-            "id": "d3709572c865dfa7",
+            "id": "5fa2957123943a06",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Ruby/Ruby.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Ruby/Ruby.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Ruby/Ruby.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,11 +124,13 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Ruby/Ruby.md"
+              }
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -138,19 +146,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d3709572c865dfa7",
+  "active": "5fa2957123943a06",
   "lastOpenFiles": [
+    "Ruby/Ruby Data types/Ruby booleans.md",
+    "Ruby/Ruby.md",
+    "Ruby/Ruby Data types/Ruby hashes.md",
+    "Ruby/Ruby Data types/Ruby arrays.md",
+    "Ruby/Ruby Data types/Ruby numbers.md",
+    "Ruby/Ruby Data types/Ruby symbols.md",
+    "Ruby/Ruby Data types/Ruby strings.md",
+    "Ruby/Ruby Data types",
+    "Computer science/Compiling Programming languages.md",
+    "Computer science/Computer Science.md",
+    "Computer science/Data Structures.md",
     "Applications&platforms&etc/Version control systems.md",
     "Applications&platforms&etc/Git.md",
     "Applications&platforms&etc/Applications&platforms%etc..md",
-    "Computer science/Data Structures.md",
     "Computer science/Interpreting Programming Languages.md",
-    "Ruby/Ruby.md",
     "Network Applications/Network applications.md",
     "Computer science/Pogramming Languages.md",
     "Computer science/Testing.md",
     "Computer science/Algorithms.md",
-    "Computer science/Computer Science.md",
     "Computer Science/Computer Science.md",
     "Network Applications/Packet(DataGram).md",
     "Network Applications/Security stuff.md",
@@ -159,13 +175,6 @@
     "Network Applications/PROTOCOLS/DHCP.md",
     "Hard Skills.md",
     "Network Applications/Networking Console Utils/PING.md",
-    "Network Applications/Networking Console Utils/Networking Console Utils.md",
-    "Network Applications/CIDR.md",
-    "Network Applications/PROTOCOLS/SOAP.md",
-    "Network Applications/PROTOCOLS/SLIP.md",
-    "Network Applications/PROTOCOLS/RPC.md",
-    "Network Applications/PROTOCOLS/Protocols.md",
-    "Network Applications/PROTOCOLS/PPP.md",
     "Computer Science",
     "Architecture/Security",
     "Ruby/Ruby on Rails",

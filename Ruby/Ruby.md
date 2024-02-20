@@ -9,12 +9,12 @@ https://www.ruby-lang.org/en/documentation/
 [[Modules in Ruby]]
 
 ### Data types
-- Numbers
-- Boolean
-- Strings #TODO frozen string
-- Hashes
-- Arrays
-- Symbols
+- [[Ruby numbers]]
+- [[Ruby booleans]]
+- [[Ruby strings]] #TODO frozen string
+- [[Ruby hashes]]
+- [[Ruby arrays]]
+- [[Ruby symbols]]
 
 ```ruby
 # Ruby program to illustrate the
@@ -44,4 +44,10 @@ puts domains[:hu]
 ```
 Symbols also are also used for different purpose than string
 Detail info: https://www.rubyguides.com/2018/02/ruby-symbols/
+
+
+### Working with strings:
+sub/gsub to replace character or all of them
+
+replace to replace all the string
 
