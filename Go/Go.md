@@ -13,3 +13,5 @@ go run
 go help
 
 [[Go variables and data types]]
+
+[[Go useful stuff]]
