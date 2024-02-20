@@ -23,3 +23,28 @@ var iface interface{} = "text"
 
  := is declaration and assignment
  = is assignment
+
+**You can't use `:=` outside of `funcs`. It's because, outside a func, a statement should start with a keyword.**
+
+**You can use `:=` for multi-variable declarations and assignments**
+
+**You can use them twice in "multi-variable" declarations, _if one of the variables is new_:**
+
+```go
+foo, bar  := someFunc()
+foo, jazz := someFunc()  // <-- jazz is new
+baz, foo  := someFunc()  // <-- baz is new
+```
+
+**You can use the short declaration to declare a variable in a newer scope even if that variable is already declared with the same name before**
+```go
+var foo int = 34
+
+func some() {
+  // because foo here is scoped to some func
+  foo := 42  // <-- legal
+  foo = 314  // <-- legal
+}
+```
+
+**You can declare the same name in short statement blocks like: if, for, switch 
