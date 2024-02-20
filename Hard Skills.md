@@ -12,7 +12,7 @@
 **9. [[Message Brokers]]**
 **10. [[JavaScript]]**
 **11. [[Applications&platforms%etc.]]**
-**12. [[Golang]]**
+**12. [[Go]]**
 **13. [[Ruby]]**
 **14. [[Computer Science]]**
 

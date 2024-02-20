@@ -11,3 +11,5 @@ When your code imports packages contained in other modules, you manage those dep
 go mod
 go run
 go help
+
+[[Go variables and data types]]
