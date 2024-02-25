@@ -12,7 +12,8 @@ Extendable
 
 ### Cool almost complete guide I found
 https://www.allhandsontech.com/programming/golang/web-app-sqlite-go/
-
+Also nice source of GORM+Gin framework
+https://github.com/dedidot/gorm-gin/blob/master/main.go
 
 ### Quickstart
 
