@@ -19,3 +19,5 @@ go help
 [[Go basic syntax]]
 
 [[Go useful stuff]]
+
+[[Go generics]]
