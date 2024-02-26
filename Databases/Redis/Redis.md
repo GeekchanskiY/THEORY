@@ -1,4 +1,5 @@
 [[NoSQL]]
+[[RedisInsight]]
 
 The open-source, in-memory data store used by millions of developers as a cache, vector database, document database, streaming engine, and message broker.
 
@@ -11,6 +12,7 @@ Server-side scripting with Lua and server-side stored procedures with Redis Func
 
 ### Persistence
 Keeps the dataset in memory for fast access, but can also persist all writes to permanent storage to survive reboots and system failures.
+Read more: [[Redis persistance]]
 
 ### Extensibility
 A module API for building custom extensions to Redis in C, C++, and Rust.
@@ -20,3 +22,6 @@ Horizontal scalability with hash-based sharding, scaling to millions of nodes wi
 
 ### High availability
 Replication with automatic failover for both standalone and clustered deployments.
+
+### Variety of usecases
+Redis can be used as Real-time data store, caching and session storage, for streaming and messaging, etc.
