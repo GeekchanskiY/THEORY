@@ -12,6 +12,8 @@ go mod
 go run
 go help
 
+[[OOP in go]]
+
 [[Goroutines and Channels]]
 
 [[Go variables and data types]]

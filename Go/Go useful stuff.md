@@ -12,3 +12,7 @@ func packageWriteToDB() {} // exported, visible within the package
 ```
 
 **All functions should be named in camel case, but only functions starting with uppercase will be exported!**
+
+
+### File I/O
+https://www.honeybadger.io/blog/comprehensive-guide-to-file-operations-in-go/
