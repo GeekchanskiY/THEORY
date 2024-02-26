@@ -1,6 +1,8 @@
 [[NoSQL]]
 [[RedisInsight]]
 
+https://redis.io/docs/
+
 The open-source, in-memory data store used by millions of developers as a cache, vector database, document database, streaming engine, and message broker.
 
 ## Core capabilities
