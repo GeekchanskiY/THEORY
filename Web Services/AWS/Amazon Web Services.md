@@ -30,3 +30,5 @@ The following diagram shows an example VPC. The VPC has one subnet in each of th
 ### 10. [[Amazon Cognito]]
 
 ### 11. [[Amazon DynamoDB]]
+
+### 12. [[AWS IoT]]
