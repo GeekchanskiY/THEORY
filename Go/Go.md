@@ -23,3 +23,5 @@ go help
 [[Go useful stuff]]
 
 [[Go generics]]
+
+[[Go Interview questions]]
