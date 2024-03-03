@@ -29,3 +29,5 @@ tests
 especially
 paddi
 cancan
+
+[[Rails typical errors and solutions]]
