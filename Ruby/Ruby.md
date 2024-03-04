@@ -11,7 +11,7 @@ https://www.ruby-lang.org/en/documentation/
 ### Data types
 - [[Ruby numbers]]
 - [[Ruby booleans]]
-- [[Ruby strings]] #TODO frozen string
+- [[Ruby strings]]
 - [[Ruby hashes]]
 - [[Ruby arrays]]
 - [[Ruby symbols]]

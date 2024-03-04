@@ -20,14 +20,5 @@ config.hosts << /.*/ # allow any hosts
 ```
 
 
-#TODO:
-factorybot
-pry (gem pry)
-asset compile
-active admin
-tests 
-especially
-paddi
-cancan
 
 [[Rails typical errors and solutions]]
