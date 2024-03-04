@@ -19,3 +19,8 @@ func split(sum int) (x, y int) {
 }
 
 ```
+
+
+### Strictures
+
+additionally, there is a Tag feature. Read more: [[Go tags]]
