@@ -1,4 +1,4 @@
-
+To get swagger, go to the /docs
 ### Theme configuration
 It can be achieved by directly changing ui parameters in fastapi startup
 ```python
