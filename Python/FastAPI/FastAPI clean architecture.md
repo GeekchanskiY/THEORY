@@ -18,11 +18,11 @@ Average project structure for fastapi:
 			- modelRouter.py
 		- services/
 			- modelService.py
+		- schemas/
+			- modelSchema.py
 		- repositories/
 			- models/
 				- model.py
-			- schemas/
-				- modelSchema.py
 			- modelRepository.py
 	- Dockerfile
 	- .dockerignore
