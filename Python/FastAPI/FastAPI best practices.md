@@ -1,3 +1,5 @@
+
+### [[FastAPI clean architecture]]
 ### Fastapi Dependency injection
 Warning: DI in Fastapi can cause deadlock if do not use them properly!
 Example of nice usage:
