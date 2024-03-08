@@ -42,3 +42,9 @@ __all__ = ['Base', 'User', 'Service', 'ServiceLog']
 ```
 A little description:
 Writing `from repositories.models import *` inside the env.py allows access all the models and Base (which we need for metadata), and do not update .env file all the time. IMHO best practice for this shit, but probably there's a better solution, idk. Obviously, you need to update `__init__.py` file each time you create a new model.
+#### How to drop all the migrations
+First, delete the table `alembic_version` is the database via 
+```sql
+DROP TABLE alembic_version;
+```
+and then delete all the versions from `./alembic/versions/`
