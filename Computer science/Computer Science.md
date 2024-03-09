@@ -1,4 +1,4 @@
-[[Pogramming Languages]]
+[[Programming Languages]]
 [[Data Structures]]
 [[Algorithms]]
 [[Testing]]
