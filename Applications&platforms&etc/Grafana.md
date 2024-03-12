@@ -2,3 +2,9 @@ Grafana is a multi-platform open source analytics and interactive visualization 
 Written in Go and TS.
 
 https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/
+
+Also there is a LGTM Stack:
+Loki - logs
+Grafana - visualization
+Tempo for traces
+Mimir for metrics
