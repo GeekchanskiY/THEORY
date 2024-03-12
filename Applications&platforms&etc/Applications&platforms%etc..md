@@ -10,6 +10,11 @@ ELK stack:
 	[[LogStash]]
 	[[Kibana]]
 
+Monitoring:
+	- [[Grafana]]
+	- Datadog
+	- New Relic
+
 
 [[Version control systems]]
 [[Terraform]]
