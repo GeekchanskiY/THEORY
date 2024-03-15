@@ -73,3 +73,6 @@ class JWTBearer(HTTPBearer):
 
 ```
 using this call in route you can do `credentials: JWTCredentials = Depends(JWTBearer())`
+
+
+[[FastAPI lifespan]]
