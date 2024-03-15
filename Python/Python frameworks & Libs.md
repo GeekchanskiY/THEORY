@@ -16,6 +16,8 @@ WM:
 
 [[SQLAlchemy]]
 
+[[Pytest]]
+
 ### Connection to DB and utils:
 
 [[Redis]]:
