@@ -1,17 +1,17 @@
 [[Python]]
 
-Initialization and Construction
 
-Description
-
-__new__(cls, other)
-
+	`def __new__(cls)`
 To get called in an object's instantiation.
 
-__init__(self, other)
-
+	`def __init__(self)`
 To get called by the __new__ method.
 
-__del__(self)
-
+	`__def__(self)`
 Destructor method.
+
+	`def __repr__(self)`
+Representation of object. Called by `str()` if `__str__` is not implemented, and by `__repr__`
+
+	`def __str__(self)`
+Used in `str()`
