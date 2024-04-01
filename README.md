@@ -7,5 +7,3 @@ In OBSIDIAN, I use these plugins for better experience:
 
 Execute code: https://github.com/twibiral/obsidian-execute-code
 Git:
-
-TEST
