@@ -6,3 +6,6 @@
 
 ## Programming paradigms
 [[Declarative Programming]]
+
+## Stuff
+[[ORM]]
