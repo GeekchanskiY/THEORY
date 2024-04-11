@@ -57,3 +57,34 @@ In addition, dict comprehensions can be used to create dictionaries from arbitra
 {x: x**2 for x in (2, 4, 6)}
 # {2: 4, 4: 16, 6: 36}
 ```
+
+
+### Looping techniques
+When looping through dictionaries, the key and corresponding value can be retrieved at the same time using the `items()` method.
+
+When looping through a sequence, the position index and corresponding value can be retrieved at the same time using the `enumerate()` function.
+
+To loop over two or more sequences at the same time, the entries can be paired with the `zip()` function.
+
+To loop over a sequence in reverse, first specify the sequence in a forward direction and then call the `reversed()` function.
+
+To loop over a sequence in sorted order, use the `sorted()` function which returns a new sorted list while leaving the source unaltered.
+
+!!! Note: Using `set()` on a sequence eliminates duplicate elements. The use of sorted() in combination with set() over a sequence is an idiomatic way to loop over unique elements of the sequence in sorted order.
+
+It is sometimes tempting to change a list while you are looping over it; however, it is often simpler and safer to create a new list instead.
+
+### Comparing Sequences and Other Types
+Sequence objects typically may be compared to other objects with the same sequence type. The comparison uses lexicographical ordering: first the first two items are compared, and if they differ this determines the outcome of the comparison; if they are equal, the next two items are compared, and so on, until either sequence is exhausted. If two items to be compared are themselves sequences of the same type, the lexicographical comparison is carried out recursively. If all items of two sequences compare equal, the sequences are considered equal. If one sequence is an initial sub-sequence of the other, the shorter sequence is the smaller (lesser) one. Lexicographical ordering for strings uses the Unicode code point number to order individual characters. Some examples of comparisons between sequences of the same type:
+```python 
+(1, 2, 3)              < (1, 2, 4)
+[1, 2, 3]              < [1, 2, 4]
+'ABC' < 'C' < 'Pascal' < 'Python'
+(1, 2, 3, 4)           < (1, 2, 4)
+(1, 2)                 < (1, 2, -1)
+(1, 2, 3)             == (1.0, 2.0, 3.0)
+(1, 2, ('aa', 'ab'))   < (1, 2, ('abc', 'a'), 4)
+```
+
+Note that comparing objects of different types with < or > is legal provided that the objects have appropriate comparison methods. For example, mixed numeric types are compared according to their numeric value, so 0 equals 0.0, etc. Otherwise, rather than providing an arbitrary ordering, the interpreter will raise a TypeError exception.
+
