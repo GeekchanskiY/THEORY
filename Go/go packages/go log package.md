@@ -49,3 +49,23 @@ A log record consists of a time, a level, a message, and a set of key-value pair
 The default handler formats the log record's message, time, level, and attributes as a string and passes it to the log package.
 
 For more control over the output format, create a logger with a different handler. This statement uses New to create a new logger with a TextHandler that writes structured records in text form to standard error
+
+The package also provides JSONHandler, whose output is line-delimited
+
+Both TextHandler and JSONHandler can be configured with HandlerOptions. There are options for setting the minimum level, displaying the source file and line of the log call, and modifying attributes before they are logged.
+
+
+#### Groups
+Attributes can be collected into groups. A group has a name that is used to qualify the names of its attributes. How this qualification is displayed depends on the handler. TextHandler separates the group and attribute names with a dot. JSONHandler treats each group as a separate JSON object, with the group name as the key.
+
+```go
+slog.Group("request",
+    "method", r.Method,
+    "url", r.URL)
+```
+
+#### Contexts
+Some handlers may wish to include information from the context.Context that is available at the call site. One example of such information is the identifier for the current span when tracing is enabled.
+
+
+#### Attrs and 
