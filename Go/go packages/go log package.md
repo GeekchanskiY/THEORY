@@ -45,4 +45,7 @@ const (
 
 all info on the doc: https://pkg.go.dev/log/slog@go1.22.3
 
+A log record consists of a time, a level, a message, and a set of key-value pairs, where the keys are strings and the values may be of any type. 
+The default handler formats the log record's message, time, level, and attributes as a string and passes it to the log package.
 
+For more control over the output format, create a logger with a different handler. This statement uses New to create a new logger with a TextHandler that writes structured records in text form to standard error
