@@ -29,5 +29,3 @@ go help
 [[Go generics]]
 
 [[Go Interview questions]]
-
-[[go sync package]]
