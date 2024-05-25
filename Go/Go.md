@@ -9,6 +9,7 @@ When your code imports packages contained in other modules, you manage those dep
 
 
 ### Project structure
+https://github.com/golang-standards/project-layout
 
 ```
 - app
