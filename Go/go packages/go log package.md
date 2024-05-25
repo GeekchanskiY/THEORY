@@ -68,4 +68,11 @@ slog.Group("request",
 Some handlers may wish to include information from the context.Context that is available at the call site. One example of such information is the identifier for the current span when tracing is enabled.
 
 
-#### Attrs and 
+#### Attrs and values
+
+An Attr is a key-value pair. The Logger output methods accept Attrs as well as alternating keys and values.
+
+```go
+slog.Info("hello", slog.Int("count", 3)) 
+slog.Info("hello", "count", 3) // Shorten syntax. I dont like it actually
+```
