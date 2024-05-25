@@ -11,3 +11,4 @@ Good notes about patterns: https://www.decipherzone.com/blog-detail/software-arc
 [[Peer-to-Peer pattern]]
 [[Cloud Native architecture]]
 
+test
