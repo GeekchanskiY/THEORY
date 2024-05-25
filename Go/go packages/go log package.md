@@ -18,3 +18,31 @@ Logger methods:
  - Prints, Println - same as Fatalf, Fatalln
  - SetFlags, SetOutput, SetPrefix
  - Writer - returns writer
+
+
+
+### Slog
+Package slog provides structured logging, in which log records include a message, a severity level, and various other attributes expressed as key-value pairs.
+
+
+Default attributes for slog logger
+```go
+const (
+	// TimeKey is the key used by the built-in handlers for the time
+	// when the log method is called. The associated Value is a [time.Time].
+	TimeKey = "time"
+	// LevelKey is the key used by the built-in handlers for the level
+	// of the log call. The associated value is a [Level].
+	LevelKey = "level"
+	// MessageKey is the key used by the built-in handlers for the
+	// message of the log call. The associated value is a string.
+	MessageKey = "msg"
+	// SourceKey is the key used by the built-in handlers for the source file
+	// and line of the log call. The associated value is a *[Source].
+	SourceKey = "source"
+)
+```
+
+all info on the doc: https://pkg.go.dev/log/slog@go1.22.3
+
+
