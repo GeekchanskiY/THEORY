@@ -9,3 +9,4 @@ it's used to initialize global variables and perform setup tasks. It's called au
 
 ### dynamic and static types of var declaration
 
+what is test containers in go?
