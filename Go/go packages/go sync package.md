@@ -1,4 +1,8 @@
 
+https://pkg.go.dev/sync
+
+Sync package is about working with goroutines. It allows us to create mutex (default and rwmutes), wait groups,  etc. From the original description: "provides basic synchronization primitives such as mutual exclusion locks. Other than the Once and WaitGroup types, most are intended for use by low-level library routines. Higher-level synchronization is better done via channels and communication."
+
 ### OnceFunc
 
 ```go
