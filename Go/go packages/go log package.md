@@ -68,4 +68,17 @@ slog.Group("request",
 Some handlers may wish to include information from the context.Context that is available at the call site. One example of such information is the identifier for the current span when tracing is enabled.
 
 
-#### Attrs and 
+#### Attrs and values
+
+An Attr is a key-value pair. The Logger output methods accept Attrs as well as alternating keys and values.
+
+```go
+slog.Info("hello", slog.Int("count", 3)) 
+slog.Info("hello", "count", 3) // Shorten syntax. I dont like it actually
+```
+
+
+#### Cool stuff that will be used once a life
+##### Record advanced modifications
+Sometimes a Handler will need to modify a Record before passing it on to another Handler or backend. A Record contains a mixture of simple public fields (e.g. Time, Level, Message) and hidden fields that refer to state (such as attributes) indirectly. This means that modifying a simple copy of a Record (e.g. by calling Record.Add or Record.AddAttrs to add attributes) may have unexpected effects on the original. Before modifying a Record, use Record.Clone to create a copy that shares no state with the original, or create a new Record with NewRecord and build up its Attrs by traversing the old ones with Record.Attrs.
+
