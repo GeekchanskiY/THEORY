@@ -40,3 +40,5 @@ go help
 [[Go generics]]
 
 [[Go Interview questions]]
+
+[[GO Garbage collector]]
