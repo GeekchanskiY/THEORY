@@ -26,3 +26,10 @@ type Finder interface {
 ```
 
 Go does not support traditional inheritance, but it uses composition instead
+
+### Type aliases
+`type A = string` creates an alias for `string`. Whenever you use `A` in your code, it works just like `string`. So for example, you can't define methods on it.
+
+```go
+type Hint string
+```
