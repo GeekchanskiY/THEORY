@@ -8,7 +8,7 @@ A defer statement defers the execution of a function until the surrounding funct
 *Very important here*
 ```go
 func writeToDB(){} // unexported, only visible within the 
-func packageWriteToDB() {} // exported, visible within the package
+func WriteToDB() {} // exported, visible within the package
 ```
 
 **All functions should be named in camel case, but only functions starting with uppercase will be exported!**

@@ -13,9 +13,10 @@ https://github.com/golang-standards/project-layout
 
 ```
 - app
-	-bin // binaries
-	-cmd
-	-pkg //
+	- bin // binaries
+	- cmd // main.go usually, entrypoints
+	- pkg // package
+	- internal // package that cant be imported from other packages
 ```
 
 # Links
