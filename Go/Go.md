@@ -18,14 +18,10 @@ https://github.com/golang-standards/project-layout
 	-pkg //
 ```
 
-### Other
-Go default packages: 
-[[go packages]]
+# Links
 
-**// commands**
-go mod
-go run
-go help
+[[go packages]]
+[[go standard library]]
 
 [[OOP in go]]
 
@@ -40,3 +36,7 @@ go help
 [[Go generics]]
 
 [[Go Interview questions]]
+
+[[Go garbage collector]]
+
+[[Go CLI]]
