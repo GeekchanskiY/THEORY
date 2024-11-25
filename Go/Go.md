@@ -24,13 +24,11 @@ https://github.com/golang-standards/project-layout
 [[go packages]]
 [[go standard library]]
 
-[[OOP in go]]
-
-[[Goroutines and Channels]]
+[[Go asynchronous programming]]
 
 [[Go variables and data types]]
 
-[[Go basic syntax]]
+[[Go basics]]
 
 [[Go useful stuff]]
 
