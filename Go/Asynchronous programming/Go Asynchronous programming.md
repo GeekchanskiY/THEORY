@@ -1,12 +1,17 @@
+# Description
+
+# Article
 ## Goroutines
 
-A _goroutine_ is a lightweight thread managed by the Go runtime.
+A goroutine is a lightweight thread managed by the Go runtime. To start a goroutine use the `go` keyword
 
+```go
 go f(x, y, z)
+```
+
 
 starts a new goroutine running
 
-f(x, y, z)
 
 The evaluation of `f`, `x`, `y`, and `z` happens in the current goroutine and the execution of `f` happens in the new goroutine.
 
@@ -115,3 +120,10 @@ Go's standard library provides mutual exclusion with [`sync.Mutex`](https://go.
 We can define a block of code to be executed in mutual exclusion by surrounding it with a call to `Lock` and `Unlock` as shown on the `Inc` method.
 
 We can also use `defer` to ensure the mutex will be unlocked as in the `Value` method.
+
+# Links
+
+[[Go Channels]]
+[[Go Goroutines]]
+[[Go Mutexes]]
+[[Go WaitGroups]]

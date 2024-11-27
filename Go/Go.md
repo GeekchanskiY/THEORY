@@ -22,9 +22,10 @@ https://github.com/golang-standards/project-layout
 # Links
 
 [[go packages]]
+
 [[go standard library]]
 
-[[Go asynchronous programming]]
+[[Go Asynchronous programming]]
 
 [[Go variables and data types]]
 
@@ -39,3 +40,5 @@ https://github.com/golang-standards/project-layout
 [[Go garbage collector]]
 
 [[Go CLI]]
+
+[[Go errors]]
