@@ -1,5 +1,5 @@
 
-[[go sync package]]
-[[go log package]]
-[[go database-sql package]]
-[[go net-http package]]
+[[Go sync package]]
+[[Go log package]]
+[[Go database-sql package]]
+[[Go net-http package]]
