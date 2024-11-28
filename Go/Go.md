@@ -23,7 +23,7 @@ https://github.com/golang-standards/project-layout
 
 [[go packages]]
 
-[[go standard library]]
+[[Go standard library]]
 
 [[Go Asynchronous programming]]
 
