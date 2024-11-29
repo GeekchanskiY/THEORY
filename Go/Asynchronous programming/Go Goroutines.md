@@ -1,4 +1,3 @@
-# Article
 A goroutine is a lightweight thread managed by the Go runtime. Actually, goroutine solves the concurrency problem, and involves a new way to manage parallel tasks. It doesn't mean that it does it parallel at CPU level. It would also work on a single-core CPU, as an older machines managed to create an illusion of parallelism. The flow of parallel jobs 'A' & 'B' can be described as:
  - Job A runs a single CPU operation (which takes nanoseconds for 1Ghz CPU)
  - Job A finishes operation, and gives the wheel to job B

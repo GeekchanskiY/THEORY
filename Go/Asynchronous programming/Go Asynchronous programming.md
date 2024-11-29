@@ -1,6 +1,3 @@
-# Description
-
-# Article
 ## Goroutines
 
 A goroutine is a lightweight thread managed by the Go runtime. To start a goroutine use the `go` keyword

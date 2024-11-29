@@ -1,17 +1,15 @@
-# Description
 Repository to store all theory in a one place.
 
 Now, it's also used as a database, so that's why I prefer to do a default format for each document to be able to parse them later.
 
 <div style="padding: 20px; display: flex; justify-content: center; width: 100%;"><a href="https://github.com/GeekchanskiY"><div style="width: 120; height: 50; background-color: #3b3b3b;  display: flex; justify-content: center; align-items: center; border-radius: 15px; padding: 10px;">my github</div></a><a href="https://t.me/GeekanskiY"><div style="width: 120; height: 50; background-color: #3b3b3b; margin-left: 30px;  display: flex; justify-content: center; align-items: center; border-radius: 15px; padding: 10px;">my telegram</div></a></div>
 
-# Article
 ### Note structure
 Notes are being separated by `# Label`
 Never use some custom labels, without adding them to this document, because this document is being a documentation for a repository, which will be used for cv_builder and my other services
 
 ```note
-# Article
+[Filename = Title]
 all note stuff here
 # Links
 [[Hard Skills]]
