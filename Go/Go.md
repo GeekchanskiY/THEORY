@@ -35,8 +35,6 @@ https://github.com/golang-standards/project-layout
 
 [[Go generics]]
 
-[[Go Interview questions]]
-
 [[Go garbage collector]]
 
 [[Go CLI]]
