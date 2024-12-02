@@ -1,7 +1,5 @@
 
 After 1.18 release go has generics
-
-
 ```go
 type Unsigned interface (
 	uint8 | uint16 | uint32 | uint64
