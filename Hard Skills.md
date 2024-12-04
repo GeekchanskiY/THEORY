@@ -4,7 +4,7 @@ Hard skills is a group of skills, that generally shows your technical knowledge,
 
 **[[Network applications]]**
 **[[Architecture Patterns]]**
-**[[DataBases]]**
+**[[Databases]]**
 **[[Design Patterns]]**
 **[[Development methodology]]**
 **[[Python]]**
