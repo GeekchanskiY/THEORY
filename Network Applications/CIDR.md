@@ -73,7 +73,7 @@ With CIDR, your organization can create and consolidate multiple subnets. This a
 
 ### **Create a Virtual Private Cloud**
 
-Amazon virtual private cloud ([[VPC]]) is a private digital space hosted within the cloud. It allows your organization to provision workloads in an isolated and secure environment. A VPC uses CIDR IP addresses when it transfers data packets between connected devices. 
+Amazon virtual private cloud (VPC) is a private digital space hosted within the cloud. It allows your organization to provision workloads in an isolated and secure environment. A VPC uses CIDR IP addresses when it transfers data packets between connected devices. 
 
 ### **Create supernets flexibly**
 

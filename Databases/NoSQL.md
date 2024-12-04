@@ -3,4 +3,4 @@ NoSQL, also referred to as “not only SQL”, “non-SQL”, is an approach to
 
 [[Redis]]
 [[MongoDB]]
-[[Amazon DynamoDB]]
+Amazon DynamoDB

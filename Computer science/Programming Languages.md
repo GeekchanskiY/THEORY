@@ -3,5 +3,5 @@ Basically the idea is to make code more human-readable than computer instruction
 
 According to translation technologies, there are two basic types of programming languages:
 
-[[Compiling Programming languages]]
-[[Interpreting Programming Languages]]
+[[Compiled Programming languages]]
+[[Interpreted Programming Languages]]

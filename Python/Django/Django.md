@@ -20,5 +20,5 @@ In Django, signals are triggered when certain events occur in the application. T
 
 To summarize, signals in Django are used to allow certain actions to be taken when certain events occur in the application. They're defined using the Signal object, connected to events using the @receiver decorator, and sent using the send() method
 
-Django + [[Amazon Web Services]] setup:
+Django + Amazon Web Services setup:
 https://dev.to/vaddimart/deploy-django-app-on-aws-lambda-using-serverless-part-1-1i90

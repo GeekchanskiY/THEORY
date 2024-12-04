@@ -15,7 +15,7 @@ Most popular ones are:
 [[RabbitMQ]]
 [[Kafka]]
 [[Redis as MB]]
-[[SQS]]
+Cloud solutions like SQS
 
 Features:
 [[Dead letter queue]]

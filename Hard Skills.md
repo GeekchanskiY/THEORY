@@ -14,7 +14,6 @@ Hard skills is a group of skills, that generally shows your technical knowledge,
 **[[JavaScript]]**
 **[[Applications&platforms%etc.]]**
 **[[Go]]**
-**[[Ruby]]**
 **[[Computer Science]]**
 **[[Internet of Things]]**
 **[[CI&CD Pipelines]]**

@@ -1,4 +1,4 @@
-[[Kafka]], Amazon [[SQS]](Simple Queue Service), and [[RabbitMQ]] are three popular messaging systems, each with its own strengths and use cases. Let's compare them in various aspects:
+[[Kafka]], Amazon SQS(Simple Queue Service), and [[RabbitMQ]] are three popular messaging systems, each with its own strengths and use cases. Let's compare them in various aspects:
 
 1. **Messaging Model**:
    - Kafka: Kafka is a distributed streaming platform that follows a publish-subscribe model. It allows producers to publish messages to topics, and consumers can subscribe to these topics and consume messages in real-time.

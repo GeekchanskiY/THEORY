@@ -20,5 +20,5 @@ WM:
 
 ### Connection to DB and utils:
 
-[[Redis]]:
+Redis:
  - https://redis-py.readthedocs.io/en/stable/examples/asyncio_examples.html
