@@ -5,7 +5,6 @@ Concepts:
  - [[Variables]]
  - [[Control structures]]
  - [[Abstraction]]
- - [[Arrays]]
  - [[Cyclomatic complexity]]
  - [[Data types]]
  - [[Debugging]]

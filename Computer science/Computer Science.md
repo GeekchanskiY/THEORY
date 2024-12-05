@@ -1,6 +1,6 @@
 [[Programming Languages]]
-[[Computer science/Data Structures]]
 [[Algorithms]]
+[[Computer science/Data structures/Data structures|Data structures]]
 [[Testing]]
 [[Math Programming]]
 [[Coding concepts]]
