@@ -1,0 +1,1 @@
+Data type defines what exactly will be stored inside of the variable. Data types can be simple, as integer, string, boolean, etc. But also complex, like array, hash map, or even class instance, which will contain another data types inside. 
