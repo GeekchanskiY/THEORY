@@ -73,3 +73,5 @@ fmt.Println(*p) // read i through the pointer p
 This is known as "dereferencing" or "indirecting".
 
 Unlike C, Go has no pointer arithmetic.
+
+[[Go slices]]
