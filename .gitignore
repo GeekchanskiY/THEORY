@@ -5,3 +5,6 @@
 
 # Ignore Obsidian workspace files
 workspace
+
+# Ignore JetBrains IDEA
+.idea
