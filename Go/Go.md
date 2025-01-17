@@ -22,6 +22,7 @@ https://github.com/golang-standards/project-layout
 # Links
 
 [[go packages]]
+[[Go community packages]]
 
 [[Go standard library]]
 
