@@ -2,6 +2,8 @@
 `Uber.go/fx` is a dependency injection framework
 It allows to automatically build dependency graph inside, increases code reusability, and reduces boilerplates . Also it simplifies code writing process a lot.
 
+Documentation:
+https://pkg.go.dev/go.uber.org/fx
 ## Concepts
 ### Container
 Container is the abstraction responsible for holding all constructors and values. It’s the primary means by which an application interacts with Fx. You teach the container about the needs of your application, how to perform certain operations, and then you let it handle actually running your application.
@@ -64,6 +66,22 @@ During **execution**, Fx will,
 - run all startup hooks appended to the application by providers, decorators, and invoked functions
 - wait for a signal to stop running
 - run all shutdown hooks appended to the application
+
+To add fx hooks you can not only use `fx.Lifecycle` as an function argument, but also `fx.Annotate`:
+	
+```go
+fx.Annotate(
+	NewServer,
+	fx.OnStart(
+		func(ctx context.Context, s *Server) error {
+		 s.Start() return nil 
+	}), 
+	fx.OnStop(
+		func(ctx context.Context, s *Server) error { 
+		s.Stop() return nil 
+	}), 
+),
+```
 
 
 ### Rules of Fx Hooks:
