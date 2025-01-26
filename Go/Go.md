@@ -40,4 +40,6 @@ https://github.com/golang-standards/project-layout
 
 [[Go CLI]]
 
+[[Go mod and go work]]
+
 [[Go errors]]
