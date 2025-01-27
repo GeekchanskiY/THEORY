@@ -1,5 +1,5 @@
 Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
-
+// TODO: make git an separate leaf
 ## Commands
 ### git init
 
@@ -63,6 +63,11 @@ $ git log --<author>="Author Name"
 Remove files or directories from the working index (staging area). With _git rm_, there are two options to keep in mind: force and cached. Running the command with force deletes the file. The cached command removes the file from the working index. When removing an entire directory, a recursive command is necessary.
 ### git fetch
 git-fetch - Download objects and refs from another repository
-Fetch branches and/or tags (collectively, "refs") from one or more other repositories, along with the objects necessary to complete their histories. Remote-tracking branches are updated (see the description of <refspec> below for ways to control this behavior).
+Fetch branches and/or tags (collectively, "refs") from one or more other repositories, along with the objects necessary to complete their histories. Remote-tracking branches are updated.
 
-By default, any tag that points into the histories being fetched is also fetched; the effect is to fetch tags that point at branches that you are interested in. This default behavior can be changed by using the --tags or --no-tags options or by configuring remote.<name>.tagOpt. By using a refspec that fetches tags explicitly, you can fetch tags that do not point into branches you are interested in as well.
+By default, any tag that points into the histories being fetched is also fetched; the effect is to fetch tags that point at branches that you are interested in. This default behavior can be changed by using the --tags or --no-tags options or by configuring remote . By using a refspec that fetches tags explicitly, you can fetch tags that do not point into branches you are interested in as well.
+
+
+## Good practices
+
+To store inside git directory, which is empty at the moment, but you wish to leave it in the project structure to be available for other developers, you can use dummy files. By default, name for this file is a `.gitkeep`.
