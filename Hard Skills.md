@@ -18,3 +18,4 @@ Hard skills is a group of skills, that generally shows your technical knowledge,
 **[[Internet of Things]]**
 **[[CI&CD Pipelines]]**
 **[[Project management]]**
+**[[Version control systems]]**
