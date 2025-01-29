@@ -344,7 +344,7 @@ Returns string value of `Location`
 ### Ticker
 ```go
 type Ticker struct {
-	C <-chan [Time](https://pkg.go.dev/time#Time) // The channel on which the ticks are delivered.
+	C <-chan Time
 	// contains filtered or unexported fields
 }
 ```
