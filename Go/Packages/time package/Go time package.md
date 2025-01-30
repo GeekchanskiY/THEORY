@@ -7,3 +7,4 @@ By default, if you have `time.Time` in your struct which you wish to unmarshal f
 
 [[Go time package types]]
 [[Go time package constants]]
+[[Go time package functions]]
