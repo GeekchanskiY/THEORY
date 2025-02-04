@@ -18,6 +18,8 @@ A `WaitGroup` must not be copied after first use.
 
 In the terminology of the Go memory model, a call to `WaitGroup.Done` “synchronizes before” the return of any Wait call that it unblocks.
 
+[[Go WaitGroup examples]]
+
 #### Methods
 ```go
 func (wg *WaitGroup) Add(delta int)

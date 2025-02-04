@@ -1,4 +1,3 @@
-
 ```go
 // bad example
 func bad(urls []string){
