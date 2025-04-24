@@ -14,6 +14,13 @@ The evaluation of `f`, `x`, `y`, and `z` happens in the current goroutine a
 
 Goroutines run in the same address space, so access to shared memory must be synchronized. The [`sync`](https://go.dev/pkg/sync/) package provides useful primitives, although you won't need them much in Go as there are other primitives. (See the next slide.)
 
+
+By default, there are `GOMAXPROCS` env var, which says how much goroutines will run on separate CPU cores (in linux, `GOMAXPROCS` = `ptread_t` by default. actually it also will be equal to `func NumCPU() int` by default) 
+It can be changed due the runtime using the runtime function:
+```go
+func GOMAXPROCS(n int) int
+```
+if n = -1 - it returns current value.
 ## Channels
 
 Channels are a typed conduit through which you can send and receive values with the channel operator, `<-`.
@@ -31,6 +38,8 @@ ch := make(chan int)
 By default, sends and receives block until the other side is ready. This allows goroutines to synchronize without explicit locks or condition variables.
 
 The example code sums the numbers in a slice, distributing the work between two goroutines. Once both goroutines have completed their computation, it calculates the final result.
+
+
 
 ## Buffered Channels
 
@@ -117,6 +126,8 @@ Go's standard library provides mutual exclusion with [`sync.Mutex`](https://go.
 We can define a block of code to be executed in mutual exclusion by surrounding it with a call to `Lock` and `Unlock` as shown on the `Inc` method.
 
 We can also use `defer` to ensure the mutex will be unlocked as in the `Value` method.
+
+Mutex lock may decrease the total performance of the application because of the thread locking method under the hood. But, it is still faster than using channels for locking.
 
 # Links
 

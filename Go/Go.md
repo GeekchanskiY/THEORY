@@ -31,6 +31,7 @@ https://github.com/golang-standards/project-layout
 [[Go variables and data types]]
 
 [[Go basics]]
+[[Go tags]]
 
 [[Go useful stuff]]
 

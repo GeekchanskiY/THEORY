@@ -1,18 +1,16 @@
 
-### Defer statement
+### `new(T)` vs `&T{}`
+Their behavior is almost same, despite the fact that `new` will automatically put variable into heap, and `&T{}` have a chance to leave in stack. That leads to 2 facts: new is faster for runtime, it does not need to move variable into different scopes, but &T may be a bit faster for gc and be deleted with scope of it's creation.
+
+### defer statement
 A defer statement defers the execution of a function until the surrounding function returns.
 
 
-### Naming conventions
+### Naming conventions and specifics
 
-*Very important here*
+All functions should be named in camel case, but only functions starting with uppercase will be exported
 ```go
 func writeToDB(){} // unexported, only visible within the 
 func WriteToDB() {} // exported, visible within the package
 ```
 
-**All functions should be named in camel case, but only functions starting with uppercase will be exported!**
-
-
-### File I/O
-https://www.honeybadger.io/blog/comprehensive-guide-to-file-operations-in-go/
