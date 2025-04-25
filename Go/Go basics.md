@@ -7,6 +7,7 @@ func name(args) return_type {
 	return args
 }
 
+// multiple return values
 func swap(x, y string) (string, string) {
 	return y, x
 }
@@ -24,16 +25,13 @@ func split(sum int) (x, y int) {
 
 if statement
 ```go
-if v.Method == "get" {
-	res, err = http.Get(v.Adress)
-	if err != nil {
-	fmt.Printf("error making http request: %s\n", err)
-	} else {}
+if err != nil {
+	return err
 }
 
-// Scope of 'v' is inside of if statement
-if v := math.Pow(x, n); v < lim {
-	return v
+// Scope of 'area' is inside of if statement
+if area := math.Pow(x, n); area > limit {
+	return errors.New("area is too big")
 }
 ```
 
@@ -48,15 +46,15 @@ sum := 1
 for ; sum < 1000; {
 	sum += sum
 }
-
-// While analog
+// same as
 for sum < 1000 {
 	sum += sum
 }
 
-// Forever
-for sum < 1000 {
-	sum += sum
+// Range returns iter num and value from iterable
+var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+for i, v := range pow {
+	fmt.Printf("2**%d = %d\n", i, v)
 }
 ```
 
@@ -84,5 +82,22 @@ func main() {
 	}
 }
 
+```
+
+### defer statement
+A defer statement defers the execution of a function until the surrounding function returns.
+**Note: defers are stacked**
+
+```go
+func main() {
+  defer fmt.Println(1)
+  defer fmt.Println(2)
+  defer fmt.Println(3)
+}
+
+// Output:
+// 3
+// 2
+// 1
 ```
 

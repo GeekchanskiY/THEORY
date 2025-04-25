@@ -5,17 +5,13 @@ Hard skills is a group of skills, that generally shows your technical knowledge,
 **[[Architecture Patterns]]**
 **[[Databases]]**
 **[[Design Patterns]]**
-**[[Development methodology]]**
 **[[Python]]**
 **[[Computer Science]]**
 **[[Cloud Computing Services]]**
 **[[Message Brokers]]**
-**[[JavaScript]]**
 **[[Applications&platforms%etc.]]**
 **[[Go]]**
 **[[Web development]]**
 **[[Computer Science]]**
-**[[Internet of Things]]**
 **[[CI&CD Pipelines]]**
-**[[Project management]]**
 **[[Version control systems]]**
