@@ -6,7 +6,7 @@ PostgreSQL is a powerful, open source object-relational database system with ove
 [[PG CONSTRAINTS]]
 [[PG MVCC]]
 [[PG useful notes]]
-
+[[Psql shell]]
 ## Indexes
 In PostgreSQL, an index is a data structure that allows efficient access to specific rows within a table. There are several types of indexes that you can use in PostgreSQL, each with its own specific characteristics and use cases. Here is a brief overview of the different types of indexes available in PostgreSQL: 
 1. B-tree index: This is the most common type of index in PostgreSQL and is used to index values that are sorted in an ascending or descending order. B-tree indexes are good for a wide range of queries, including those that use equal and range operators (e.g., WHERE column = value and WHERE column BETWEEN value1 AND value2). 
