@@ -6,3 +6,5 @@ Earlier I tried to use some plugins like execute_code, auto-backup, etc. But whe
 Start with [[Hard Skills]]
 
 And remember: `THEORY must grow`
+
+test message
