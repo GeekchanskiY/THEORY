@@ -1,1 +1,0 @@
-[[Go math-rand package]]

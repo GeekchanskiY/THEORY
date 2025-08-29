@@ -1,1 +1,0 @@
-[[12 factors of web application]]
