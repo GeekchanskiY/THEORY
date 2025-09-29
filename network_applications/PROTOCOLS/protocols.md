@@ -32,3 +32,4 @@ Together, these terms describe various aspects of the functioning and interactio
 [[RPC]]
 [[SOAP]]
 [[IPC]]
+[[MQTT]]

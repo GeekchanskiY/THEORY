@@ -5,6 +5,7 @@
 [[coding_concepts]]
 ## Programming paradigms
 [[declarative_programming]]
+[[imperative_programming]]
 
 ## Stuff
 [[ORM]]

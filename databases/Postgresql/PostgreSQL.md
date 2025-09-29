@@ -6,6 +6,7 @@ PostgreSQL is a powerful, open source object-relational database system with ove
 [[PG_constrains]]
 [[PG_MVCC]]
 [[PG_useful_notes]]
+[[PG_window_functions]]
 [[psql_shell]]
 ## Indexes
 In PostgreSQL, an index is a data structure that allows efficient access to specific rows within a table. There are several types of indexes that you can use in PostgreSQL, each with its own specific characteristics and use cases. Here is a brief overview of the different types of indexes available in PostgreSQL: 
