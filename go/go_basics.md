@@ -1,4 +1,3 @@
-
 ### Functions
 
 All cases of go functions here:

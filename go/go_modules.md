@@ -22,5 +22,4 @@ require (
 ```
 
 # Links
-[[go_CLI]]
 [[go_packages]]
