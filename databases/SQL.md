@@ -1,4 +1,0 @@
-[[PostgreSQL]]
-[[MySQL]]
-[[MicrosoftSQL]]
-[[OracleSQL]]
