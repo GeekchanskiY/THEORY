@@ -23,15 +23,17 @@ What's possible for go:
 [[go_standard_library]]
 [[go_asynchronous_programming]]
 [[go_variables_and_data_types]]
-[[go_basics]]
+[[Go Specification]]
 [[go_tags]]
-[[go_useful_stuff]]
+[[Useful stuff]]
 [[go_generics]]
-[[go_garbage_collector]]
+[[Go Garbage Collector]]
 [[go_mod and go_work]]
-[[go_errors]]
 
 # Useful links
 [Documentation](https://go.dev/doc/)
 [Specification](https://go.dev/ref/spec#Introduction)
 [Project layout](https://github.com/golang-standards/project-layout)
+
+# Sources
+[Wikipedia]

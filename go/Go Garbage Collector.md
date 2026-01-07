@@ -53,3 +53,7 @@ GOGC = 100 => GC starts when live heap = new heap
 
 GoMemLimit - env var, limit for go runtime memory
 GoMemLimit is not set by default to avoid memory leaks
+
+
+# Sources
+[A Guide to the Go Garbage Collector](https://go.dev/doc/gc-guide)
