@@ -24,6 +24,7 @@ What's possible for go:
 [[go_asynchronous_programming]]
 [[go_variables_and_data_types]]
 [[Go Specification]]
+[[Effective go]]
 [[go_tags]]
 [[Useful stuff]]
 [[go_generics]]
@@ -34,6 +35,3 @@ What's possible for go:
 [Documentation](https://go.dev/doc/)
 [Specification](https://go.dev/ref/spec#Introduction)
 [Project layout](https://github.com/golang-standards/project-layout)
-
-# Sources
-[Wikipedia]
