@@ -245,10 +245,58 @@ A new, initialized slice value for a given element type T may be made using the 
 
 Like arrays, slices are ==always one-dimensional== but ==may be composed== to construct higher-dimensional objects. With arrays of arrays, the inner arrays are, by construction, always the same length; however with slices of slices (or arrays of slices), the ==inner lengths may vary dynamically==. Moreover, the ==inner slices must be initialized individually== (because their default value is nil).
 ### Struct types
+A struct is a ==sequence of named elements, called fields==, each of which has a name and a type. Field names may be specified explicitly (==IdentifierList==) or implicitly (==EmbeddedField==). Within a struct, ==non-blank field names must be unique==.
 
+A field declared with a type but no explicit field name is called an embedded field. An embedded field must be specified as a type name or as a pointer to a non-interface type name, and type name itself may not be a pointer type or type parameter. The ==unqualified type name acts as the field name==.
+
+```go
+// An empty struct.
+struct {}
+
+// A struct with 6 fields.
+struct {
+	x, y int
+	u float32
+	_ float32  // padding
+	A *[]int
+	F func()
+}
+
+// A struct with four embedded fields of types T1, *T2, P.T3 and *P.T4
+struct {
+	T1        // field name is T1
+	*T2       // field name is T2
+	P.T3      // field name is T3
+	*P.T4     // field name is T4
+	x, y int  // field names are x and y
+}
+```
+
+A field or method f of an embedded field in a struct x is called ==promoted if x.f is a legal selector that denotes that field or method f==. (if you can do x.f when f is a part of an embedded struct => field is promoted)
+
+Promoted fields act like ordinary fields of a struct except that they cannot be used as field names in composite literals of the struct. (you cant do `struct{a: 10}` if a is a field of an embedded struct).
+
+Given a struct type `S` and a type name `T`. promoted methods are included in the method set of the struct as follows:
+ - If `S` contains an embedded field `T`, the method sets of `S` and `*S` both include promoted methods with receiver `T`. The method set of `*S` also includes promoted methods with receiver `*T`.
+- If `S` contains an embedded field `*T`, the method sets of `S` and `*S` both include promoted methods with receiver `T` or `*T`.
+
+A field declaration may be followed by an ==optional string literal tag==, which becomes an attribute for all the fields in the corresponding field declaration. The tags are made ==visible through a reflection interface== and take part in type identity for structs but are otherwise ignored.
 ### Pointer types
+A pointer type denotes the set of all pointers to variables of a given type, called the base type of the pointer. The value of an uninitialized pointer is nil. 
+```go
+var x *int
+var x *[4]int
+```
 ### Function types
+A function type denotes the set of all functions with the same parameter and result types. The value of an uninitialized variable of function type is nil.
+
+All non-blank names in signature (parameter and result) must be unique.
+
+Th ==final incoming parameter== in a function signature may have a type prefixed with `...`. A function with such a parameter is called ==variadic== and may be invoked with zero or more arguments for that parameter.
 ### Interface types
+An interface type ==defines a type set==. A variable of interface type can store a value of any type that is in the type set of the interface. Such a type is said to implement the interface. The value of an uninitialized variable of interface type is nil.
+
+
 ### Map types
 ### Channel types
 
