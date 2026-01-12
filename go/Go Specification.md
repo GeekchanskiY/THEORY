@@ -296,9 +296,77 @@ Th ==final incoming parameter== in a function signature may have a type prefixed
 ### Interface types
 An interface type ==defines a type set==. A variable of interface type can store a value of any type that is in the type set of the interface. Such a type is said to implement the interface. The value of an uninitialized variable of interface type is nil.
 
+An interface type is specified by a list of methods or types.
+#### Basic interface
+In its most basic form an interface specifies a (possibly empty) list of methods. The type set defined by such an interface is the set of types which implement all of those methods, and the corresponding method set consists exactly of the methods specified by the interface. Interfaces whose type sets can be ==defined entirely by a list of methods are called basic interfaces==.
 
+The name of each explicitly specified method must be unique and not blank.
+
+More than one type may implement an interface. Every type that is a member of the type set of an interface implements that interface. Any given type may implement several distinct interfaces. 
+
+All types implement the empty interface (`interface{}` or it's alias `any`) which stands for the set of all (non-interface) types.
+#### Embedded interfaces
+In a slightly more general form an interface `T` may use a (possibly qualified) interface type name `E` as an interface element. This is called embedding interface `E` in `T`. The type set of `T` is the intersection of the type sets defined by `T` explicitly declared methods and the type sets of `T` embedded interfaces. In other words, the type set of `T` is the ==set of all types that implement all the explicitly declared methods of T and also all the methods of E==.
+
+When embedding interfaces, ==methods with the same names must have identical signatures==.
+#### General interfaces
+In their most general form, an interface element may also be an arbitrary type term `T`, or a term of the form `~T` ==specifying the underlying type== `T` (which is the type and aliases), or a union of terms `t1|t2|…|tn`. Together with method specifications, these elements enable the precise definition of an interface's type set as follows:
+- The type set of the empty interface is the set of all non-interface types.
+- The type set of a non-empty interface is the intersection of the type sets of its interface elements.
+- The type set of a method specification is the set of all non-interface types whose method sets include that method.
+- The type set of a non-interface type term is the set consisting of just that type.
+- The type set of a term of the form `~T` is the ==set of all types whose underlying type is T==.
+- The type set of a union of terms `t1|t2|…|tn` is the union of the type sets of the terms.
+
+By construction, an ==interface's type set never contains an interface type==.
+In a term of the form `~T`, the underlying type of `T` must be itself, and `T` cannot be an interface.
+
+Implementation restriction: A union (with more than one term) cannot contain the predeclared identifier `comparable` or interfaces that specify methods, or embed `comparable` or interfaces that specify methods.
+
+The type `T` in a term of the form `T` or `~T` ==cannot be a type parameter==, and the type sets of all non-interface terms must be pairwise disjoint (the pairwise intersection of the type sets must be empty).
+
+Interfaces that are ==not basic may only be used as type constraints, or as elements of other interfaces used as constraints==. They cannot be the types of values or variables, or components of other, non-interface types.
+
+An interface type `T` may not embed a type element that is, contains, or embeds `T`, directly or indirectly.
+#### Implementing an interface
+A type T implements an interface I if
+- `T` is not an interface and is an element of the type set of `I`
+- `T` is an interface and the type set of T is a subset of the type set of `I`.
+A value of type T implements an interface if T implements the interface.
 ### Map types
+A map is an ==unordered group of elements of one type==, called the element type, ==indexed by a set of unique keys of another type==, called the key type. The value of an ==uninitialized map is nil==.
+
+The comparison operators `==` and `!=` must be fully defined for operands of the key type
+Thus ==the key type must not be a function, map, or slice==. 
+
+If the key type is an interface type, these comparison operators must be defined for the dynamic key values; failure will cause a run-time panic.
+
+The number of map elements is called its length. For a `map m`, it can be discovered using the built-in function `len` and may change during execution. Elements may be added during execution using assignments and retrieved with index expressions
+
+Elements may be removed with the `delete` and `clear` built-in function.
+
+A new, empty map value is made using the built-in function make, which takes the map type and an optional capacity hint as argument. The initial capacity does not bound its size: maps grow to accommodate the number of items stored in them, with the exception of `nil` maps. ==A `nil` map is equivalent to an empty map except that no elements may be added==.
 ### Channel types
+A channel provides a mechanism for concurrently executing functions to communicate by sending and receiving values of a specified element type. The value of an uninitialized channel is nil.
+`ChannelType = ( "chan" | "chan" "<-" | "<-" "chan" ) ElementType .`
+
+The optional `<-` operator specifies the channel direction, send or receive. ==If a direction is given, the channel is directional, otherwise it is bidirectional==. A channel may be constrained only to send or only to receive by ==assignment or explicit conversion==.
+
+The `<-` operator associates with the leftmost chan possible:
+```go
+chan<- chan int    // same as chan<- (chan int)
+chan<- <-chan int  // same as chan<- (<-chan int)
+<-chan <-chan int  // same as <-chan (<-chan int)
+chan (<-chan int)
+```
+
+A new, initialized channel value can be made using the built-in function make, which takes the channel type and an optional capacity as argument.
+
+The capacity, in number of elements, ==sets the size of the buffer in the channel==. If the capacity is zero or absent, the channel is ==unbuffered== and ==communication succeeds only when both a sender and receiver are ready==. Otherwise, the channel is ==buffered== and ==communication succeeds without blocking if the buffer is not full (sends) or not empty (receives)==. A `nil` channel is ==never ready for communication==.
+
+A channel may be closed with the built-in function close. The multi-valued assignment form of the receive operator reports whether a received value was sent before the channel was closed.
+
+A single channel may be used in send statements, receive operations, and calls to the built-in functions `cap` and `len` by any number of `goroutines` without further synchronization. ==Channels act as first-in-first-out queues==.
 
 
 # Sources

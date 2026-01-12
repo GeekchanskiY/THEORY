@@ -4,3 +4,5 @@
 	 No, but formal syntax may use it. [[Go Specification]]
 3. What's the difference between raw string literal, and interpreted string literal?
 	 Raw string literal is a raw utf-8 string, which is not processed in compile time like a interpreted string, so the backslash sequences will have no effect, also raw string may contain a newline character. [[Go Specification]]
+ 4.  What are the channel types?
+	 Buffered and unbuffered, directional and bidirectional. [[Go Specification]]

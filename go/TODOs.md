@@ -9,3 +9,4 @@ race detection
 imaginary literal
 Array nil value vs slice nil value
 Promoted fields, promoted methods.
+General interfaces, `~T` syntax
