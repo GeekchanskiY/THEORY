@@ -367,7 +367,78 @@ The capacity, in number of elements, ==sets the size of the buffer in the channe
 A channel may be closed with the built-in function close. The multi-valued assignment form of the receive operator reports whether a received value was sent before the channel was closed.
 
 A single channel may be used in send statements, receive operations, and calls to the built-in functions `cap` and `len` by any number of `goroutines` without further synchronization. ==Channels act as first-in-first-out queues==.
+## Properties of types and values
+### Representation of values
+Values of predeclared types (see below for the interfaces any and error), arrays, and structs are self-contained: Each such ==value contains a complete copy of all its data==, and variables of such types ==store the entire value==. For instance, an array variable provides the storage (the variables) for all elements of the array. The respective zero values are specific to the value's types, and they are never nil.
 
+`Non-nil pointer`, `function`, `slice`, `map`, and `channel` values ==contain references to underlying data== which may be shared by multiple values:
+- A pointer value is a reference to the variable holding the pointer base type value.
+- A function value contains references to the (possibly anonymous) function and enclosed variables.
+- A slice value contains the slice length, capacity, and a reference to its underlying array.
+- A map or channel value is a reference to the implementation-specific data structure of the map or channel.
+
+An interface value may be self-contained or contain references to underlying data depending on the interface's dynamic type. The predeclared identifier nil is the zero value for types whose values can contain references.
+
+When multiple values share underlying data, ==changing one value may change another==. For instance, ==changing an element of a slice will change that element in the underlying array for all slices that share the array==.
+### Underlying type
+Each type `T` has an underlying type: If `T` is one of the predeclared boolean, numeric, or string types, or a type literal, the corresponding ==underlying type is T itself==. Otherwise, `T`'s underlying type is the underlying type of the type to which `T` refers in its declaration. For a type parameter that is the underlying type of its type constraint, which is always an `interface`.
+```go
+type (
+	A1 = string // underlying: string
+	A2 = A1 // underlying: string
+)
+
+type (
+	B1 string // underlying: string
+	B2 B1 // underlying: string
+	B3 []B1 // underlying: []B1 (both for []B1 and B3)
+	B4 B3 // underlying: []B1
+)
+
+func f[P any](x P) { … } // underlying of P is interface{}
+```
+### Type identity
+Two types are either identical or different.
+
+A ==named type is always different from any other type==. Otherwise, two types are ==identical if their underlying type literals are structurally equivalent==
+
+That is, they have the same literal structure and corresponding components have identical types. In detail:
+- Two array types are identical if they have identical element types and the same array length.
+- Two slice types are identical if they have identical element types.
+- Two struct types are identical if they have the same sequence of fields, and if corresponding pairs of fields have the same names, identical types, and identical tags, and are either both embedded or both not embedded. ==Non-exported field names from different packages are always different==.
+- Two pointer types are identical if they have identical base types.
+- Two function types are identical if they have the same number of parameters and result values, corresponding parameter and result types are identical, and either both functions are variadic or neither is. ==Parameter and result names are not required to match==.
+- Two interface types are identical if they define the same type set.
+- Two map types are identical if they have identical key and element types.
+- Two channel types are identical if they have identical element types and the same direction.
+- Two instantiated types are identical if their defined types and all type arguments are identical.
+### Assignability
+A value `x` of type `V` is assignable to a variable of type `T` if one of the following conditions applies:
+- `V` and `T` are identical.
+- `V` and `T` have identical underlying types but are not type parameters and at least one of `V` or `T` is not a named type.
+- `V` and `T` are channel types with identical element types, `V` is a bidirectional channel, and at least one of `V` or `T` is not a named type.
+- `T` is an interface type, but not a type parameter, and x implements `T`. 
+- `x` is the predeclared identifier nil and `T` is a pointer, function, slice, map, channel, or interface type, but not a type parameter.
+- `x` is an untyped constant representable by a value of type `T`.
+
+Additionally, if `x`'s type `V` or `T` are type parameters, `x` is assignable to a variable of type `T` if one of the following conditions applies:
+- `x` is the predeclared identifier `nil`, `T` is a type parameter, and `x` is assignable to each type in `T`'s type set.
+- `V` is not a named type, `T` is a type parameter, and `x` is assignable to each type in `T`'s type set.
+- `V` is a type parameter and `T` is not a named type, and values of each type in `V`'s type set are assignable to `T`.
+### Representability
+A constant `x` is representable by a value of type `T`, where `T` is not a type parameter, if one of the following conditions applies:
+- `x` is in the set of values determined by `T`.
+- `T` is a floating-point type and x can be rounded to `T`'s precision without overflow. Rounding uses IEEE 754 round-to-even rules but with an IEEE negative zero further simplified to an unsigned zero. Note that constant values never result in an IEEE negative zero, NaN, or infinity.
+- `T` is a complex type, and `x`'s components `real(x)` and `imag(x)` are representable by values of `T`'s component type (float32 or float64).
+If `T` is a type parameter, `x` is representable by a value of type `T` if `x` is representable by a value of each type in `T`'s type set.
+### Method sets
+The method set of a type determines the methods that can be called on an operand of that type. Every type has a (possibly empty) method set associated with it:
+- The method set of a defined type `T` consists of all methods declared with receiver type `T` (not `*T`).
+- The method set of a pointer to a defined type `T` (where `T` is ==neither a pointer nor an interface==) is the set of all methods declared with receiver `*T` or `T`.
+- The method set of an interface type is the ==intersection of the method sets of each type in the interface's type set==.
+Further rules apply to structs (and pointer to structs) containing embedded fields, as described in the section on struct types. Any other type has an empty method set.
+
+In a method set, each method must have a unique non-blank method name.
 
 # Sources
 [The Go Programming Language Specification](https://go.dev/ref/spec) (go version: 1.25)

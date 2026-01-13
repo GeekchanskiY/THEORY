@@ -6,3 +6,5 @@
 	 Raw string literal is a raw utf-8 string, which is not processed in compile time like a interpreted string, so the backslash sequences will have no effect, also raw string may contain a newline character. [[Go Specification]]
  4.  What are the channel types?
 	 Buffered and unbuffered, directional and bidirectional. [[Go Specification]]
+5. What is a variadic function?
+	It is a function with a `...` in the last parameter. [[Go Specification]]
