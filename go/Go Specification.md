@@ -574,7 +574,7 @@ A generic type may also have methods associated with it. In this case, the metho
 // The method Len returns the number of elements in the linked list l.
 func (l *List[T]) Len() int  { … }
 ```
-### Type parameter declarations
+#### Type parameter declarations
 A type parameter list declares the type parameters of a generic function or type declaration. The type parameter list looks like an ordinary function parameter list except that the type parameter names must all be present and the list is enclosed in square brackets rather than parentheses.
 
 All non-blank names in the list must be unique. Each name declares a type parameter, which is a new and ==different named type== that acts as a placeholder for an (as of yet) unknown type in the declaration. The type parameter is replaced with a type argument upon instantiation of the generic function or type.
@@ -587,7 +587,59 @@ All non-blank names in the list must be unique. Each name declares a type parame
 ```
 Just as each ordinary function parameter has a parameter type, each type parameter has a corresponding (meta-)type which is called its type constraint.
 
-A parsing ambiguity arises when the type parameter list for a generic type declares a single type parameter P with a constraint C such that the text P C forms a valid expression.
+A parsing ambiguity arises when the type parameter list for a generic type declares a single type parameter P with a constraint C such that the text P C forms a valid expression:
+```go
+type T[P *C] …
+type T[P (C)] …
+type T[P *C|Q] …
+```
+
+In these rare cases, the type parameter list is indistinguishable from an expression and the type declaration is parsed as an array type declaration. To resolve the ambiguity, embed the constraint in an interface or use a trailing comma:
+```go
+type T[P interface{*C}] …
+type T[P *C,] …
+```
+
+Type parameters may also be declared by the receiver specification of a method declaration associated with a generic type.
+
+Within a type parameter list of a generic type T, a type constraint may not (directly, or indirectly through the type parameter list of another generic type) refer to T.
+
+#### Type constraints
+A type constraint is an interface that defines the set of permissible type arguments for the respective type parameter and controls the operations supported by values of that type parameter
+
+If the constraint is an interface literal of the form interface{E} where E is an embedded type element (not a method), in a type parameter list the enclosing interface{ … } may be omitted for convenience.
+```go
+[T []P]                      // = [T interface{[]P}]
+[T ~int]                     // = [T interface{~int}]
+[T int|string]               // = [T interface{int|string}]
+type Constraint ~int         // illegal: ~int is not in a type parameter list
+```
+
+The predeclared interface type comparable denotes the set of all non-interface types that are strictly comparable. Even though interfaces that are not type parameters are comparable, they are not strictly comparable and therefore they do not implement comparable. However, they satisfy comparable. The ==comparable interface and interfaces that (directly or indirectly) embed comparable may only be used as type constraints==. They cannot be the types of values or variables, or components of other, non-interface types.
+#### Satisfying a type constraint
+A type argument T satisfies a type constraint C if T is an element of the type set defined by C; in other words, if T implements C. As an exception, a strictly comparable type constraint may also be satisfied by a comparable (not necessarily strictly comparable) type argument. More precisely `type T satisfies a constraint C` if:
+ - T implements C
+ - C can be written in the form interface{ comparable; E }, where E is a basic interface and T is comparable and implements E.
+
+Because of the exception in the constraint satisfaction rule, ==comparing operands of type parameter type may panic at run-time== (even though comparable type parameters are always strictly comparable).
+### Variable declarations
+A variable declaration creates one or more variables, binds corresponding identifiers to them, and gives each a type and an initial value.
+```go
+var i int
+var U, V, W float64
+var a = testFunc(x)
+var (
+	b int
+	z, x, c = "asdasd", 2, 2.0
+)
+var _, x = lookup(123)
+```
+If a list of expressions is given, the variables are initialized with the expressions following the rules for assignment statements. Otherwise, ==each variable is initialized to its zero value==.
+
+If a type is present, each variable is given that type. Otherwise, each variable is given the type of the corresponding initialization value in the assignment. If that value is an untyped constant, it is first implicitly converted to its default type; if it is an untyped boolean value, it is first implicitly converted to type bool. The ==predeclared identifier nil cannot be used to initialize a variable with no explicit type==.
+
+> [!warning] Implementation restriction
+> A compiler may make it illegal to declare a variable inside a function body if the variable is never used.
 
 In these rare cases, the type parameter list is indistinguishable from an expression and the type declaration is parsed as an array type declaration. To resolve the ambiguity, embed the constraint in an interface or use a trailing comma:
 ```go
