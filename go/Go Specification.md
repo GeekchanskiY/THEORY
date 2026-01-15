@@ -35,26 +35,7 @@ Formal syntax uses semicolons (;), which are automatically omitted after the lin
  - one of the operators and punctuation ++, --, ), ], or }
  and to allow complex statements to occupy a single line, a semicolon may be omitted before a closing ")" or "}".
 
-
-Identifiers name program entities such as variables and types. An identifier is a sequence of one or more letters and digits. The first character in an identifier must be a letter. Also go has pre-declared identifiers:
-```identifiers
-Types:
-	any bool byte comparable
-	complex64 complex128 error float32 float64
-	int int8 int16 int32 int64 rune string
-	uint uint8 uint16 uint32 uint64 uintptr
-
-Constants:
-	true false iota
-
-Zero value:
-	nil
-
-Functions:
-	append cap clear close complex copy delete imag len
-	make max min new panic print println real recover
-```
-
+Identifiers name program entities such as variables and types. An identifier is a sequence of one or more letters and digits. The first character in an identifier must be a letter. Also go has [[#pre-declared identifiers]]
 
 The following keywords are reserved and may not be used as identifiers.
 ```keywords
@@ -64,7 +45,6 @@ chan         else         goto         package      switch
 const        fallthrough  if           range        type
 continue     for          import       return       var
 ```
-
 
 The following character sequences represent operators (including assignment operators) and punctuation
 ```operators
@@ -439,6 +419,164 @@ The method set of a type determines the methods that can be called on an operand
 Further rules apply to structs (and pointer to structs) containing embedded fields, as described in the section on struct types. Any other type has an empty method set.
 
 In a method set, each method must have a unique non-blank method name.
+## Block
+A block is a possibly empty sequence of declarations and statements within matching brace brackets.
+
+In addition to explicit blocks in the source code, there are implicit blocks:
+ - The universe block encompasses all Go source text.
+ - Each package has a package block containing all Go source text for that package.
+ - Each file has a file block containing all Go source text in that file.
+ - Each "if", "for", and "switch" statement is considered to be in its own implicit block.
+ - Each clause in a "switch" or "select" statement ==acts as an implicit block==.
+ 
+ Blocks nest and ==influence scoping==.
+## Declarations and scope
+A declaration binds a non-blank identifier to a `constant`, `type`, `type parameter`, `variable`, `function`, `label`, or `package`. Every identifier in a program must be declared. ==No identifier may be declared twice in the same block==, and ==no identifier may be declared in both the file and package block==.
+
+The blank identifier may be used like any other identifier in a declaration, but it does not introduce a binding and thus is not declared. In the package block, the identifier init may only be used for init function declarations, and like the blank identifier it does not introduce a new binding.
+
+The _scope_ of a declared identifier is the extent of source text in which the identifier denotes the specified constant, type, variable, function, label, or package.
+
+Go is lexically scoped using blocks:
+ - The scope of a predeclared identifier is the universe block.
+ - The scope of an identifier denoting a constant, type, variable, or function (==but not method==) declared at top level (outside any function) is the package block.
+ - The scope of the package name of an imported package is the file block of the file containing the import declaration.
+ - The scope of an identifier denoting a method receiver, function parameter, or result variable is the function body.
+ - The scope of an identifier denoting a type parameter of a function or declared by a method receiver begins after the name of the function and ends at the end of the function body.
+ - The scope of an identifier denoting a type parameter of a type begins after the name of the type and ends at the end of the TypeSpec.
+ - The scope of a constant or variable identifier declared inside a function begins at the end of the ConstSpec or VarSpec (ShortVarDecl for short variable declarations) and ends at the end of the innermost containing block.
+ - The scope of a type identifier declared inside a function begins at the identifier in the TypeSpec and ends at the end of the innermost containing block.
+
+An identifier declared in a block may be redeclared in an inner block. While the identifier of the inner declaration is in scope, it denotes the entity declared by the inner declaration.
+
+The package clause is not a declaration; the package name does not appear in any scope. Its purpose is to identify the files belonging to the same package and to specify the default package name for import declarations.
+### Label scopes
+Labels are declared by labeled statements and are used in the "break", "continue", and "goto" statements. It is illegal to define a label that is never used. In contrast to other identifiers, labels are not block scoped and do not conflict with identifiers that are not labels. The scope of a label is the body of the function in which it is declared and excludes the body of any nested function.
+
+```go
+Error: log.Panic("error encountered")
+
+goto Error
+```
+### Blank identifier
+The blank identifier is represented by the underscore character `_`. It serves as an anonymous placeholder instead of a regular (non-blank) identifier and has special meaning in declarations, as an operand, and in assignment statements.
+### Predeclared identifiers
+The following identifiers are implicitly declared in the universe block.
+```
+Types:
+	any bool byte comparable
+	complex64 complex128 error float32 float64
+	int int8 int16 int32 int64 rune string
+	uint uint8 uint16 uint32 uint64 uintptr
+
+Constants:
+	true false iota
+
+Zero value:
+	nil
+
+Functions:
+	append cap clear close complex copy delete imag len
+	make max min new panic print println real recover
+```
+### Exported identifiers
+An identifier may be exported to permit access to it from another package. An identifier is exported if both:
+ - the first character of the identifier's name is a Unicode uppercase letter (Unicode character category Lu); and
+ - the identifier is declared in the package block or it is a field name or method name.
+ 
+All other identifiers are not exported.
+### Uniqueness of identifiers
+Given a set of identifiers, an identifier is called unique if it is different from every other in the set. Two identifiers are different if they are spelled differently, or if they appear in different packages and are not exported. Otherwise, they are the same.
+### Constant declarations
+A constant declaration binds a ==list of identifiers== to the values of a list of constant expressions. The ==number of identifiers must be equal to the number of expressions==, and the nth identifier on the left is bound to the value of the nth expression on the right.
+
+If the type is present, all constants take the type specified, and the expressions must be assignable to that type, which must not be a type parameter. If the type is omitted, the constants take the individual types of the corresponding expressions. If the expression values are ==untyped constants==, the declared constants remain untyped and the constant identifiers denote the constant values.
+
+Within a parenthesized const declaration list the expression list may be omitted from any but the first ConstSpec. Such an empty list is equivalent to the textual substitution of the first preceding non-empty expression list and its type if any. ==Omitting the list of expressions is therefore equivalent to repeating the previous list==. The number of identifiers must be equal to the number of expressions in the previous list.
+```go
+const (
+	a = "test"
+	b // also equals test
+)
+```
+### Iota
+Within a constant declaration, the predeclared identifier iota represents successive untyped integer constants. Its value is the index of the respective ConstSpec in that constant declaration, starting at zero. It can be used to construct a set of related constants.
+
+By definition, ==multiple uses of iota in the same ConstSpec all have the same value==.
+```go
+const (
+	bit0, mask0 = 1 << iota, 1<<iota - 1  // bit0 == 1, mask0 == 0  (iota == 0)
+	bit1, mask1                           // bit1 == 2, mask1 == 1  (iota == 1)
+	_, _                                  //                        (iota == 2, unused)
+	bit3, mask3                           // bit3 == 8, mask3 == 7  (iota == 3)
+)
+```
+### Type declarations
+A type declaration binds an identifier, the type name, to a type. Type declarations come in two forms: alias declarations and type definitions.
+#### Alias declarations
+An alias declaration binds an identifier to the given type.
+#### Type definitions
+A type definition creates a new, distinct type with the same underlying type and operations as the given type and binds an identifier, the type name, to it.
+
+The new type is called a defined type. ==It is different from any other type, including the type it is created from==.
+
+A defined type may have methods associated with it. It does not inherit any methods bound to the given type, but the method set of an interface type or of elements of a composite type remains unchanged.
+```go
+// A Mutex is a data type with two methods, Lock and Unlock.
+type Mutex struct         { /* Mutex fields */ }
+func (m *Mutex) Lock()    { /* Lock implementation */ }
+func (m *Mutex) Unlock()  { /* Unlock implementation */ }
+
+// NewMutex has the same composition as Mutex but its method set is empty.
+type NewMutex Mutex
+
+// The method set of PtrMutex's underlying type *Mutex remains unchanged,
+// but the method set of PtrMutex is empty.
+type PtrMutex *Mutex
+
+// The method set of *PrintableMutex contains the methods
+// Lock and Unlock bound to its embedded field Mutex.
+type PrintableMutex struct {
+	Mutex
+}
+
+// MyBlock is an interface type that has the same method set as Block.
+type MyBlock Block
+```
+
+Type definitions may be used to define different boolean, numeric, or string types and associate methods with them:
+```go
+type Enum int
+```
+
+If the type definition specifies type parameters, the type name denotes a generic type. Generic types must be instantiated when they are used.
+```go
+type List[T any] struct {
+	next  *List[T]
+	value T
+}
+```
+In a type definition the given type ==cannot be a type parameter==.
+
+A generic type may also have methods associated with it. In this case, the method receivers must declare the same number of type parameters as present in the generic type definition.
+```go
+// The method Len returns the number of elements in the linked list l.
+func (l *List[T]) Len() int  { … }
+```
+### Type parameter declarations
+A type parameter list declares the type parameters of a generic function or type declaration. The type parameter list looks like an ordinary function parameter list except that the type parameter names must all be present and the list is enclosed in square brackets rather than parentheses.
+
+All non-blank names in the list must be unique. Each name declares a type parameter, which is a new and ==different named type== that acts as a placeholder for an (as of yet) unknown type in the declaration. The type parameter is replaced with a type argument upon instantiation of the generic function or type.
+```
+[P any]
+[S interface{ ~[]byte|string }]
+[S ~[]E, E any]
+[P Constraint[int]]
+[_ any]
+```
+Just as each ordinary function parameter has a parameter type, each type parameter has a corresponding (meta-)type which is called its type constraint.
+
+A parsing ambiguity arises when the type parameter list for a generic type declares a single type parameter P with a constraint C such that the text P C forms a valid expression.
 
 # Sources
 [The Go Programming Language Specification](https://go.dev/ref/spec) (go version: 1.25)
@@ -446,3 +584,4 @@ In a method set, each method must have a unique non-blank method name.
 [Extended Backus–Naur form](https://en.wikipedia.org/wiki/Extended_Backus–Naur_form)
 [Codecademy go strings](https://www.codecademy.com/resources/docs/go/strings)
 [Go blog: slices usage and internals](https://go.dev/blog/slices-intro)
+[Boldlygo: universal and package identifiers](https://boldlygo.tech/archive/2023-06-22-the-universe-and-package-blocks/)
