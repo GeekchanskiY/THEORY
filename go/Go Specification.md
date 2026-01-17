@@ -308,6 +308,17 @@ The type `T` in a term of the form `T` or `~T` ==cannot be a type parameter==, a
 Interfaces that are ==not basic may only be used as type constraints, or as elements of other interfaces used as constraints==. They cannot be the types of values or variables, or components of other, non-interface types.
 
 An interface type `T` may not embed a type element that is, contains, or embeds `T`, directly or indirectly.
+
+```go
+type A int
+
+type IntAlike interface {
+	~int
+}
+
+var x IntAlike = A(4) // valid
+var x IntAlike = int(3) // valid
+```
 #### Implementing an interface
 A type T implements an interface I if
 - `T` is not an interface and is an element of the type set of `I`
@@ -577,6 +588,29 @@ All non-blank names in the list must be unique. Each name declares a type parame
 Just as each ordinary function parameter has a parameter type, each type parameter has a corresponding (meta-)type which is called its type constraint.
 
 A parsing ambiguity arises when the type parameter list for a generic type declares a single type parameter P with a constraint C such that the text P C forms a valid expression.
+
+In these rare cases, the type parameter list is indistinguishable from an expression and the type declaration is parsed as an array type declaration. To resolve the ambiguity, embed the constraint in an interface or use a trailing comma:
+```go
+type T[P interface{*C}] …
+type T[P *C,] …
+```
+
+Type parameters may also be declared by the receiver specification of a method declaration associated with a generic type.
+
+Within a type parameter list of a generic type T, a type constraint may not (directly, or indirectly through the type parameter list of another generic type) refer to T. 
+
+TODO: return here and refactor it.
+
+#### Type constraints
+A type constraint is an interface that defines the set of permissible type arguments for the respective type parameter and controls the operations supported by values of that type parameter
+
+If the constraint is an interface literal of the form interface{E} where E is an embedded type element (not a method), in a type parameter list the enclosing interface{ … } may be omitted for convenience
+```go
+[T []P]                      // = [T interface{[]P}]
+[T ~int]                     // = [T interface{~int}]
+[T int|string]               // = [T interface{int|string}]
+type Constraint ~int         // illegal: ~int is not in a type parameter list
+```
 
 # Sources
 [The Go Programming Language Specification](https://go.dev/ref/spec) (go version: 1.25)
