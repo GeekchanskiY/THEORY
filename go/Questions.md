@@ -8,3 +8,11 @@
 	 Buffered and unbuffered, directional and bidirectional. [[Go Specification]]
 5. What is a variadic function?
 	It is a function with a `...` in the last parameter. [[Go Specification]]
+6. What is comparable?
+	TODO
+7. Type declarations vs type parameter declarations?
+	TODO
+8. May receiver method be blank?
+	Yes. [[Go Specification]]
+9. What's the difference between var and := (full and short) variable declarations?
+	Short variable declaration may assign a new value to an declared variable in multi-value assignment, but it will not re-declare it.

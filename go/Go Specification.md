@@ -602,7 +602,7 @@ Within a type parameter list of a generic type T, a type constraint may not (dir
 TODO: return here and refactor it.
 
 #### Type constraints
-A type constraint is an interface that defines the set of permissible type arguments for the respective type parameter and controls the operations supported by values of that type parameter
+A ==type constraint is an interface that defines the set of permissible type arguments for the respective type parameter== and controls the operations supported by values of that type parameter.
 
 If the constraint is an interface literal of the form interface{E} where E is an embedded type element (not a method), in a type parameter list the enclosing interface{ … } may be omitted for convenience
 ```go
@@ -612,6 +612,120 @@ If the constraint is an interface literal of the form interface{E} where E is an
 type Constraint ~int         // illegal: ~int is not in a type parameter list
 ```
 
+The predeclared interface type `comparable` denotes the set of all non-interface types that are ==strictly comparable==.
+
+Even though interfaces that are not type parameters are comparable, they are ==not strictly comparable and therefore they do not implement comparable==. However, they satisfy comparable.
+
+The comparable interface and interfaces that (directly or indirectly) embed comparable may only be used as type constraints. They cannot be the types of values or variables, or components of other, non-interface types.
+#### Satisfying a type constraint
+A type T satisfies a constraint C if:
+ - ==T implements C==
+ - C can be written in the form `interface{ comparable; E }`, where `E` is a basic interface and `T` is `comparable` and implements `E`.
+
+### Variable declarations
+```go
+var x, y = 1, 2
+```
+
+A variable declaration creates one or more variables, binds corresponding identifiers to them, and ==gives each a type and an initial value==.
+
+If a list of expressions is given, the variables are ==initialized with the expressions== following the rules for assignment statements. Otherwise, ==each variable is initialized to its zero value==.
+If a type is present, each variable is given that type. Otherwise, each variable is given the type of the corresponding initialization value in the assignment. If that value is an untyped constant, it is ==first implicitly converted to its default type==. If it is an untyped boolean value, it is first implicitly converted to type bool. ==The predeclared identifier nil cannot be used to initialize a variable with no explicit type==.
+
+>[!warning] Unused variable implementation restriction
+> A compiler may make it illegal to declare a variable inside a function body if the variable is never used.
+
+### Short variable declarations
+It is shorthand for a regular variable declaration with initializer expressions but no types.
+
+Unlike regular variable declarations, a short variable declaration ==may redeclare variables== provided they were originally declared earlier in the same block (or the parameter lists if the block is the function body) with the same type, and ==at least one of the non-blank variables is new==. As a consequence, ==redeclaration can only appear in a multi-variable short declaration==. Redeclaration ==does not introduce a new variable; it just assigns a new value to the original==. The non-blank variable names on the left side of := must be unique.
+```go
+x := 10
+var z *int
+
+if true {
+	x := 10
+	z = &x
+}
+
+&x == z // false
+
+// TODO: provide more examples here
+```
+
+Short variable declarations may appear only inside functions. In some contexts such as the initializers for `if`, `for`, or `switch` statements, they ==can be used to declare local temporary variables==.
+
+### Function declarations
+A function declaration ==binds an identifier, the function name, to a function==.
+
+If the function's signature declares result parameters, the function body's statement list ==must end in a terminating statement==.
+
+If the function declaration specifies type parameters, the function name denotes a `generic function`. A `generic function` ==must be instantiated before it can be called or used as a value==.
+
+A function declaration ==without type parameters may omit the body==. Such a declaration provides the signature ==for a function implemented outside Go==, such as an assembly routine. Example:
+```go
+func flushICache(begin, end uintptr)
+```
+
+### Method declarations
+A method is a ==function with a receiver==. A method declaration ==binds an identifier, the method name, to a method==, and ==associates the method with the receiver's base type==.
+
+The receiver is specified via an extra parameter section preceding the method name. That parameter section must ==declare a single non-variadic parameter, the receiver==. Its type must be a ==defined type T or a pointer to a defined type T==, possibly followed by a list of type parameter names `[P1, P2, …]` enclosed in square brackets. `T` is called the ==receiver base type==. A receiver base type ==cannot be a pointer or interface type== and it ==must be defined in the same package as the method==. The method is said to be bound to its receiver base type and the method name is visible only within selectors for type `T` or `*T`.
+
+A ==non-blank receiver identifier must be unique== in the method signature. If the receiver's value is not referenced inside the body of the method, ==its identifier may be omitted in the declaration==. The same applies in general to parameters of functions and methods.
+
+For a base type, the non-blank names of methods bound to it must be unique. If the ==base type is a `struct` type==, the ==non-blank method and field names must be distinct==.
+
+In the following example receiver type is `*Point`, and the base type is `Point`, and it binds `Length` to it.
+```go
+func (p *Point) Length() float64 {
+	return math.Sqrt(p.x * p.x + p.y * p.y)
+}
+```
+
+If the receiver base type is a generic type, the receiver specification ==must declare corresponding type parameters for the method== to use. This makes the receiver type parameters available to the method. Syntactically, this type parameter declaration looks like an instantiation of the receiver base type: the type arguments must be identifiers denoting the type parameters being declared, one for each type parameter of the receiver base type. ==The type parameter names do not need to match their corresponding parameter names in the receiver base type definition==, and ==all non-blank parameter names must be unique== in the receiver parameter section ==and the method signature==. The ==receiver type parameter constraints are implied by the receiver base type definition==: corresponding type parameters have corresponding constraints.
+
+> [!warning] Generic alias method restriction
+> If the receiver type is denoted by (a pointer to) an alias, the alias must not be generic and it must not denote an instantiated generic type, neither directly nor indirectly via another alias, and irrespective of pointer indirections.
+> ```go
+>type GPoint[P any] = Point
+>type IPair         = Pair[int, int]
+>
+>func (*GPoint[P]) Draw(P)   { … }  // illegal: alias must not be generic
+>func (*IPair) Second() int  { … }  // illegal: alias must not denote instantiated type Pair[int, int]
+>```
+## Expressions
+An expression specifies the computation of a value by applying operators and functions to operands.
+### Operands
+Operands denote the elementary values in an expression. An operand may be: 
+ - literal
+ - (possibly qualified) non-blank identifier denoting a constant
+ - variable
+ - function
+ - parenthesized expression.
+
+An operand name denoting a generic function may be followed by a list of type arguments. The resulting operand is an instantiated function.
+
+The `blank identifier` may appear as an operand only on the ==left-hand side of an assignment statement==.
+
+A compiler ==will not report an error if an operand's type is a type parameter with an empty type set==. Functions with such type parameters cannot be instantiated; any attempt will lead to an error at the instantiation site:
+```go
+type Empty interface {
+	~int
+	~string
+}
+
+func f[T Empty](x T) // will not return an error
+```
+
+### Qualified identifier
+A qualified identifier is an ==identifier qualified with a package name prefix==. Both the package name and the identifier must not be blank.
+
+A qualified identifier accesses an identifier in a different package, which must be imported. The identifier must be exported and declared in the package block of that package.
+
+### Composite literals
+
+
 # Sources
 [The Go Programming Language Specification](https://go.dev/ref/spec) (go version: 1.25)
 [Wirth syntax notation](https://en.wikipedia.org/wiki/Wirth_syntax_notation)
@@ -619,3 +733,4 @@ type Constraint ~int         // illegal: ~int is not in a type parameter list
 [Codecademy go strings](https://www.codecademy.com/resources/docs/go/strings)
 [Go blog: slices usage and internals](https://go.dev/blog/slices-intro)
 [Boldlygo: universal and package identifiers](https://boldlygo.tech/archive/2023-06-22-the-universe-and-package-blocks/)
+[Getting started with the generics](https://go.dev/doc/tutorial/generics)
