@@ -12,7 +12,12 @@
 	TODO
 7. Type declarations vs type parameter declarations?
 	TODO
-8. May receiver method be blank?
-	Yes. [[Go Specification]]
+8. May method receiver be blank?
+	Yes, `func (_ Type) f()` is valid. [[Go Specification]]
 9. What's the difference between var and := (full and short) variable declarations?
 	Short variable declaration may assign a new value to an declared variable in multi-value assignment, but it will not re-declare it.
+10. How to define an empty int array with len 10 and 4th element equal 5?
+	`[10]int{3: 5}` [[Go Specification#Composite literals]]
+11. Selectors vs qualified identifiers?
+	Qualified identifiers are selectors for the package [[Go Specification]].
+	

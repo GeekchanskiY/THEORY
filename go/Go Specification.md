@@ -280,7 +280,7 @@ An interface type is specified by a list of methods or types.
 #### Basic interface
 In its most basic form an interface specifies a (possibly empty) list of methods. The type set defined by such an interface is the set of types which implement all of those methods, and the corresponding method set consists exactly of the methods specified by the interface. Interfaces whose type sets can be ==defined entirely by a list of methods are called basic interfaces==.
 
-The name of each explicitly specified method must be unique and not blank.
+The name of each explicitly specified method ==must be unique and not blank==.
 
 More than one type may implement an interface. Every type that is a member of the type set of an interface implements that interface. Any given type may implement several distinct interfaces. 
 
@@ -724,7 +724,202 @@ A qualified identifier is an ==identifier qualified with a package name prefix==
 A qualified identifier accesses an identifier in a different package, which must be imported. The identifier must be exported and declared in the package block of that package.
 
 ### Composite literals
+Composite literals construct new values for structs, arrays, slices, and maps each time they are evaluated. They consist of the type of the literal followed by a brace-bound list of elements. Each element may optionally be preceded by a corresponding key.
 
+Unless the LiteralType is a type parameter, its underlying type must be a struct, array, slice, or map type (the syntax enforces this constraint except when the type is given as a TypeName). If the LiteralType is a type parameter, ==all types in its type set must have the same underlying type== which must be a valid composite literal type. The types of the elements and keys must be assignable to the respective field, element, and key types of type `T`. There is no additional conversion. The key is interpreted as a field name for struct literals, an index for array and slice literals, and a key for map literals. For ==map literals, all elements must have a key==. ==It is an error to specify multiple elements with the same field name or constant key value==. For non-constant map keys, see the section on evaluation order.
+
+For struct literals the following rules apply:
+ - A key must be a field name declared in the struct type.
+ - An element list that does not contain any keys must list an element for each struct field in the order in which the fields are declared.
+ - If any element has a key, every element must have a key.
+ - An element list that contains keys does not need to have an element for each struct field. Omitted fields get the zero value for that field.
+ - A literal ==may omit the element list==; such a literal evaluates to the zero value for its type.
+ - It is an error to specify an element for a non-exported field of a struct belonging to a different package.
+
+For array and slice literals the following rules apply:
+ - Each element has an associated integer index marking its position in the array.
+ - An element with a key uses the key as its index. The key must be a non-negative constant representable by a value of type int; and if it is typed it must be of integer type.
+ - An ==element without a key uses the previous element's index plus one. If the first element has no key, its index is zero==.
+
+Taking the address of a composite literal ==generates a pointer to a unique variable initialized with the literal's value==. `var pointer *Point3D = &Point3D{y: 1000}`
+
+Note that the zero value for a slice or map type is not the same as an initialized but empty value of the same type. Consequently, taking the address of an empty slice or map composite literal does not have the same effect as allocating a new slice or map value with `new`.
+```go
+p1 := &[]int{}    // p1 points to an initialized, empty slice with value []int{} and length 0
+p2 := new([]int)  // p2 points to an uninitialized slice with value nil and length 0
+```
+
+The length of an array literal is the length specified in the literal type. If fewer elements than the length are provided in the literal, the ==missing elements are set to the zero value for the array element type==. It is an ==error to provide elements with index values outside the index range of the array==. 
+
+The notation `...` specifies an array length equal to the maximum element index plus one (equals to the amount of elements): `[...]string{"", ""}  // len = 2`
+
+A slice literal describes the entire underlying array literal. Thus the ==length and capacity of a slice literal are the maximum element index plus one==. A slice literal has the form `[]T{x1, x2, … xn}` and is shorthand for a slice operation applied to an array:
+```go
+tmp := [n]T{x1, x2, … xn}
+tmp[0 : n]
+```
+
+Within a composite literal of array, slice, or map type `T`, elements or map keys that are themselves composite literals may elide the respective literal type if it is identical to the element or key type of `T`. Similarly, elements or keys that are addresses of composite literals may elide the `&T` when the element or key type is `*T`.
+```go
+[2]Point{{1.5, -3.5}, {}} // same as [2]Point{Point{1.5, -3.5}, Point{}}
+[2]*Point{{1.5, -3.5}, {}} // same as [2]*Point{&Point{1.5, -3.5}, &Point{}}
+```
+
+A parsing ambiguity arises when a composite literal using the `TypeName` form of the `LiteralType` appears as an operand between the keyword and the opening brace of the block of an `if`, `for`, or `switch` statement, and the composite literal is not enclosed in parentheses, square brackets, or curly braces. In this rare case, the opening brace of the literal is erroneously parsed as the one introducing the block of statements. To resolve the ambiguity, the composite literal must appear within parentheses.
+```go
+if x == (T{a,b,c}[i]) { … }
+if (x == T{a,b,c}[i]) { … }
+```
+
+Some examples of literals:
+```go
+// list of prime numbers
+primes := []int{2, 3, 5, 7, 9, 2147483647}
+
+// vowels[ch] is true if ch is a vowel
+vowels := [128]bool{'a': true, 'e': true, 'i': true, 'o': true, 'u': true, 'y': true}
+
+
+// the array [10]float32{-1, 0, 0, 0, -0.1, -0.1, 0, 0, 0, -1}
+filter := [10]float32{-1, 4: -0.1, -0.1, 9: -1}
+
+// frequencies in Hz for equal-tempered scale (A4 = 440Hz)
+noteFrequency := map[string]float32{
+	"C0": 16.35, "D0": 18.35, "E0": 20.60, "F0": 21.83,
+	"G0": 24.50, "A0": 27.50, "B0": 30.87,
+}
+```
+
+### Function literals
+A function literal ==represents an anonymous function==. Function literals cannot declare type parameters (may not be generic).
+
+A function literal can be assigned to a variable or invoked directly.
+```go
+f := func(x, y int) int { return x + y }
+func(ch chan int) { ch <- ACK }(replyChan)
+```
+
+==Function literals are closures==: they may refer to variables defined in a surrounding function. Those variables are then shared between the surrounding function and the function literal, and they survive as long as they are accessible.
+### Primary expressions
+Primary expressions are the ==operands for unary and binary expressions==.
+```go
+x
+2
+(s + ".txt")
+f(3.1415, true)
+Point{1, 2}
+m["foo"]
+s[i : j + 1]
+obj.color
+f.p[i].x()
+```
+### Selectors
+For a primary expression `x` that is not a package name, the selector expression `x.f` denotes the field or method `f` of the value `x` or `*x`. The identifier `f` is called the (field or method) selector; it must not be the blank identifier. The type of the selector expression is the type of `f`. If `x` is a package name, then it's a qualified identifiers.
+
+A selector f may denote a field or method `f` of a type `T`, or it may refer to a field or method `f` of a nested embedded field of `T`. The number of embedded fields traversed to reach `f` is called its ==depth in `T`==. The depth of a field or method `f` declared in `T` is zero. The depth of a field or method `f` declared in an embedded field `A` in `T` is the depth of `f` in `A` plus one.
+
+The following rules apply to selectors:
+ - For a value `x` of type `T` or `*T` where `T` is not a pointer or interface type, `x.f` denotes the field or method at the shallowest depth in `T` where there is such an `f`. ==If there is not exactly one `f` with shallowest depth, the selector expression is illegal==.
+ - For a value `x` of type `I` where `I` is an interface type, `x.f` denotes the actual method with name `f` of the dynamic value of `x`. If there is no method with name `f` in the method set of `I`, the selector expression is illegal.
+ - As an exception, if the type of `x` is a defined pointer type and `(*x).f` is a valid selector expression denoting a field (but not a method), `x.f` is shorthand for `(*x).f`.
+ - In all other cases, `x.f` is illegal.
+ - If `x` is of pointer type and has the value nil and `x.f` denotes a struct field, assigning to or evaluating `x.f` ==causes a run-time panic==.
+ - If `x` is of interface type and has the value `nil`, calling or evaluating the method `x.f` ==causes a run-time panic==.
+
+### Method expressions
+If `M` is in the method set of type `T`, `T.M` is a function that is ==callable as a regular function== with the same arguments as `M` prefixed by an additional argument that is the receiver of the method.
+
+`T` is a type, `Mv` is a value receiver method, `Mp` is a pointer receiver method.
+```go
+func (tv  T) Mv(a int) int // equals to func(tv T, a int) int
+func (tp *T) Mp(f float32) float32 // equals to func(tp *T, f float32) float32
+```
+
+A value-receiver function for a pointer-receiver method is illegal because pointer-receiver methods are not in the method set of the value type.
+
+It is legal to derive a function value from a method of an interface type. The resulting function takes an explicit receiver of that interface type.
+
+You can get struct method and use it in the code:
+```go
+type Greeter interface {
+	Greet(name string) string
+}
+
+var g Greeter = englishGreeter{}
+
+// Derive a function value from an interface method
+f := Greeter.Greet
+
+// The receiver is now an explicit parameter of type Greeter
+fmt.Println(f(g, "Alice"))
+```
+### Method values
+If the expression `x` has static type `T` and `M` is in the method set of type `T`, `x.M` is called a method value. The method value `x.M` is a function value that is callable with the same arguments as a method call of `x.M`. The expression `x` is evaluated and saved during the evaluation of the method value; the saved copy is then used as the receiver in any calls, which may be executed later.
+
+The type `T` may be an interface or non-interface type.
+
+As with selectors, a reference to a non-interface method with a value receiver using a pointer will ==automatically dereference that pointer==: `pt.Mv` is equivalent to `(*pt).Mv`.
+
+As with method calls, a reference to a non-interface method with a pointer receiver using an addressable value will automatically take the address of that value: `t.Mp` is equivalent to `(&t).Mp`.
+
+Although the examples above use non-interface types, it is also ==legal to create a method value from a value of interface type==.
+```go
+var i interface { M(int) } = myVal
+f := i.M; f(7)  // like i.M(7)
+```
+### Index expressions
+A primary expression of the form `a[x]` ==denotes the element of the array, pointer to array, slice, string or map a indexed by x==. The value `x` is called the ==index or map key==, respectively. 
+
+If a is neither a map nor a type parameter:
+ - the index x must be an untyped constant, or its type must be an integer or a type parameter whose type set contains only integer types
+ - a constant index must be non-negative and representable by a value of type int
+ - a constant index that is untyped is given type int
+ - the index x is in range `if 0 <= x < len(a)`, otherwise it is out of range
+
+For a of array type `A`:
+ - a constant index must be in range
+ - if x is out of range at run time, a ==run-time panic occurs==.
+ - `a[x]` is the array element at index `x` and the type of `a[x]` is the element type of `A`.
+
+For a of pointer to array type:
+ - `a[x]` is shorthand for `(*a)[x]`
+
+For a of slice type `S`:
+ - if `x` is out of range at run time, a ==run-time panic occurs==
+ - `a[x]` is the slice element at index `x` and the type of `a[x]` is the element type of `S`
+
+For a of string type:
+ - a constant index must be in range if the string `a` is also constant
+ - if `x` is out of range at run time, a ==run-time panic occurs==
+ - `a[x]` is the non-constant byte value at index x and the type of `a[x]` is `byte`
+ - `a[x]` ==may not be assigned to==
+
+For a of map type `M`:
+ - `x`'s type must be assignable to the key type of `M`
+ - if the map contains an entry with key `x`, `a[x]` is the map element with key x and the type of `a[x]` is the element type of `M`
+ - if the map is nil or does not contain such an entry, `a[x]` is the ==zero value for the element type of M==
+
+For a of type parameter type `P`:
+ - The index expression `a[x]` must be valid for values of all types in `P`'s type set.
+ - The element types of all types in `P`'s type set must be identical. In this context, the element type of a string type is byte.
+ - If there is a map type in the type set of `P`, all types in that type set must be map types, and the respective key types must be all identical.
+ - `a[x]` is the array, slice, or string element at index x, or the map element with key `x` of the type argument that `P` is instantiated with, and the type of `a[x]` is the type of the (identical) element types.
+ - `a[x]` may not be assigned to if `P`'s type set includes string types.
+
+==Otherwise `a[x]` is illegal==.
+
+An index expression on a map a of type `map[K]V` used in an assignment statement or initialization of the special form ==yields an additional untyped boolean value==. The value of ok is `true` if the key `x` is present in the map, and `false` otherwise.
+```go
+v, ok = a[x]
+v, ok := a[x]
+var v, ok = a[x]
+```
+
+==Assigning to an element of a nil map causes a run-time panic==.
+### Slice expressions
+Slice expressions ==construct a substring or slice from a string, array, pointer to array, or slice operand==. There are two variants: a ==simple form that specifies a low and high bound==, and a ==full form that also specifies a bound on the capacity==.
+
+If the operand type is a type parameter, unless its type set contains string types, all types in the type set must have the same underlying type, and the slice expression must be valid for an operand of that type. If the type set contains string types it may also contain byte slices with underlying type []byte. In this case, the slice expression must be valid for an operand of string type.
 
 # Sources
 [The Go Programming Language Specification](https://go.dev/ref/spec) (go version: 1.25)
