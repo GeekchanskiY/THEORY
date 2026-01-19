@@ -20,4 +20,5 @@
 	`[10]int{3: 5}` [[Go Specification#Composite literals]]
 11. Selectors vs qualified identifiers?
 	Qualified identifiers are selectors for the package [[Go Specification]].
-	
+12. What is a dynamic type of a variable?
+	TODO

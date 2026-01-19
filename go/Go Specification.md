@@ -776,7 +776,7 @@ A qualified identifier is an ==identifier qualified with a package name prefix==
 A qualified identifier accesses an identifier in a different package, which must be imported. The identifier must be exported and declared in the package block of that package.
 
 ### Composite literals
-Composite literals construct new values for structs, arrays, slices, and maps each time they are evaluated. They consist of the type of the literal followed by a brace-bound list of elements. Each element may optionally be preceded by a corresponding key.
+Composite literals construct new values for structs, arrays, slices, and maps each time they are evaluated. They consist of the type of the literal followed by a brace-bound list of elements. Each element may optionally be preceded by a corresponding key. 
 
 Unless the LiteralType is a type parameter, its underlying type must be a struct, array, slice, or map type (the syntax enforces this constraint except when the type is given as a TypeName). If the LiteralType is a type parameter, ==all types in its type set must have the same underlying type== which must be a valid composite literal type. The types of the elements and keys must be assignable to the respective field, element, and key types of type `T`. There is no additional conversion. The key is interpreted as a field name for struct literals, an index for array and slice literals, and a key for map literals. For ==map literals, all elements must have a key==. ==It is an error to specify multiple elements with the same field name or constant key value==. For non-constant map keys, see the section on evaluation order.
 
@@ -971,7 +971,125 @@ var v, ok = a[x]
 ### Slice expressions
 Slice expressions ==construct a substring or slice from a string, array, pointer to array, or slice operand==. There are two variants: a ==simple form that specifies a low and high bound==, and a ==full form that also specifies a bound on the capacity==.
 
-If the operand type is a type parameter, unless its type set contains string types, all types in the type set must have the same underlying type, and the slice expression must be valid for an operand of that type. If the type set contains string types it may also contain byte slices with underlying type []byte. In this case, the slice expression must be valid for an operand of string type.
+If the operand type is a type parameter, unless its type set contains string types, all types in the type set must have the same underlying type, and the slice expression must be valid for an operand of that type. If the type set contains string types it may also contain byte slices with underlying type `[]byte`. In this case, the slice expression must be valid for an operand of `string` type.
+#### Simple slice expressions
+For a string, array, pointer to array, or slice a, the primary expression `a[low : high]` ==constructs a substring or slice==. The indices `low` and `high` select which elements of operand a appear in the result. The result has indices starting at `0` and length equal to `high - low`. After slicing the array `a := [5]int{1, 2, 3, 4, 5}` using `s := a[1:4]` the slice `s` has type `[]int`, length 3, capacity 4, and elements `2, 3, 4` with indexes `0, 1, 2`.
+
+For convenience, ==any of the indices may be omitted==. A missing low index defaults to zero; a missing high index defaults to the length of the sliced operand.
+
+If `a` is a pointer to an array, `a[low : high]` is shorthand for `(*a)[low : high]`.
+
+For arrays or strings, the indices are in range if `0 <= low <= high <= len(a)`, otherwise they are out of range. ==For slices, the upper index bound is the slice capacity== rather than the length. A constant index must be non-negative and representable by a ==value of type int==; for arrays or constant strings, constant indices must also be in range. If both indices are constant, they must satisfy `low <= high`. If the indices are out of range at run time, a run-time panic occurs.
+
+Except for untyped strings, if the sliced operand is a string or slice, the result of the slice operation ==is a non-constant value of the same type as the operand==. For untyped string operands the result is a non-constant value of type string. If the sliced operand is an array, it must be addressable and the result of the slice operation is a ==slice with the same element type as the array==.
+
+If the sliced operand of a valid slice expression is a `nil` slice, the result is a `nil` slice. Otherwise, if the result is a slice, it ==shares its underlying array with the operand==. (underlying type of slice is an array).
+
+#### Full slice expressions
+For an array, pointer to array, or slice a (but not a string), the primary expression `a[low : high : max]` constructs a slice of the same type, and with the same length and elements as the simple slice expression `a[low : high]`. Additionally, it ==controls the resulting slice's capacity by setting it to max - low==. Only the first index may be omitted; it defaults to 0. 
+
+### Type assertions
+For an expression `x` of interface type, but not a type parameter, and a type `T`, the primary expression `x.(T)` ==asserts that x is not nil and that the value stored in x is of type T==. The notation `x.(T)` is called a type assertion.
+
+More precisely, if `T` is not an interface type, `x.(T)` asserts that the dynamic type of `x` is identical to the type `T`. In this case, `T` must implement the (interface) type of `x`; otherwise the type assertion is invalid since it is not possible for `x` to store a value of type `T`. If `T` is an interface type, `x.(T)` asserts that the dynamic type of `x` implements the interface `T`.
+
+==If it's not, then run-time panic occurs.==
+
+A type assertion used in an assignment statement or initialization of the special form `v, ok := x.(T)` or `var v, ok interface{} = x.(T) // dynamic types of v and ok are T and bool` yields an additional untyped boolean value. The value of `ok` is `true` if the assertion holds. Otherwise it is false and the value of `v` is the zero value for type `T`. ==No run-time panic occurs in this case==.
+
+### Calls
+Given an expression `f` of function type `F` `f(a1, a2, … an)` calls `f` with arguments `a1, a2, … an`. Except for one special case, arguments must be single-valued expressions assignable to the parameter types of `F` and are evaluated before the function is called. The type of the expression is the result type of `F`. A method invocation is similar but the method itself is specified as a selector upon a value of the receiver type for the method.
+
+If `f` denotes a generic function, it ==must be instantiated before it can be called or used as a function value==.
+
+If the type of `f` is a type parameter, all types in its type set must have the same underlying type, which must be a function type, and the function call must be valid for that type.
+
+In a function call, the function value and arguments are evaluated in the usual order. After they are evaluated, new storage is allocated for the function's variables, which includes its parameters and results. Then, the arguments of the call are passed to the function, which means that they are assigned to their corresponding function parameters, and the called function begins execution. The return parameters of the function are passed back to the caller when the function returns.
+
+==Calling a nil function value causes a run-time panic==.
+
+As a special case, if the return values of a function or method `g` are equal in number and individually assignable to the parameters of another function or method `f`, then the call `f(g(parameters_of_g))` will invoke `f` after passing the return values of `g` to the parameters of `f` in order. The call of `f` must contain no parameters other than the call of `g`, and `g` must have at least one return value. If `f` has a final `...` parameter, it is assigned the return values of `g` that remain after assignment of regular parameters.
+```go
+func Split(s string, pos int) (string, string) {
+	return s[0:pos], s[pos:]
+}
+
+func Join(s, t string) string {
+	return s + t
+}
+
+res := Join(Split(value, len(value)/2))
+```
+
+A method call `x.m()` is valid if the method set of (the type of) `x` contains `m` and the argument list can be assigned to the parameter list of `m`. If `x` is addressable and `&x`'s method set contains `m`, `x.m()` is shorthand for `(&x).m()`.
+
+==There is no distinct method type and there are no method literals==.
+### Passing arguments to ... parameters
+If `f` is variadic with a final parameter p of type `...T`, then within `f` the type of `p` is equivalent to type `[]T`. ==If `f` is invoked with no actual arguments for `p`, the value passed to `p` is `nil`==. Otherwise, the value passed is a new slice of type `[]T` with a new underlying array whose successive elements are the actual arguments, which all must be assignable to `T`. The ==length and capacity of the slice is therefore the number of arguments== bound to `p` and may differ for each call site.
+### Instantiations
+A generic function or type is instantiated by substituting type arguments for the type parameters. Instantiation proceeds in two steps:
+ - Each type argument is substituted for its corresponding type parameter in the generic declaration. This substitution happens across the entire function or type declaration, including the type parameter list itself and any types in that list.
+ - After substitution, each type argument must satisfy the constraint (instantiated, if necessary) of the corresponding type parameter. Otherwise instantiation fails.
+
+Instantiating a type results in a new non-generic named type; instantiating a function produces a new non-generic function.
+
+==Type argument lists may be omitted entirely if the function is==:
+ - called with ordinary arguments,
+ - assigned to a variable with a known type
+ - passed as an argument to another function, or
+ - returned as a result.
+
+In all other cases, a (possibly partial) type argument list must be present. If a type argument list is absent or partial, ==all missing type arguments must be inferrable from the context== in which the function is used.
+```go
+// sum returns the sum (concatenation, for strings) of its arguments.
+func sum[T ~int | ~float64 | ~string](x... T) T { … }
+
+x := sum                       // illegal: the type of x is unknown
+intSum := sum[int]             // intSum has type func(x... int) int
+a := intSum(2, 3)              // a has value 5 of type int
+b := sum[float64](2.0, 3)      // b has value 5.0 of type float64
+c := sum(b, -1)                // c has value 4.0 of type float64
+
+type sumFunc func(x... string) string
+var f sumFunc = sum            // same as var f sumFunc = sum[string]
+f = sum                        // same as f = sum[string]
+```
+
+==A partial type argument list cannot be empty==; at least the first argument must be present. The list is a prefix of the full list of type arguments, leaving the remaining arguments to be inferred.
+```go
+func apply[S ~[]E, E any](s S, f func(E) E) S { … }
+
+f0 := apply[]                  // illegal: type argument list cannot be empty
+f1 := apply[[]int]             // type argument for S explicitly provided, type argument for E inferred
+f2 := apply[[]string, string]  // both type arguments explicitly provided
+
+var bytes []byte
+r := apply(bytes, func(byte) byte { … })  // both type arguments inferred from the function arguments
+```
+
+==For a generic type, all type arguments must always be provided explicitly==.
+### Type inference
+A use of a generic function may omit some or all type arguments if they can be inferred from the context within which the function is used, including the constraints of the function's type parameters. Type inference succeeds if it can infer the missing type arguments and instantiation succeeds with the inferred type arguments. Otherwise, type inference fails and the program is invalid.
+
+Type inference uses the type relationships between pairs of types for inference: For instance, a function argument must be assignable to its respective function parameter; this establishes a relationship between the type of the argument and the type of the parameter. If either of these two types contains type parameters, type inference looks for the type arguments to substitute the type parameters with such that the assignability relationship is satisfied. Similarly, type inference uses the fact that a type argument must satisfy the constraint of its respective type parameter.
+
+Each such pair of matched types corresponds to a type equation containing one or multiple type parameters, from one or possibly multiple generic functions. Inferring the missing type arguments means solving the resulting set of type equations for the respective type parameters.
+
+Given a set of type equations, the type parameters to solve for are the type parameters of the functions that need to be instantiated and for which no explicit type arguments is provided. ==These type parameters are called bound type parameters==. An ==argument to a generic function call may be a generic function itself==. The type parameters of that function are included in the set of bound type parameters. The types of function arguments may contain type parameters from other functions (such as a generic function enclosing a function call). Those type parameters may also appear in type equations but they are not bound in that context. Type equations are always solved for the bound type parameters only.
+
+Type inference supports calls of generic functions and assignments of generic functions to (explicitly function-typed) variables. This includes passing generic functions as arguments to other (possibly also generic) functions, and returning generic functions as results. Type inference operates on a set of equations specific to each of these cases. The equations are as follows (type argument lists are omitted for clarity):
+ - For a function call `f(a0, a1, …)` where `f` or a function argument `ai` is a generic function:
+ - Each pair `(ai, pi)` of corresponding function arguments and parameters where `ai` is not an untyped constant yields an equation `typeof(pi) ≡A typeof(ai)`.
+ - If `ai` is an untyped constant `cj`, and `typeof(pi)` is a bound type parameter `Pk`, the pair `(cj, Pk)` is collected separately from the type equations.
+ - For an assignment `v` = `f` of a generic function `f` to a (non-generic) variable `v` of function type: `typeof(v) ≡A typeof(f)`.
+ - For a return statement return `…,` `f`, `…` where `f` is a generic function returned as a result to a (non-generic) result variable `r` of function type: `typeof(r) ≡A typeof(f)`.
+
+Type inference gives precedence to type information obtained from typed operands before considering untyped constants. Therefore, ==inference proceeds in two phases==:
+- The type equations are solved for the bound type parameters using type unification. If unification fails, type inference fails.
+- For each bound type parameter `Pk` for which no type argument has been inferred yet and for which one or more pairs `(cj, Pk)` with that same type parameter were collected, determine the constant kind of the constants `cj` in all those pairs the same way as for constant expressions. The type argument for `Pk` is the default type for the determined constant kind. If a constant kind cannot be determined due to conflicting constant kinds, type inference fails.
+
+If not all type arguments have been found after these two phases, type inference fails.
+
 
 # Sources
 [The Go Programming Language Specification](https://go.dev/ref/spec) (go version: 1.25)
