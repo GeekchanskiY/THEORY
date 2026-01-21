@@ -1090,6 +1090,414 @@ Type inference gives precedence to type information obtained from typed operands
 
 If not all type arguments have been found after these two phases, type inference fails.
 
+If type arguments contain cyclic references to themselves through bound type parameters, simplification and thus type inference fails. Otherwise, type inference succeeds.
+### Type unification
+Type inference solves type equations through type unification. Type unification recursively compares the `LHS` and `RHS` (left and right hand size) types of an equation, where either or both types may be or contain bound type parameters, and looks for type arguments for those type parameters such that the `LHS` and `RHS` match (become identical or assignment-compatible, depending on context). To that effect, ==type inference maintains a map of bound type parameters to inferred type arguments; this map is consulted and updated during type unification==. Initially, the bound type parameters are known but the map is empty. During type unification, if a new type argument `A` is inferred, the respective mapping `P ➞ A` from type parameter to argument is added to the map. Conversely, when comparing types, a known type argument (a type argument for which a map entry already exists) takes the place of its corresponding type parameter. As type inference progresses, the map is populated more and more until all equations have been considered, or until unification fails. Type inference succeeds if no unification step fails and the map has an entry for each type parameter.
+
+For example, type unification solves the problem when 2 function args have generic type `T`, and provided arguments have different from `T` types, which is incorrect.
+### Operators
+Operators combine operands into expressions. For different from comparison binary operators (they are discussed below), the operand types must be identical unless the operation involves shifts or untyped constants. For operations involving constants only, see the section on constant expressions.
+
+Except for shift operations, if one operand is an untyped constant and the other operand is not, the ==constant is implicitly converted to the type of the other operand==.
+
+The right operand in a shift expression must have integer type or be an untyped constant representable by a value of type uint. If the left operand of a non-constant shift expression is an untyped constant, it is first implicitly converted to the type it would assume if the shift expression were replaced by its left operand alone.
+#### Operator precedence
+Unary operators have the ==highest precedence==. As the `++` and `--` operators form statements, not expressions, they fall outside the operator hierarchy. As a consequence, statement `*p++` is the same as `(*p)++`.
+
+There are five precedence levels for binary operators (higher = more important):
+```
+Precedence    Operator
+    5             *  /  %  <<  >>  &  &^
+    4             +  -  |  ^
+    3             ==  !=  <  <=  >  >=
+    2             &&
+    1             ||
+```
+Binary operators of the same precedence associate from left to right. For instance, `x / y * z` is the same as `(x / y) * z`.
+#### Arithmetic operators
+Arithmetic operators apply to numeric values and yield a result of the same type as the first operand. The four standard arithmetic operators `(+, -, *, /)` ==apply to integer, floating-point, and complex types; + also applies to strings==. The ==bitwise logical and shift operators apply to integers only==.
+```
++    sum                    integers, floats, complex values, strings
+-    difference             integers, floats, complex values
+*    product                integers, floats, complex values
+/    quotient               integers, floats, complex values
+%    remainder              integers
+
+&    bitwise AND            integers
+|    bitwise OR             integers
+^    bitwise XOR            integers
+&^   bit clear (AND NOT)    integers
+
+<<   left shift             integer << integer >= 0
+>>   right shift            integer >> integer >= 0
+```
+
+If the operand type is a type parameter, the ==operator must apply to each type in that type set==. The operands are represented as values of the type argument that the type parameter is instantiated with, and the operation is computed with the precision of that type argument.
+#### Integer operations
+If the divisor is a constant, it must not be zero. If the divisor is zero at run time, a run-time panic occurs.
+
+If the dividend x is the most negative value for the int type of x, the quotient q = x / -1 is equal to x (and r = 0) due to two's-complement integer overflow
+
+The shift operators shift the left operand by the shift count specified by the right operand, which must be non-negative. If the shift count is negative at run time, a run-time panic occurs.
+#### Integer overflow
+For signed integers, the operations `+, -, *, /, <<` may legally overflow and the resulting value exists and is deterministically defined by the signed integer representation, the operation, and its operands. ==Overflow does not cause a run-time panic==. A compiler may not optimize code under the assumption that overflow does not occur. For instance, it may not assume that `x < x + 1` is always true.
+#### Floating-point operations
+For floating-point and complex numbers, `+x` is the same as `x`, while `-x` is the negation of `x`. The result of a floating-point or complex division by zero is not specified beyond the `IEEE 754` standard; whether a run-time panic occurs is implementation-specific.
+#### Strings concatenation
+Strings can be concatenated using the `+` operator or the `+=` assignment operator. String addition creates a new string by concatenating the operands.
+#### Comparison operators
+Comparison operators compare two operands and yield an untyped boolean value.
+```
+==    equal
+!=    not equal
+<     less
+<=    less or equal
+>     greater
+>=    greater or equal
+```
+In any comparison, the first operand ==must be assignable to the type of the second operand==, or vice versa.
+
+The equality operators `==` and `!=` ==apply to operands of comparable types==. The ordering operators `<, <=, >, >=` apply to operands of ==ordered types==. These terms and the result of the comparisons are defined as follows:
+- Boolean types are comparable.
+- Integer types are comparable and ordered. 
+- Floating-point types are comparable and ordered. Two floating-point values are compared as defined by the IEEE 754 standard.
+- Complex types are comparable. Two complex values `u` and `v` are equal if both` real(u) == real(v) && imag(u) == imag(v)`.
+- String types are comparable and ordered. Two string values are compared lexically byte-wise.
+- Pointer types are comparable. Two pointer values are equal if they point to the same variable or if both have value nil. Pointers to ==distinct zero-size variables may or may not be equal==.
+- Channel types are comparable. Two channel values are equal if they were created by the same call to make or if both have value nil.
+- ==Interface types that are not type parameters are comparable==. Two interface values are equal if they have identical dynamic types and equal dynamic values or if both have value nil.
+- A value `x` of non-interface type `X` and a value `t` of interface type `T` can be compared if type `X` is comparable and `X` implements `T`. They are equal if t's dynamic type is identical to `X` and `t`'s dynamic value is equal to `x`.
+- ==Struct types are comparable if all their field types are comparable==. Two struct values are equal if their corresponding non-blank field values are equal. The fields are compared in source order.
+- ==Array types are comparable if their array element types are comparable==. Two array values are equal if their corresponding element values are equal. The elements are compared in ascending index order.
+ - Type parameters are comparable if they are strictly comparable (see below).
+
+A comparison of two interface values with ==identical dynamic types causes a run-time panic== if that type is not comparable. This behavior applies not only to direct interface value comparisons but also when comparing arrays of interface values or structs with interface-valued fields.
+
+As a special case, a `slice`, `map`, or `function` value may be compared to the predeclared identifier `nil`. Comparison of `pointer`, `channel`, and `interface` values to `nil` is also allowed and follows from the general rules above.
+
+A type is `strictly comparable` if it is comparable and not an interface type nor composed of interface types. Specifically:
+- Boolean, numeric, string, pointer, and channel types are strictly comparable.
+- Struct types are strictly comparable if all their field types are strictly comparable.
+- Array types are strictly comparable if their array element types are strictly comparable.
+- Type parameters are strictly comparable if all types in their type set are strictly comparable.
+#### Logical operators
+Logical operators ==apply to boolean values and yield a result of the same type as the operands==. The left operand is evaluated, and then the right if the condition requires it.
+```
+&&    conditional AND    p && q  is  "if p then q else false"
+||    conditional OR     p || q  is  "if p then true else q"
+!     NOT                !p      is  "not p"
+```
+#### Adress operators
+For an operand `x` of type `T`, the address operation `&x` generates a pointer of type `*T` to `x`. The operand must be `addressable`, that is, either a variable, pointer indirection, or slice indexing operation; or a field selector of an addressable struct operand; or an array indexing operation of an addressable array. As an exception to the addressability requirement, `x` may also be a (possibly parenthesized) composite literal. If the evaluation of `x` would cause a run-time panic, then the evaluation of `&x` does too.
+
+==If `x` is `nil`, an attempt to evaluate `*x` will cause a run-time panic==.
+#### Receive operators
+For an operand `ch` of `channel type`, the value of the receive operation `<-ch` is the value received from the channel `ch`. The channel direction must permit receive operations, and the type of the receive operation is the element type of the channel. The ==expression blocks until a value is available==. ==Receiving from a nil channel blocks forever==. ==A receive operation on a closed channel can always proceed immediately==, yielding the element type's zero value after any previously sent values have been received.
+
+If the operand type is a type parameter, all types in its type set must be channel types that permit receive operations, and they must all have the same element type, which is the type of the receive operation.
+
+A receive expression used in an assignment statement or initialization of the special form `x, ok := <-ch` yields an additional untyped boolean result reporting whether the communication succeeded. The value of `ok` is `true` if the value received was delivered by a successful send operation to the channel, or `false` if it is a zero value generated because the channel is closed and empty.
+
+### Conversions
+A conversion changes the type of an expression to the type specified by the conversion. A conversion may appear literally in the source, or it may be implied by the context in which an expression appears.
+
+An explicit conversion is an expression of the form `T(x)` where `T` is a type and `x` is an expression that can be converted to type `T`.
+
+If the type starts with the operator `*` or `<-`, or if the type starts with the keyword func and has no result list, it must be parenthesized when necessary to avoid ambiguity:
+```go
+*Point(p)        // same as *(Point(p))
+(*Point)(p)      // p is converted to *Point
+<-chan int(c)    // same as <-(chan int(c))
+(<-chan int)(c)  // c is converted to <-chan int
+func()(x)        // function signature func() x
+(func())(x)      // x is converted to func()
+(func() int)(x)  // x is converted to func() int
+func() int(x)    // x is converted to func() int (unambiguous)
+```
+
+A constant value x can be converted to type `T` if `x` is representable by a value of `T`. As a special case, an integer constant `x` can be explicitly converted to a string type using the same rule as for non-constant `x`.
+
+Converting a constant to a type that is not a type parameter yields a typed constant.
+```
+uint(iota)               // iota value of type uint
+float32(2.718281828)     // 2.718281828 of type float32
+```
+
+Converting a constant to a type parameter ==yields a non-constant value of that type==, with the value represented as a value of the type argument that the type parameter is instantiated with. For example, given the function:
+```go
+func f[P ~float32|~float64]() {
+	… P(1.1) …
+}
+```
+the conversion `P(1.1)` results in a non-constant value of type `P` and the value `1.1` is represented as a `float32` or a `float64` depending on the type argument for `f`.
+
+A non-constant value `x` can be converted to type `T` in any of these cases:
+- x is assignable to T.
+- ignoring struct tags (see below), x's type and T are not type parameters but have identical underlying types.
+- ignoring struct tags (see below), x's type and T are pointer types that are not named types, and their pointer base types are not type parameters but have identical underlying types.
+- x's type and T are both integer or floating point types.
+- x's type and T are both complex types.
+- x is an integer or a slice of bytes or runes and T is a string type.
+- x is a string and T is a slice of bytes or runes.
+- x is a slice, T is an array or a pointer to an array, and the slice and array types have identical element types.
+
+Additionally, if T or x's type V are type parameters, x can also be converted to type T if one of the following conditions applies:
+- Both V and T are type parameters and a value of each type in V's type set can be converted to each type in T's type set.
+- Only V is a type parameter and a value of each type in V's type set can be converted to T.
+- Only T is a type parameter and x can be converted to each type in T's type set.
+
+==Struct tags are ignored when comparing struct types for identity for the purpose of conversion==.
+
+Specific rules apply to (non-constant) conversions between numeric types or to and from a string type. ==These conversions may change the representation of x and incur a run-time cost==. ==All other conversions only change the type but not the representation of x==.
+
+There is no linguistic mechanism to convert between pointers and integers. The package unsafe implements this functionality under restricted circumstances.
+#### Conversion between numeric types
+For the conversion of non-constant numeric values, the following rules apply:
+- When converting between integer types, if the value is a signed integer, it is sign extended to implicit infinite precision; otherwise it is zero extended. It is then truncated to fit in the result type's size. There is no indication of overflow.
+- When converting a floating-point number to an integer, the ==fraction is discarded== (truncation towards zero).
+- When converting an integer or floating-point number to a floating-point type, or a complex number to another complex type, the result value is rounded to the precision specified by the destination type.
+#### Conversions to and from a string type
+Converting a slice of bytes to a string type yields a string whose successive bytes are the elements of the slice.
+
+Converting a slice of runes to a string type yields a string that is the concatenation of the individual rune values converted to strings.
+
+Converting a value of a string type to a slice of bytes type yields a non-nil slice whose successive elements are the bytes of the string. The ==capacity of the resulting slice is implementation-specific and may be larger than the slice length==.
+
+Converting a value of a string type to a slice of runes type yields a ==slice containing the individual Unicode code points of the string==. The ==capacity of the resulting slice is implementation-specific and may be larger than the slice length==.
+
+ for historical reasons, an integer value may be converted to a string type. This form of conversion yields a string containing the (possibly multi-byte) UTF-8 representation of the Unicode code point with the given integer value. Values outside the range of valid Unicode code points are converted to "\uFFFD".
+#### Conversions from slice to array or array pointer
+Converting a slice to an array yields an array containing the elements of the underlying array of the slice. Similarly, converting a slice to an array pointer yields a pointer to the underlying array of the slice. In both cases, ==if the length of the slice is less than the length of the array, a run-time panic occurs==.
+### Constant expressions
+Constant expressions ==may contain only constant operands and are evaluated at compile time==.
+
+Untyped boolean, numeric, and string constants may be used as operands wherever it is legal to use an operand of boolean, numeric, or string type, respectively.
+
+A constant comparison always yields an untyped boolean constant. If the left operand of a constant shift expression is an untyped constant, the result is an integer constant; otherwise it is a constant of the same type as the left operand, which must be of integer type.
+
+Any other operation on untyped constants results in an untyped constant of the same kind. If the untyped operands of a binary operation (other than a shift) are of different kinds, the result is of the operand's kind that appears later in this list.
+
+Applying the built-in function complex to untyped integer, rune, or floating-point constants yields an untyped complex constant.
+
+The values of typed constants must always be accurately representable by values of the constant type.
+
+Implementation restriction: ==A compiler may use rounding while computing untyped floating-point or complex constant expressions==; see the implementation restriction in the section on constants. This rounding may cause a floating-point constant expression to be invalid in an integer context, even if it would be integral when calculated using infinite precision, and vice versa.
+### Order of evaluation
+At package level, initialization dependencies determine the evaluation order of individual initialization expressions in variable declarations. Otherwise, when evaluating the operands of an expression, assignment, or return statement, all function calls, method calls, receive operations, and binary logical operations are evaluated in ==lexical left-to-right order==.
+
+At package level, initialization dependencies override the left-to-right rule for individual initialization expressions, but not for operands within each expression.
+### Statements
+Statements control execution.
+#### Terminating statements
+A terminating statement interrupts the regular flow of control in a block. The following statements are terminating:
+- `return` and `goto`
+- `panic` call
+- A block in which the statement list ends in a terminating statement.
+- An "if" statement in which the "else" branch is present, and both branches are terminating statements.
+- A "for" statement in which there are no "break" statements referring to the "for" statement, and the loop condition is absent, and it does not use a range clause.
+- A "switch" statement in which there are no "break" statements referring to the "switch" statement, there is a default case, and the statement lists in each case, including the default, end in a terminating statement, or a possibly labeled `fallthrough` statement.
+- A "select" statement in which there are no "break" statements referring to the "select" statement, and the statement lists in each case, including the default if present, end in a terminating statement.
+- A labeled statement labeling a terminating statement.
+All other statements are not terminating.
+#### Empty statement
+Does nothing
+#### Labeled statement
+A labeled statement may be the target of a `goto`, `break` or `continue` statement.
+`Error: log.Panic("error encountered")`
+#### Expression statements
+With the exception of specific built-in functions, function and method calls and receive operations can appear in statement context. Such statements may be parenthesized.
+
+The following built-in functions are not permitted in statement context: `append cap complex imag len make new real unsafe.Add unsafe.Alignof unsafe.Offsetof unsafe.Sizeof unsafe.Slice unsafe.SliceData unsafe.String unsafe.StringData`
+#### Send statements
+A send statement sends a value on a channel. The channel expression must be of channel type, the channel direction must permit send operations, and the type of the value to be sent must be assignable to the channel's element type.
+
+Both the channel and the value expression are evaluated before communication begins. Communication blocks until the send can proceed. ==A send on an unbuffered channel can proceed if a receiver is ready==. A ==send on a buffered channel can proceed if there is room in the buffer==. A send on a closed channel proceeds by causing a run-time panic. A send on a nil channel blocks forever.
+
+If the type of the channel expression is a type parameter, all types in its type set must be channel types that permit send operations, they must all have the same element type, and the type of the value to be sent must be assignable to that element type.
+#### IncDec statements
+The `++` and `--` statements increment or decrement their operands by the untyped constant 1. As with an assignment, the operand must be addressable or a map index expression. `+= 1` and `++`, `-= 1` and `--` are equivalent.
+#### Assignment statements
+An assignment replaces the current value stored in a variable with a new value specified by an expression. An assignment statement may assign a single value to a single variable, or multiple values to a matching number of variables.
+
+Each left-hand side operand must be addressable, a map index expression, or ==`for =` assignments only it may be the blank identifier==. Operands may be parenthesized.
+
+An assignment operation `x op=` y where `op` is a binary arithmetic operator is equivalent to `x = x op (y)` but evaluates `x` only once. ==The `op=` construct is a single token==. In assignment operations, both the left- and right-hand expression lists must contain exactly one single-valued expression, and the left-hand expression must not be the blank identifier. `a[i] <<= 2`
+
+A tuple assignment assigns the individual elements of a multi-valued operation to a list of variables. There are two forms. In the first, the right hand operand is a single multi-valued expression such as a `function call`, a `channel` or `map` operation, or a `type assertion`. The number of operands on the left hand side must match the number of values. `x, y = f()`
+
+In the second form, the number of operands on the left must equal the number of expressions on the right, each of which must be single-valued, and the nth expression on the right is assigned to the nth operand on the left: `one, two, three = '一', '二', '三'`
+
+The blank identifier provides a way to ignore right-hand side values in an assignment.
+
+The assignment proceeds in two phases. ==First, the operands of index expressions and pointer indirections (including implicit pointer indirections in selectors) on the left and the expressions on the right are all evaluated in the usual order==. Second, the assignments are carried out in ==left-to-right== order.
+
+In assignments, each value must be assignable to the type of the operand to which it is assigned, with the following special cases:
+- Any typed value may be assigned to the blank identifier.
+- If an untyped constant is assigned to a variable of interface type or the blank identifier, the constant is first implicitly converted to its default type.
+- If an untyped boolean value is assigned to a variable of interface type or the blank identifier, it is first implicitly converted to type bool.
+
+When a value is assigned to a variable, only the data that is stored in the variable is replaced. If the value contains a reference, the assignment copies the reference but does not make a copy of the referenced data (such as the underlying array of a slice).
+#### if statements
+`If` statements specify the conditional execution of two branches according to the value of a boolean expression. If the expression evaluates to true, the `if` branch is executed, otherwise, if present, the `else` branch is executed. The expression may be preceded by a simple statement, which executes before the expression is evaluated.
+```go
+if x := f(); x < y {
+	return x
+} else if x > z {
+	return z
+} else {
+	return y
+}
+```
+#### Switch statements
+`Switch` statements provide multi-way execution. An expression or type is compared to the `cases` inside the `switch` to determine which branch to execute.
+
+There are two forms: ==expression switches== and ==type switches==. In an expression switch, the cases contain expressions that are compared against the value of the switch expression. In a type switch, the cases contain types that are compared against the type of a specially annotated switch expression. The ==switch expression is evaluated exactly once in a switch statement==.
+
+##### Expression switches
+In an expression switch, the switch expression is evaluated and the case expressions, which need not be constants, are evaluated left-to-right and top-to-bottom; ==the first one that equals the switch expression triggers execution of the statements of the associated case==; ==the other cases are skipped==. If no case matches and there is a `default` case, its statements are executed. There can be at most one default case and it may appear anywhere in the `switch` statement. A missing switch expression is equivalent to the boolean value `true`.
+
+If the switch expression evaluates to an untyped constant, it is first implicitly converted to its default type. The predeclared untyped value nil cannot be used as a switch expression. The ==switch expression type must be comparable==.
+
+If a case expression is untyped, it is first implicitly converted to the type of the switch expression. For each (possibly converted) case expression `x` and the value `t` of the switch expression, `x == t` must be a valid comparison.
+
+In a case or default clause, the last non-empty statement may be a (possibly labeled) `fallthrough` statement to indicate that control should flow from the end of this clause to the first statement of the next clause. Otherwise control flows to the end of the `switch` statement. A `fallthrough` statement may appear as the last statement of all but the last clause of an expression switch.
+```go
+switch tag {
+default: s3()
+case 0, 1, 2, 3: s1()
+case 4, 5, 6, 7: s2()
+}
+
+switch x := f(); {  // missing switch expression means "true"
+case x < 0: return -x
+default: return x
+}
+
+switch {
+case x < y: f1()
+case x < z: f2()
+case x == 4: f3()
+}
+```
+
+Implementation restriction: A compiler may disallow multiple case expressions evaluating to the same constant. For instance, the ==current compilers disallow duplicate integer, floating point, or string constants in case expressions==.
+##### Type switches
+A type switch ==compares types rather than values==. It is otherwise similar to an expression switch. It is marked by a special switch expression that has the form of a type assertion using the keyword type rather than an actual type:
+```go
+switch x.(type) {
+// cases
+}
+```
+
+Cases then match actual types `T` against the dynamic type of the expression `x`. As with type assertions, `x` must be of interface type, but not a type parameter, and each non-interface type `T` listed in a case must implement the type of `x`. The types listed in the cases of a type switch must all be different.
+
+The `TypeSwitchGuard` (expression to store type) may include a short variable declaration. When that form is used, the variable is declared at the end of the `TypeSwitchCase` in the implicit block of each clause. In clauses with a case listing exactly one type, the variable has that type; otherwise, the variable has the type of the expression in the `TypeSwitchGuard`.
+
+Instead of a type, a case may use the predeclared identifier `nil`; that case is selected when the expression in the TypeSwitchGuard is a `nil` interface value. There may be at most one `nil` case.
+```go
+switch i := x.(type) {
+case nil:
+	printString("x is nil")                // type of i is type of x (interface{})
+case int:
+	printInt(i)                            // type of i is int
+case float64:
+	printFloat64(i)                        // type of i is float64
+case func(int) float64:
+	printFunction(i)                       // type of i is func(int) float64
+case bool, string:
+	printString("type is bool or string")  // type of i is type of x (interface{})
+default:
+	printString("don't know the type")     // type of i is type of x (interface{})
+}
+```
+
+A type parameter or a generic type may be used as a type in a case. If upon instantiation that type turns out to duplicate another entry in the switch, the first matching case is chosen.
+
+The type switch guard may be preceded by a simple statement, which executes before the guard is evaluated.
+
+==The "fallthrough" statement is not permitted in a type switch.==
+#### For statements
+A "for" statement specifies repeated execution of a block. There are three forms: The iteration may be controlled by a single condition, a `for` clause, or a `range` clause.
+##### For statements with single condition
+In its simplest form, a "for" statement specifies the repeated execution of a block as long as a boolean condition evaluates to true. ==The condition is evaluated before each iteration==. If the condition is absent, it is equivalent to the boolean value true.
+```go
+for a < b {
+	a *= 2
+}
+```
+##### For statements with for clause
+A `for` statement with a `ForClause` is also controlled by its condition, but additionally it may specify an `init` and a `post` statement, such as an assignment, an increment or decrement statement. The init statement may be a short variable declaration, but the post statement must not.
+
+If non-empty, the init statement is executed once before evaluating the condition for the first iteration; the post statement is executed after each execution of the block (and only if the block was executed). ==Any element of the ForClause may be empty but the semicolons are required unless there is only a condition==. If the condition is absent, it is equivalent to the boolean value true.
+```go
+for i := 0; i < 10; i++ {
+	f(i)
+}
+for cond { S() }    is the same as    for ; cond ; { S() }
+for      { S() }    is the same as    for true     { S() }
+```
+
+==Each iteration has its own separate declared variable (or variables)==. The variable used by the first iteration is declared by the init statement. The variable used by each subsequent iteration is declared implicitly before executing the post statement and ==initialized to the value of the previous iteration's variable at that moment==.
+```go
+for i := 0; i < 5; i++ {
+	fmt.Println(i)
+	i++
+}
+// prints 0 2 4
+```
+##### For statements with range clause
+A `for` statement with a `range` clause ==iterates through all entries of an array, slice, string or map, values received on a channel, integer values from zero to an upper limit, or values passed to an iterator function's yield function==. For each entry it assigns iteration values to corresponding iteration variables if present and then executes the block.
+
+The expression on the right in the "range" clause is called the range expression, which may be an array, pointer to an array, slice, string, map, channel permitting receive operations, an integer, or a function with specific signature (see below). As with an assignment, if present the operands on the left must be addressable or map index expressions; they denote the iteration variables. If the range expression is a function, the maximum number of iteration variables depends on the function signature. If the range expression is a channel or integer, at most one iteration variable is permitted; otherwise there may be up to two. If the last iteration variable is the blank identifier, the range clause is equivalent to the same clause without that identifier.
+
+The range expression `x` is evaluated before beginning the loop, with one exception: ==if at most one iteration variable is present and `x` or `len(x)` is constant, the range expression is not evaluated==.
+
+Function calls on the left are evaluated once per iteration. For each iteration, iteration values are produced as follows if the respective iteration variables are present:
+```go
+Range expression                                       1st value                2nd value
+
+array or slice      a  [n]E, *[n]E, or []E             index    i  int          a[i]       E
+string              s  string type                     index    i  int          see below  rune
+map                 m  map[K]V                         key      k  K            m[k]       V
+channel             c  chan E, <-chan E                element  e  E
+integer value       n  integer type, or untyped int    value    i  see below
+function, 0 values  f  func(func() bool)
+function, 1 value   f  func(func(V) bool)              value    v  V
+function, 2 values  f  func(func(K, V) bool)           key      k  K            v          V
+```
+
+- For an array, pointer to array, or slice value a, the index iteration values are produced in increasing order, starting at element index 0. If at most one iteration variable is present, the range loop produces iteration values from 0 up to len(a)-1 and does not index into the array or slice itself. For a nil slice, the number of iterations is 0.
+- For a string value, the "range" clause ==iterates over the Unicode code points in the string== starting at byte index 0. On successive iterations, the index value will be the index of the first byte of successive UTF-8-encoded code points in the string, and the second value, ==of type rune==, will be the value of the corresponding code point. If the iteration encounters an ==invalid UTF-8 sequence, the second value will be 0xFFFD==, the Unicode replacement character, and the next iteration will advance a single byte in the string.
+- The ==iteration order over maps is not specified and is not guaranteed to be the same from one iteration to the next==. If a map entry that has not yet been reached is removed during iteration, the ==corresponding iteration value will not be produced==. If a ==map entry is created during iteration, that entry may be produced during the iteration or may be skipped==. The choice may vary for each entry created and from one iteration to the next. If the map is nil, the number of iterations is 0.
+- For channels, the iteration values produced are the successive values sent on the channel until the channel is closed. ==If the channel is nil, the range expression blocks forever==.
+- For an integer value n, where n is of integer type or an untyped integer constant, the iteration values ==0 through n-1 are produced in increasing order==. If n is of integer type, the iteration values have that same type. Otherwise, the type of ==n is determined as if it were assigned to the iteration variable==. Specifically: if the iteration variable is preexisting, the type of the iteration values is the type of the iteration variable, which must be of integer type. Otherwise, if the iteration variable is declared by the "range" clause or is absent, the type of the iteration values is the default type for n. If n <= 0, the loop does not run any iterations.
+- For a function f, the iteration proceeds by calling f with a new, synthesized yield function as its argument. If yield is called before f returns, the arguments to yield become the iteration values for executing the loop body once. After each successive loop iteration, yield returns true and may be called again to continue the loop. As long as the loop body does not terminate, the "range" clause will continue to generate iteration values this way for each yield call until f returns. If the loop body terminates (such as by a break statement), yield returns false and must not be called again.
+
+The iteration variables may be declared by the `range` clause using a form of short variable declaration (`:=`). In this case their scope is the block of the `for` statement and each iteration has its own new variables. The variables have the types of their respective iteration values.
+
+If the iteration variables are not explicitly declared by the "range" clause, they must be preexisting. In this case, the iteration values are assigned to the respective variables as in an assignment statement.
+
+If the type of the range expression is a type parameter, all types in its type set must have the same underlying type and the range expression must be valid for that type.
+#### Go statements
+A `go` statement starts the execution of a function call as an ==independent concurrent thread of control==, or `goroutine`, within the same address space.
+
+The expression must be a function or method call; it cannot be parenthesized. ==Calls of built-in functions are restricted as for expression statements==.
+
+The function value and parameters are evaluated as usual in the calling `goroutine`, but unlike with a regular call, program execution does not wait for the invoked function to complete. Instead, ==the function begins executing independently in a new `goroutine`==. ==When the function terminates, its `goroutine` also terminates==. ==If the function has any return values, they are discarded when the function completes==.
+#### Select statements
+A `select` statement chooses which of a set of possible send or receive operations will proceed. It looks similar to a `switch` statement but with the cases all referring to communication operations.
+
+A case with a `RecvStmt` may assign the result of a `RecvExpr` to one or two variables, which may be declared using a short variable declaration. The `RecvExpr` must be a (possibly parenthesized) receive operation. There can be at most one default case and it may appear anywhere in the list of cases.
+
+Execution of a "select" statement proceeds in several steps:
+
+- For all the cases in the statement, the channel operands of receive operations and the channel and right-hand-side expressions of send statements are ==evaluated exactly once==, in source order, upon entering the "select" statement. The result is a set of channels to receive from or send to, and the corresponding values to send. Any side effects in that evaluation will occur irrespective of which (if any) communication operation is selected to proceed. Expressions on the left-hand side of a RecvStmt with a short variable declaration or assignment are not yet evaluated.
+- If one or more of the communications can proceed, a single one that can proceed is chosen via a uniform pseudo-random selection. Otherwise, if there is a default case, that case is chosen. If there is no default case, the "select" statement blocks until at least one of the communications can proceed.
+- Unless the selected case is the default case, the respective communication operation is executed.
+- If the selected case is a RecvStmt with a short variable declaration or an assignment, the left-hand side expressions are evaluated and the received value (or values) are assigned.
+- The statement list of the selected case is executed.
+
+
 
 # Sources
 [The Go Programming Language Specification](https://go.dev/ref/spec) (go version: 1.25)
