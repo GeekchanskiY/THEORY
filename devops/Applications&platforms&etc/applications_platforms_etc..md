@@ -1,7 +1,7 @@
 Containerization & build:
-	[[docker]]
+	[[DevOps/Applications&platforms&etc/docker]]
 	[[docker-compose]]
-	[[kubernetes]]
+	[[DevOps/Applications&platforms&etc/kubernetes]]
 	[[makefile]]
 	
 ELK stack:
