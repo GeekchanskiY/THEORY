@@ -1,3 +1,10 @@
+# Notes
+It's a compact version of go specification. The data which is removed:
+ - signatures and structure of lexical elements: it's intuitive and does not make any practical use for most cases (except code generation maybe). places where internals are referenced  by documentation are marked and description of these elements is provided.
+ - Details about generics are moved to [[Go Generics]].
+
+
+# Go specification
 The syntax  is specified using a variant of Extended Backus-Naur Form (EBNF). // TODO
 
 Source code is Unicode text encoded in UTF-8. It disallows NUL character (U+0000) and ignores BOM's (Byte-order mask) if it is the first Unicode code point in the source text. A byte order mark may be disallowed anywhere else in the source.
@@ -1515,9 +1522,135 @@ func f(n int) (res int, err error) {
 }
 ```
 
+#### Break statements
+A `break` statement terminates execution of the innermost `for`, `switch`, or `select` statement within the same function.
 
+If there is a label, it must be that of an enclosing and that is the one whose execution terminates.
+```go
+OuterLoop:
+	for i = 0; i < n; i++ {
+		for j = 0; j < m; j++ {
+			switch a[i][j] {
+			case nil:
+				state = Error
+				break OuterLoop
+			case item:
+				state = Found
+				break OuterLoop
+			}
+		}
+	}
+```
+#### Continue statements
+A `continue` statement begins the next iteration of the innermost enclosing `for` loop by advancing control to the end of the loop block. The `for` loop must be within the same function.
+#### Goto statements
+A `goto` statement transfers control to the statement with the corresponding label within the same function.
 
+Executing the `goto` statement must not cause any variables to come into scope that were not already in scope at the point of the goto. 
+```go
+goto L  // BAD, skips 'v' creation
+	v := 3
+L:
+```
 
+A `goto` statement outside a block cannot jump to a label inside that block. 
+#### Fallthrough statements
+A `fallthrough` statement transfers control to the first statement of the next case clause in an expression `switch` statement. It may be used only as the final non-empty statement in such a clause.
+#### Defer statements
+A `defer` statement ==invokes a function whose execution is deferred== to the moment the surrounding function returns because: 
+- executed a return statement
+- reached the end of its function body
+- the corresponding `goroutine` is panicking.
+
+The expression must be a function or method call; it cannot be parenthesized. Calls of built-in functions are restricted as for expression statements.
+
+Each time a `defer` statement executes, the function value and parameters to the call are evaluated as usual and saved again but the actual function is not invoked. Instead, deferred functions are ==invoked immediately before the surrounding function returns, in the reverse order they were deferred==. That is, if the surrounding function returns through an explicit return statement, deferred functions are ==executed after any result parameters are set by that return statement but before the function returns to its caller==. If a deferred function value evaluates to nil, execution panics when the function is invoked, not when the `defer` statement is executed.
+### Built-in functions
+Built-in functions are predeclared. They are called like any other function but some of them accept a type instead of an expression as the first argument.
+
+The built-in functions do not have standard Go types, so they can only appear in call expressions; ==they cannot be used as function values==.
+#### Append
+The built-in functions `append` and `copy` assist in common slice operations. For both functions, the result is independent of whether the memory referenced by the arguments overlaps.
+
+The variadic function `append` appends zero or more values `x` to a slice `s` of type `S` and returns the resulting slice, also of type `S`. The values `x` are passed to a parameter of type `...E` where `E` is the element type of `S` and the respective parameter passing rules apply. 
+
+>[!note] Append `string` to `[]byte`
+As a special case, append also accepts a first argument assignable to type `[]byte` with a second argument of string type followed by `...`. This form appends the bytes of the string.
+
+If `S` is a type parameter, all types in its type set must have the same underlying slice type `[]E`.
+
+If the capacity of `s` is not large enough to fit the additional values, append allocates a new, enough large underlying array that fits both the existing slice elements and the additional values. Otherwise, append re-uses the underlying array.
+#### Copy
+==The function `copy` copies slice elements from a source `src` to a destination `dst` and returns the number of elements copied==. Both arguments must have identical element type `E` and must be assignable to a slice of type `[]E`. The number of elements copied is the minimum of `len(src)` and `len(dst)`. As a special case, copy also accepts a destination argument assignable to type `[]byte` with a source argument of a string type. This form copies the bytes from the string into the byte slice. If the type of one or both arguments is a type parameter, all types in their respective type sets must have the same underlying slice type `[]E`.
+#### Clear
+The built-in function clear takes an argument of `map`, `slice`, or `type parameter` type, and deletes or zeroes out all elements.
+
+If the type of the argument to clear is a `type parameter`, all types in its type set must be maps or slices, and clear performs the operation corresponding to the actual type argument.
+
+If the `map` or `slice` is `nil`, clear is a `no-op`.
+#### Close
+For a channel `ch`, the built-in function `close(ch)` ==records that no more values will be sent on the channel==. ==It is an error if `ch` is a receive-only channel==. ==Sending to or closing a closed channel causes a run-time panic==. ==Closing the nil channel also causes a run-time panic==. After calling `close`, ==and after any previously sent values have been received==, receive operations will return the zero value for the channel's type without blocking. The multi-valued receive operation returns a received value along with an indication of whether the channel is closed.
+
+If the type of the argument to close is a type parameter, all types in its type set must be channels with the same element type. ==It is an error if any of those channels is a receive-only channel==.
+#### Manipulating complex numbers
+Three functions assemble and disassemble complex numbers. The built-in function `complex` constructs a complex value from a floating-point real and imaginary part, while `real` and `imag` extract the real and imaginary parts of a complex value.
+#### Deletion of map elements
+The built-in function `delete` removes the element with key `k` from a map `m`. The value `k` must be assignable to the key type of `m`.
+
+If the type of `m` is a type parameter, all types in that type set must be maps, and they must all have identical key types.
+
+If the map `m` is `nil` or the element `m[k]` does not exist, delete is a no-op.
+#### Len 
+The built-in function `len` take arguments of various types and return a result of type int. The implementation guarantees that the result always fits into an int.
+```
+len(s)    string type      string length in bytes
+          [n]T, *[n]T      array length (== n)
+          []T              slice length
+          map[K]T          map length (number of defined keys)
+          chan T           number of elements queued in channel buffer
+          type parameter   see below
+```
+The length of a nil slice, map or channel is 0.
+
+The expression `len(s)` is constant if `s` is a string constant.
+#### Cap
+The built-in function `cap` take arguments of various types and return a result of type int. The implementation guarantees that the result always fits into an int.
+```go
+cap(s)    [n]T, *[n]T      array length (== n)
+          []T              slice capacity
+          chan T           channel buffer capacity
+          type parameter   see below
+```
+The capacity of a slice is the number of elements for which there is space allocated in the underlying array. At any time the following relationship holds: `0 <= len(s) <= cap(s)`.
+
+The capacity of a nil slice or channel is 0.
+
+he expressions `len(s)` and `cap(s)` are constants if the type of `s` is an array or pointer to an array and the expression s does not contain channel receives or (non-constant) function calls; in this case `s` is not evaluated. Otherwise, invocations of `len` and `cap` are not constant and `s` is evaluated.
+#### Make
+The built-in function `make` takes a type `T`, which ==must be a slice, map or channel type, or a type parameter==, optionally followed by a type-specific list of expressions. It returns a value of type `T` (not `*T`). The memory is initialized as described in the section on initial values.
+```
+Call             Type T            Result
+
+make(T, n)       slice             slice of type T with length n and capacity n
+make(T, n, m)    slice             slice of type T with length n and capacity m
+
+make(T)          map               map of type T
+make(T, n)       map               map of type T with initial space for approximately n elements
+
+make(T)          channel           unbuffered channel of type T
+make(T, n)       channel           buffered channel of type T, buffer size n
+
+make(T, n)       type parameter    see below
+make(T, n, m)    type parameter    see below
+```
+
+If the first argument is a type parameter, all types in its type set must have the same underlying type, which must be a slice or map type, or, if there are channel types, there must only be channel types, they must all have the same element type, and the channel directions must not conflict.
+
+Each of the size arguments `n` and `m` must be of integer type, have a type set containing only integer types, or be an untyped constant. A constant size argument must be non-negative and representable by a value of type int; if it is an untyped constant it is given type int. If both `n` and `m` are provided and are constant, then `n` must be no larger than `m`. ==For slices and channels, if `n` is negative or larger than `m` at run time, a run-time panic occurs==.
+
+==Calling make with a map type and size hint `n` will create a map with initial space to hold n map elements==. The precise behavior is implementation-dependent.
+#### Min and max
+The built-in functions `min` and `max` compute the smallest/largest, respectively - value of a fixed number of ==arguments of ordered types==. There must be at least one argument.
 
 # Sources
 [The Go Programming Language Specification](https://go.dev/ref/spec) (go version: 1.25)

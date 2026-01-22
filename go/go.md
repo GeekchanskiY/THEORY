@@ -27,7 +27,7 @@ What's possible for go:
 [[Effective go]]
 [[go_tags]]
 [[Useful stuff]]
-[[go_generics]]
+[[Go Generics]]
 [[Go Garbage Collector]]
 [[go_mod and go_work]]
 
