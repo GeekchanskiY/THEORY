@@ -1490,12 +1490,32 @@ A `select` statement chooses which of a set of possible send or receive operatio
 A case with a `RecvStmt` may assign the result of a `RecvExpr` to one or two variables, which may be declared using a short variable declaration. The `RecvExpr` must be a (possibly parenthesized) receive operation. There can be at most one default case and it may appear anywhere in the list of cases.
 
 Execution of a "select" statement proceeds in several steps:
-
 - For all the cases in the statement, the channel operands of receive operations and the channel and right-hand-side expressions of send statements are ==evaluated exactly once==, in source order, upon entering the "select" statement. The result is a set of channels to receive from or send to, and the corresponding values to send. Any side effects in that evaluation will occur irrespective of which (if any) communication operation is selected to proceed. Expressions on the left-hand side of a RecvStmt with a short variable declaration or assignment are not yet evaluated.
-- If one or more of the communications can proceed, a single one that can proceed is chosen via a uniform pseudo-random selection. Otherwise, if there is a default case, that case is chosen. If there is no default case, the "select" statement blocks until at least one of the communications can proceed.
+- If one or more of the communications can proceed, a ==single one that can proceed is chosen via a uniform pseudo-random selection==. Otherwise, if there is a default case, that case is chosen. ==If there is no default case, the "select" statement blocks until at least one of the communications can proceed==.
 - Unless the selected case is the default case, the respective communication operation is executed.
 - If the selected case is a RecvStmt with a short variable declaration or an assignment, the left-hand side expressions are evaluated and the received value (or values) are assigned.
 - The statement list of the selected case is executed.
+
+Since communication on nil channels can never proceed, a select with only nil channels and no default case blocks forever.
+#### Return statements
+A `return` statement in a function `F` terminates the execution of `F`, and optionally provides one or more result values. Any functions deferred by `F` are executed before `F` returns to its caller. In a function without a result type, a "return" statement must not specify any result values.
+There are three ways to return values from a function with a result type:
+- The return value or values may be explicitly listed in the `return` statement. Each expression must be single-valued and assignable to the corresponding element of the function's result type.
+- The expression list in the `return` statement may be a single call to a multi-valued function. The effect is as if each value returned from that function were assigned to a temporary variable with the type of the respective value, followed by a "return" statement listing these variables, at which point the rules of the previous case apply.
+- The expression list may be empty if the function's result type specifies names for its result parameters. The result parameters act as ordinary local variables and the function may assign values to them as necessary. The `return` statement returns the values of these variables. Example: `func complexF3() (re float64, im float64) { return }`. Regardless of how they are declared, all the result values are initialized to the zero values for their type upon entry to the function. A `return` statement that specifies results sets the result parameters before any deferred functions are executed.
+
+
+Implementation restriction: A compiler may disallow an empty expression list in a "return" statement if a different entity (constant, type, or variable) with the same name as a result parameter is in scope at the place of the return.
+```go
+func f(n int) (res int, err error) {
+	if _, err := f(n-1); err != nil {
+		return  // invalid return statement: err is shadowed
+	}
+	return
+}
+```
+
+
 
 
 
