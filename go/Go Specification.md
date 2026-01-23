@@ -65,8 +65,8 @@ The following character sequences represent operators (including assignment oper
 
 ### Literals
  An integer literal is a sequence of digits representing an integer constant.
- An optional prefix sets a non-decimal base: 0b or 0B for binary, 0, 0o, or 0O for octal, and 0x or 0X for hexadecimal
- For readability, an underscore character _ may appear after a base prefix or between successive digits
+ An optional prefix sets a non-decimal base: `0b` or `0B` for binary, `0`, `0o`, or `0O` for octal, and `0x` or `0X` for hexadecimal
+ For readability, an underscore character `_` may appear after a base prefix or between successive digits
 ```go
 var x = 123
 var x = 123_000
@@ -114,15 +114,15 @@ var x = "I am interpreted, \n and newline uses backslash escape."
 ```
 ### Constants
 Types of constants:
-- Numeric
-	- Rune
-	- Integer
-	- Floating-point
-	- Complex
-- Boolean
-- String
+- `Numeric`
+	- `Rune`
+	- `Integer`
+	- `Floating-point`
+	- `Complex`
+- `Boolean`
+- `String`
 
-Constant is represented by literal (rune, integer, floating-point, imaginary, or string), an identifier denoting a constant, a constant expression, a conversion with a result that is a constant, or the result value of some built-in functions such as min or max applied to constant arguments, unsafe.Sizeof applied to certain values, cap or len applied to some expressions, real and imag applied to a complex constant and complex applied to numeric constants. The boolean values are represented by the predeclared constants `true` and `false`. Predeclared identifier `iota` denotes an integer constant.
+Constant is represented by literal (`rune`, `integer`, `floating-point`, `imaginary`, or `string`), an identifier denoting a constant, a constant expression (expressions with constant values), a conversion with a result that is a constant, or the result value of some built-in functions such as min or max applied to constant arguments, unsafe.Sizeof applied to certain values, cap or len applied to some expressions, real and imag applied to a complex constant and complex applied to numeric constants. The boolean values are represented by the predeclared constants `true` and `false`. Predeclared identifier `iota` denotes an integer constant.
 
 Numeric constants represent exact values of arbitrary precision and do not overflow. There are no negative zero, infinity, and not-a-number values constants.
 
@@ -1650,7 +1650,215 @@ Each of the size arguments `n` and `m` must be of integer type, have a type set 
 
 ==Calling make with a map type and size hint `n` will create a map with initial space to hold n map elements==. The precise behavior is implementation-dependent.
 #### Min and max
-The built-in functions `min` and `max` compute the smallest/largest, respectively - value of a fixed number of ==arguments of ordered types==. There must be at least one argument.
+The built-in functions `min` and `max` compute the smallest/largest, respectively - value of a fixed number of ==arguments of ordered types==. There must be at least one argument. If all arguments are constant, the result is constant.
+For string arguments the result for min is the first argument with the smallest (or for max, largest) value, compared lexically byte-wise.
+```
+min(x, y)    == min(y, x)
+min(x, y, z) == min(min(x, y), z) == min(x, min(y, z))
+```
+#### New
+The built-in function new takes a type `T`, ==allocates storage for a variable of that type at run time, and returns a value of type `*T` pointing to it==. The variable is initialized as described in the section on initial values.
+#### Panic and recover
+Two built-in functions, `panic` and `recover`, assist in reporting and handling run-time panics and program-defined error conditions.
+
+While executing a function `F`, an explicit call to `panic` or a run-time panic terminates the execution of `F`. ==Any functions deferred by F are then executed as usual==. Next, any deferred functions run by `F`'s caller are run, and so on up to any deferred by the top-level function in the executing `goroutine`. At that point, the program is terminated and the error condition is reported, including the value of the argument to panic. This termination sequence is called panicking.
+
+The recover function allows a program to manage behavior of a panicking `goroutine`. Suppose a function `G` defers a function `D` that calls recover and a panic occurs in a function on the same `goroutine` in which `G` is executing. When the running of deferred functions reaches `D`, the return value of `D`'s call to recover will be the value passed to the call of panic. If `D` returns normally, without starting a new panic, the panicking sequence stops. In that case, the state of functions called between `G` and the call to panic is discarded, and normal execution resumes. Any functions deferred by `G` before `D` are then run and `G`'s execution terminates by returning to its caller.
+
+The return value of recover is nil when the `goroutine` is not panicking or recover was not called directly by a deferred function. Conversely, if a `goroutine` is panicking and recover was called directly by a deferred function, ==the return value of recover is guaranteed not to be nil==. To ensure this, calling panic with a nil interface value (or an untyped nil) causes a run-time panic.
+
+```go
+func protect(g func()) {
+	defer func() {
+		log.Println("done")  // Println executes normally even if there is a panic
+		if x := recover(); x != nil {
+			log.Printf("run time panic: %v", x)
+			// Does not continues panic sequence to the protect caller.
+		}
+	}()
+	log.Println("start")
+	g()
+}
+```
+#### Print and println
+Current implementations provide several built-in functions useful during bootstrapping: `print` and `println`. ==These functions are documented for completeness but are not guaranteed to stay in the language. They do not return a result==.
+
+Implementation restriction: print and println need not accept arbitrary argument types, but printing of boolean, numeric, and string types must be supported.
+## Packages
+==Go programs are constructed by linking together packages==. A package in turn is constructed from one or more source files that together declare constants, types, variables and functions belonging to the package and which are accessible in all files of the same package. Those elements may be exported and used in another package.
+### Source file organization
+Each source file consists of a package clause defining the package to which it belongs, followed by a possibly empty set of import declarations that declare packages whose contents it wishes to use, followed by a possibly empty set of declarations of functions, types, variables, and constants.
+### Package clause
+A package clause begins each source file and defines the package to which the file belongs. The PackageName must not be the blank identifier. A set of files sharing the same PackageName form the implementation of a package. ==An implementation may require that all source files for a package inhabit the same directory==.
+### Import declarations
+An import declaration states that the source file containing the declaration depends on functionality of the imported package and ==enables access to exported identifiers of that package==. The import names an identifier (PackageName) to be used for access and an ImportPath that specifies the package to be imported.
+
+The PackageName is used in qualified identifiers to access exported identifiers of the package within the importing source file. It is declared in the file block. If the PackageName is omitted, it defaults to the identifier specified in the package clause of the imported package. ==If an explicit period (.) appears instead of a name, all the package's exported identifiers declared in that package's package block will be declared in the importing source file's file block and must be accessed without a qualifier==.
+
+The interpretation of the ImportPath is implementation-dependent but it is typically a substring of the full file name of the compiled package and may be relative to a repository of installed packages.
+
+Implementation restriction: A compiler may restrict ImportPaths to non-empty strings using only characters belonging to Unicode's L, M, N, P, and S general categories (the Graphic characters without spaces) and may also exclude the characters ``!"#$%&'()*,:;<=>?[\]^`{|}`` and the Unicode replacement character `U+FFFD`.
+
+An import declaration declares a dependency relation between the importing and imported package. It is illegal for a package to import itself, directly or indirectly, or to directly import a package without referring to any of its exported identifiers. To import a package solely for its side-effects (init), use the blank identifier as explicit package name.
+
+```
+Import declaration          Local name of Sin
+
+import   "lib/math"         math.Sin
+import m "lib/math"         m.Sin
+import . "lib/math"         Sin
+import _ "lib/math"
+```
+## Program initialization and execution
+### The zero value
+When storage is allocated for a variable, either through a declaration or a call of new, or when a new value is created, either through a composite literal or a call of make, and ==no explicit initialization is provided, the variable or value is given a default value==. Each element of such a variable or value is set to the zero value for its type: 
+- false for booleans
+- 0 for numeric types
+- "" for strings
+- nil for pointers, functions, interfaces, slices, channels, and maps
+
+This ==initialization is done recursively==, so for instance each element of an array of structs will have its fields zeroed if no value is specified.
+### Package initialization
+Within a package, package-level variable initialization proceeds stepwise, with each step selecting the variable earliest in declaration order which has no dependencies on uninitialized variables.
+
+More precisely, a package-level variable is considered ready for initialization if it is not yet initialized and either has no initialization expression or its initialization expression has no dependencies on uninitialized variables. Initialization proceeds by repeatedly initializing the next package-level variable that is earliest in declaration order and ready for initialization, until there are no variables ready for initialization.
+
+If any variables are still uninitialized when this process ends, those variables are part of one or more initialization cycles, and the program is not valid.
+
+Multiple variables on the left-hand side of a variable declaration initialized by single (multi-valued) expression on the right-hand side are initialized together: If any of the variables on the left-hand side is initialized, all those variables are initialized in the same step.
+
+For the purpose of package initialization, ==blank variables are treated like any other variables in declarations==.
+
+The ==declaration order of variables declared in multiple files is determined by the order in which the files are presented to the compiler==. To ensure reproducible initialization behavior, build systems are encouraged to present ==multiple files belonging to the same package in lexical file name order== to a compiler.
+
+Dependency analysis does not rely on the actual values of the variables, only on lexical references to them in the source, analyzed transitively. For instance, if a variable x's initialization expression refers to a function whose body refers to variable y then x depends on y. Specifically: 
+- A reference to a variable or function is an identifier denoting that variable or function.
+- A reference to a method m is a method value or method expression of the form `t.m`, where the (static) type of `t` is not an interface type, and the method `m` is in the method set of `t`. It is immaterial whether the resulting function value `t.m` is invoked.
+- A variable, function, or method `x` depends on a variable `y` if `x`'s initialization expression or body (for functions and methods) contains a reference to `y` or to a function or method that depends on `y`.
+
+Dependency analysis is performed per package; only references referring to variables, functions, and (non-interface) methods declared in the current package are considered. If other, hidden, data dependencies exists between variables, the initialization order between those variables is unspecified.
+
+==Variables may also be initialized using functions named `init()` declared in the package block, with no arguments and no result parameters==.
+
+==Multiple such functions may be defined per package, even within a single source file. In the package block, the init identifier can be used only to declare init functions, yet the identifier itself is not declared. Thus init functions cannot be referred to from anywhere in a program==.
+
+The entire package is initialized by assigning initial values to all its package-level variables followed by calling all init functions in the order they appear in the source, possibly in multiple files, as presented to the compiler.
+
+### Program initialization
+The packages of a complete program are initialized stepwise, one package at a time. If a package has imports, the imported packages are initialized before initializing the package itself. If multiple packages import a package, the imported package will be initialized only once. The importing of packages, by construction, ==guarantees that there can be no cyclic initialization dependencies==.
+
+Package initialization—variable initialization and the ==invocation of init functions—happens in a single `goroutine`, sequentially, one package at a time==. An ==init function may launch other `goroutines`==, which can run concurrently with the initialization code. However, initialization always sequences the init functions: ==it will not invoke the next one until the previous one has returned==.
+### Program execution
+A complete program is created by linking a single, unimported package called the main package with all the packages it imports, transitively. The ==main package must have package name main and declare a function main that takes no arguments and returns no value==.
+
+Program execution begins by initializing the program and then invoking the function main in package main. When that function invocation returns, the program exits. It does not wait for other (non-main) `goroutines` to complete.
+### Errors
+The predeclared type `error` is defined as:
+```go
+type error interface {
+	Error() string
+}
+```
+It is the conventional interface for representing an error condition, with the nil value representing no error.
+### Run-time panics
+Execution errors such as attempting to index an array out of bounds trigger a run-time panic equivalent to a call of the built-in function `panic` ==with a value of the implementation-defined interface type `runtime.Error`==. That type satisfies the predeclared interface type `error`. The exact error values that represent distinct run-time error conditions are unspecified.
+## System considerations
+### Package unsafe
+The built-in package `unsafe`, known to the compiler and accessible through the import path `unsafe`, ==provides facilities for low-level programming including operations that violate the type system==. A package using unsafe ==must be vetted manually for type safety and may not be portable==. The package provides the following interface:
+```go
+package unsafe
+
+type ArbitraryType int  // shorthand for an arbitrary Go type; it is not a real type
+type Pointer *ArbitraryType
+
+func Alignof(variable ArbitraryType) uintptr
+func Offsetof(selector ArbitraryType) uintptr
+func Sizeof(variable ArbitraryType) uintptr
+
+type IntegerType int  // shorthand for an integer type; it is not a real type
+func Add(ptr Pointer, len IntegerType) Pointer
+func Slice(ptr *ArbitraryType, len IntegerType) []ArbitraryType
+func SliceData(slice []ArbitraryType) *ArbitraryType
+func String(ptr *byte, len IntegerType) string
+func StringData(str string) *byte
+```
+
+A `Pointer` is a pointer type but a `Pointer` value ==may not be dereferenced==. Any pointer or value of underlying type `uintptr` can be converted to a type of underlying type `Pointer` and vice versa. If the respective types are type parameters, all types in their respective type sets must have the same underlying type, which must be `uintptr` and `Pointer`, respectively. The effect of converting between `Pointer` and `uintptr` is implementation-defined.
+
+The functions `Alignof` and `Sizeof` take an expression `x` of any type and return the alignment or size, respectively, of a hypothetical variable `v` as if `v` were declared via `var v = x`.
+
+The function `Offsetof` takes a (possibly parenthesized) selector `s.f`, denoting a field `f` of the struct denoted by `s` or `*s`, and ==returns the field offset in bytes relative to the struct's address==. If `f` is an embedded field, it must be reachable without pointer indirections through fields of the struct.
+
+Computer architectures may require memory addresses to be aligned; that is, for addresses of a variable to be a multiple of a factor, the variable's type's alignment. The function `Alignof` takes an expression denoting a variable of any type and returns the alignment of the (type of the) variable in bytes.
+
+A (variable of) type `T` has variable size if `T` is a type parameter, or if it is an array or struct type containing elements or fields of variable size. Otherwise the size is constant. Calls to `Alignof`, `Offsetof`, and `Sizeof` are compile-time constant expressions of type `uintptr` if their arguments (or the struct `s` in the selector expression `s.f` for `Offsetof`) are types of constant size.
+
+The function `Add` adds `len` to `ptr` and returns the updated pointer `unsafe.Pointer(uintptr(ptr) + uintptr(len))`. The `len` argument must be of integer type or an untyped constant. A constant `len` argument must be representable by a value of type int; if it is an untyped constant it is given type int. The rules for valid uses of Pointer still apply.
+
+The function `Slice` returns a slice whose underlying array starts at `ptr` and whose length and capacity are `len`. If `ptr` is `nil` and `len` is zero, `Slice` returns `nil`. The `len` argument must be of integer type or an untyped constant. A constant `len` argument must be non-negative and representable by a value of type int; if it is an untyped constant it is given type int. At run time, if `len` is negative, or if `ptr` is `nil` and `len` is not zero, a run-time panic occurs.
+
+The function `SliceData` returns a pointer to the underlying array of the slice argument. If the slice's capacity `cap(slice)` is not zero, that pointer is `&slice[:1][0]`. If slice is `nil`, the result is `nil`. Otherwise it is a non-nil pointer to an unspecified memory address.
+
+The function `String` returns a `string` value whose underlying bytes start at `ptr` and whose length is `len`. The same requirements apply to the `ptr` and `len` argument as in the function `Slice`. If `len` is zero, the result is the empty string `""`. ==Since Go strings are immutable, the bytes passed to String must not be modified afterwards==.
+
+The function `StringData` returns a pointer to the underlying bytes of the `str` argument. For an empty string the return value is unspecified, and may be `nil`. Since Go strings are immutable, the bytes returned by `StringData` must not be modified.
+### Size and alignment guarantees
+For the numeric types, the following sizes are guaranteed:
+```
+type                                 size in bytes
+
+byte, uint8, int8                     1
+uint16, int16                         2
+uint32, int32, float32                4
+uint64, int64, float64, complex64     8
+complex128                           16
+```
+
+The following minimal alignment properties are guaranteed:
+- For a variable `x` of any type: `unsafe.Alignof(x)` is at least 1.
+- For a variable `x` of `struct` type: `unsafe.Alignof(x)` is the largest of all the values `unsafe.Alignof(x.f)` for each field `f` of `x`, but at least 1.
+- For a variable `x` of array type: `unsafe.Alignof(x)` is the same as the alignment of a variable of the array's element type.
+
+A ==struct or array type has size zero if it contains no fields (or elements, respectively) that have a size greater than zero==. ==Two distinct zero-size variables may have the same address in memory==.
+### Type unification rules
+
+> [!FAQ] What is type unification?
+> Type unification is the process of finding substitutions for type variables so that multiple type expressions become identical.
+
+> [!FAQ] What is bound parameter?
+> bound parameter generally refers to a type variable or function parameter that has a constraint or is “bound” to a specific scope.
+> ```go
+> x := 10
+> f := func(y int) int {
+> 	return x + y
+> }
+> ```
+> `y` is a bound parameter of the function `f`, and `x` is a free variable
+
+The type unification rules describe if and how two types unify. ==Type unification is controlled by a matching mode, which may be exact or loose==. As unification recursively descends a composite type structure, the matching mode used for elements of the type, the element matching mode, remains the same as the matching mode except when two types are unified for assignability: in this case, the matching mode is loose at the top level but then changes to exact for element types, reflecting the fact that types don't have to be identical to be assignable.
+
+Two types that are not bound type parameters unify exactly if any of following conditions is true:
+- Both types are identical.
+- Both types have identical structure and their element types unify exactly.
+- Exactly one type is an unbound type parameter, and all the types in its type set unify with the other type per the unification rules for ≡A (loose unification at the top level and exact unification for element types).
+
+If both types are bound type parameters, they unify per the given matching modes if:
+- Both type parameters are identical.
+- At most one of the type parameters has a known type argument. In this case, the type parameters are joined: they both stand for the same type argument. If neither type parameter has a known type argument yet, a future type argument inferred for one the type parameters is simultaneously inferred for both of them.
+- Both type parameters have a known type argument and the type arguments unify per the given matching modes.
+
+A single bound type parameter `P` and another type `T` unify per the given matching modes if:
+- `P` doesn't have a known type argument. In this case, T is inferred as the type argument for `P`.
+- `P` does have a known type argument `A`, `A` and `T` unify per the given matching modes, and one of the following conditions is true:
+- Both `A` and `T` are interface types: In this case, if both `A` and `T` are also defined types, they must be identical. Otherwise, if neither of them is a defined type, they must have the same number of methods (unification of `A` and `T` already established that the methods match).
+- Neither `A` nor `T` are interface types: In this case, if `T` is a defined type, `T` replaces `A` as the inferred type argument for `P`.
+
+Finally, two types that are not bound type parameters unify loosely (and per the element matching mode) if:
+- Both types unify exactly.
+- One type is a defined type, the other type is a type literal, but not an interface, and their underlying types unify per the element matching mode.
+- Both types are interfaces (but not type parameters) with identical type terms, both or neither embed the predeclared type comparable, corresponding method types unify exactly, and the method set of one of the interfaces is a subset of the method set of the other interface.
+- Only one type is an interface (but not a type parameter), corresponding methods of the two types unify per the element matching mode, and the method set of the interface is a subset of the method set of the other type.
+- Both types have the same structure and their element types unify per the element matching mode.
 
 # Sources
 [The Go Programming Language Specification](https://go.dev/ref/spec) (go version: 1.25)
