@@ -130,8 +130,6 @@ We can also use `defer` to ensure the mutex will be unlocked as in the `Value
 Mutex lock may decrease the total performance of the application because of the thread locking method under the hood. But, it is still faster than using channels for locking.
 
 # Links
-
-[[go_channels]]
-[[go_goroutines]]
-[[go_mutexes]]
-[[go_waitgroups]]
+[[Go goroutines]]
+[[Go synchronization primitives]]
+[[Go scheduler]]

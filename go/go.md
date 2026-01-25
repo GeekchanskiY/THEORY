@@ -18,18 +18,16 @@ What's possible for go:
 - Development Operations & Site Reliability Engineering (DevOPS)
 
 # Internal links
-[[go_packages]]
-[[go_community_packages]]
-[[go_standard_library]]
-[[go_asynchronous_programming]]
-[[go_variables_and_data_types]]
+[[Go community packages]]
+[[Go standard library]]
+[[Go asynchronous programming]]
 [[Go Specification]]
 [[Effective go]]
-[[go_tags]]
 [[Useful stuff]]
 [[Go Generics]]
 [[Go Garbage Collector]]
 [[go_mod and go_work]]
+[[Go standard library]]
 
 # Useful links
 [Documentation](https://go.dev/doc/)

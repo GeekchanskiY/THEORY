@@ -10,8 +10,3 @@ imaginary literal
 Array nil value vs slice nil value
 Promoted fields, promoted methods.
 General interfaces, `~T` syntax
-
-MARKDOWN:
-add footnotes[^1]
-
-[^1]: sample footnote

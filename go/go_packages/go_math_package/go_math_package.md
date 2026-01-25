@@ -1,1 +1,0 @@
-[[go_math-rand_package]]
