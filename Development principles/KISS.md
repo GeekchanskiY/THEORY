@@ -1,0 +1,1 @@
+Kiss – keep it stupid simple
