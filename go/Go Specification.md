@@ -1738,16 +1738,14 @@ Dependency analysis does not rely on the actual values of the variables, only on
 
 Dependency analysis is performed per package; only references referring to variables, functions, and (non-interface) methods declared in the current package are considered. If other, hidden, data dependencies exists between variables, the initialization order between those variables is unspecified.
 
-==Variables may also be initialized using functions named `init()` declared in the package block, with no arguments and no result parameters==.
-
-==Multiple such functions may be defined per package, even within a single source file. In the package block, the init identifier can be used only to declare init functions, yet the identifier itself is not declared. Thus init functions cannot be referred to from anywhere in a program==.
+==Variables may also be initialized using functions named `init()` declared in the package block, with no arguments and no result parameters==. More in: [[Go Package Initialization]]
 
 The entire package is initialized by assigning initial values to all its package-level variables followed by calling all init functions in the order they appear in the source, possibly in multiple files, as presented to the compiler.
 
 ### Program initialization
 The packages of a complete program are initialized stepwise, one package at a time. If a package has imports, the imported packages are initialized before initializing the package itself. If multiple packages import a package, the imported package will be initialized only once. The importing of packages, by construction, ==guarantees that there can be no cyclic initialization dependencies==.
 
-Package initialization—variable initialization and the ==invocation of init functions—happens in a single `goroutine`, sequentially, one package at a time==. An ==init function may launch other `goroutines`==, which can run concurrently with the initialization code. However, initialization always sequences the init functions: ==it will not invoke the next one until the previous one has returned==.
+Package initialization—variable initialization and the ==invocation of init functions—happens in a single `goroutine`, sequentially, one package at a time==. An ==init function may launch other `goroutines`==, which can run concurrently with the initialization code. However, initialization always sequences the init functions: ==it will not invoke the next one until the previous one has returned==. More in: [[Go Package Initialization]]
 ### Program execution
 A complete program is created by linking a single, unimported package called the main package with all the packages it imports, transitively. The ==main package must have package name main and declare a function main that takes no arguments and returns no value==.
 
