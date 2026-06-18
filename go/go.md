@@ -28,6 +28,7 @@ What's possible for go:
 [[Go Garbage Collector]]
 [[go_mod and go_work]]
 [[Go standard library]]
+[[Go Diagnostics]]
 
 # Useful links
 [Documentation](https://go.dev/doc/)
