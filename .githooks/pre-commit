@@ -1,0 +1,13 @@
+#!/bin/sh
+# Refresh README vault stats before each commit.
+set -e
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+python="${PYTHON:-python3}"
+if ! command -v "$python" >/dev/null 2>&1; then
+  python="python"
+fi
+
+"$python" "$repo_root/scripts/update_vault_readme.py"
+git add "$repo_root/README.md"
