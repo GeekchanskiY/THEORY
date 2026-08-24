@@ -12,4 +12,4 @@ DevOps Research and Assessment (DORA) has developed a series of metrics which a
 
 
 [[devops_toolchain]]
-[[applications_platforms_etc.]]
+[[devops/Applications&platforms&etc/README]]

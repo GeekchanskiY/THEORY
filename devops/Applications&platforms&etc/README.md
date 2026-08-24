@@ -1,6 +1,5 @@
 Containerization & build:
-	[[DevOps/Applications&platforms&etc/docker]]
-	[[docker-compose]]
+	[[Docker]]
 	[[DevOps/Applications&platforms&etc/kubernetes]]
 	[[makefile]]
 	
