@@ -9,9 +9,9 @@ Auto-generated on 2026-08-24. Do not edit this section by hand — it is refresh
 
 | Metric | Count |
 | --- | ---: |
-| Notes | 216 |
-| Empty files | 61 |
-| Under 200 characters | 87 |
+| Notes | 218 |
+| Empty files | 62 |
+| Under 200 characters | 89 |
 | Files with TODO | 14 |
 | TODO mentions | 19 |
 
@@ -27,9 +27,9 @@ Empty files are also included in the under-200-character count. Root `README.md`
 | python | 28 |
 | Network Applications | 23 |
 | Development principles | 16 |
-| devops | 13 |
+| devops | 11 |
+| Docker | 8 |
 | Design Patterns | 5 |
-| Docker | 4 |
 | Agile | 2 |
 | Git | 2 |
 | Kafka | 1 |
