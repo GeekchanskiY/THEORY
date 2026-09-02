@@ -1,4 +1,3 @@
-
 # What is an image?
  
  A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container.
