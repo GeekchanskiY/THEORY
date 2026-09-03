@@ -5,13 +5,13 @@ Notes on computer science, programming languages, software architecture, network
 <!-- vault-stats:start -->
 ## Vault snapshot
 
-Auto-generated on 2026-08-24. Do not edit this section by hand — it is refreshed when notes change.
+Auto-generated on 2026-09-02. Do not edit this section by hand — it is refreshed when notes change.
 
 | Metric | Count |
 | --- | ---: |
 | Notes | 218 |
-| Empty files | 62 |
-| Under 200 characters | 89 |
+| Empty files | 60 |
+| Under 200 characters | 87 |
 | Files with TODO | 14 |
 | TODO mentions | 19 |
 
