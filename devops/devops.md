@@ -11,5 +11,5 @@ DevOps Research and Assessment (DORA) has developed a series of metrics which a
 - Reliability (added in 2021): Measures operational performance, focusing on availability and adherence to user expectations.
 
 
-[[devops_toolchain]]
-[[devops/Applications&platforms&etc/README]]
+[[Devops toolchain]]
+[[DevOPS/Services/README]]

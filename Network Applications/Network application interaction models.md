@@ -1,5 +1,5 @@
 
-[[packet(datagram)]]
+[[Packet (datagram)]]
 
 # ISO/OSI
 

@@ -5,8 +5,8 @@ In context of networks, it allows to create a distributed system.
 
 There are several primary ways (protocols) to create a distributed applications:
 [[SOAP]]
-[[RESTful_API]]
-[[graphQL]]
+[[RESTful API]]
+[[GraphQL]]
 Websockets
 [[RPC]] (and gRPC, tRPC, etc.)
 etc.

@@ -1,6 +1,6 @@
 In software engineering, version control is a class of systems responsible for managing changes to computer programs, documents, large web sites, or other collections of information. Version control is a component of software configuration management.
 
-Most popular one is [[git]]
+Most popular one is [[Git]]
 ## Common terminology
 **Baseline**: An approved revision of a document or source file to which subsequent changes can be made.
 

@@ -4,3 +4,4 @@
 [[Queues]]
 [[Stacks]]
 [[Trees]]
+[[Graphs]]

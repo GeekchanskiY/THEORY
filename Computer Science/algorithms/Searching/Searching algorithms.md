@@ -10,16 +10,16 @@ Understanding the characteristics of searching in data structures and algorithms
 ## Algorithms
 
 Common searching techniques are:
-[[binary_search]]
-[[linear_search]]
-[[two_pointers_search]]
+[[Binary search]]
+[[Linear search]]
+[[Two pointers search]]
 
 Advanced:
-[[sentinel_linear_search]]
-[[one-sided_binary_search]]
-[[ternary_search]]
-[[jump_search]]
-[[interpolation_search]]
-[[exponential_search]]
-[[fibonacci_search]]
-[[ubiquitous_binary_search]]
+[[Sentinel linear search]]
+[[One-sided binary search]]
+[[Ternary search]]
+[[Jump search]]
+[[Interpolation search]]
+[[Exponential search]]
+[[Fibonacci search]]
+[[Ubiquitous binary search]]
