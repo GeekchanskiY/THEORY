@@ -5,15 +5,15 @@ Notes on computer science, programming languages, software architecture, network
 <!-- vault-stats:start -->
 ## Vault snapshot
 
-Auto-generated on 2026-09-02. Do not edit this section by hand — it is refreshed when notes change.
+Auto-generated on 2026-09-03. Do not edit this section by hand — it is refreshed when notes change.
 
 | Metric | Count |
 | --- | ---: |
-| Notes | 218 |
-| Empty files | 60 |
-| Under 200 characters | 87 |
-| Files with TODO | 14 |
-| TODO mentions | 19 |
+| Notes | 217 |
+| Empty files | 62 |
+| Under 200 characters | 86 |
+| Files with TODO | 10 |
+| TODO mentions | 15 |
 
 Empty files are also included in the under-200-character count. Root `README.md` is not counted as a note.
 
@@ -21,7 +21,7 @@ Empty files are also included in the under-200-character count. Root `README.md`
 
 | Folder | Notes |
 | --- | ---: |
-| Computer Science | 51 |
+| Computer Science | 50 |
 | go | 35 |
 | Software Architecture | 34 |
 | python | 28 |
@@ -29,8 +29,8 @@ Empty files are also included in the under-200-character count. Root `README.md`
 | Development principles | 16 |
 | devops | 11 |
 | Docker | 8 |
-| Design Patterns | 5 |
-| Agile | 2 |
+| Design Patterns | 4 |
+| Agile | 3 |
 | Git | 2 |
 | Kafka | 1 |
 | PostgreSQL | 1 |
