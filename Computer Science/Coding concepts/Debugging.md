@@ -1,1 +1,6 @@
-Debugging is the process of identifying and resolving errors or bugs in a software system. It’s a critical aspect of software development, ensuring quality, performance, and user satisfaction. Despite being time-consuming, effective debugging is essential for reliable and competitive software products.
+# Debugging
+Debugging is the process of identifying and resolving errors or bugs in a software system.
+
+It’s a critical aspect of software development, ensuring quality, performance, and user satisfaction. Despite being time-consuming, effective debugging is essential for reliable and competitive software products.
+
+#cs #TODO 

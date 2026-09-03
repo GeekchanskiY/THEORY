@@ -43,3 +43,5 @@ docker network connect anet2 myctr
 By default, for both IPv4 and IPv6, the Docker daemon blocks access to ports that have not been published. Published container ports are mapped to host IP addresses. To do this, it uses firewall rules to perform Network Address Translation (NAT), Port Address Translation (PAT), and masquerading.
 
 For example, `docker run -p 8080:80 [...]` creates a mapping between port 8080 on any address on the Docker host, and the container's port 80. Outgoing connections from the container will masquerade, using the Docker host's IP address.
+
+#devops #TODO #docker

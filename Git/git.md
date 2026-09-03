@@ -70,3 +70,5 @@ By default, any tag that points into the histories being fetched is also fetched
 ## Good practices
 
 To store inside git directory, which is empty at the moment, but you wish to leave it in the project structure to be available for other developers, you can use dummy files. By default, name for this file is a `.gitkeep`.
+
+#devops #TODO #git

@@ -23,3 +23,5 @@ func testFunc[T int32 | int64, V Unsigned] (t T, v V) (T, V){
 - handlers
 # Sources
 [Getting started with generics](https://go.dev/doc/tutorial/generics)
+
+#go #TODO

@@ -63,3 +63,5 @@ and other objects.
 Docker compose is a docker client, that lets you work with applications consisting of a set of containers.
 
 [[Docker compose]]
+
+#devops #TODO #docker

@@ -1,8 +1,3 @@
-# Notes
-It's a compact version of go specification. The data which is removed:
- - signatures and structure of lexical elements: it's intuitive and does not make any practical use for most cases (except code generation maybe). places where internals are referenced  by documentation are marked and description of these elements is provided.
- - Details about generics are moved to [[Go Generics]]. // TODO
-
 
 # Go specification
 The syntax  is specified using a variant of Extended Backus-Naur Form (EBNF). // TODO

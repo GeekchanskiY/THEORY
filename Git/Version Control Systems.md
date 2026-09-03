@@ -43,3 +43,5 @@ Most popular one is [[Git]]
 **Repository**: data structure that stores metadata for set of files or directory structure
 
 **Tag**: refers to an important snapshot in time, consistent across many files. These files at that point may all be tagged with a user-friendly, meaningful name or revision number.
+
+#devops #TODO #git

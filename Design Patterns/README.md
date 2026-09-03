@@ -1,3 +1,4 @@
+# Design patterns
 An design pattern is a repeatable architectural design in the field of software design that offers a solution to a design problem within some frequently occurring context
 
 Best sources: 
@@ -11,3 +12,4 @@ Contains 3 types:
 	3 - [[Behavioral patterns]]
 		They used to define the interaction between objects, increasing the flexibility
 
+#TODO #cs

@@ -28,3 +28,4 @@ While you're working with registries, you might hear the terms _registry_ and�
 
 A _registry_ is a centralized location that stores and manages container images, whereas a _repository_ is a collection of related container images within a registry. Think of it as a folder where you organize your images based on projects. Each repository contains one or more container images.
 
+#devops #TODO #docker

@@ -1,3 +1,5 @@
+# Searching algorithms
+
 **Searching** is the fundamental process of locating a specific element or item within a collection of data. This collection of data can take various forms, such as arrays, lists, trees, or other structured representations.
 
 ## Characteristics of Searching
@@ -23,3 +25,5 @@ Advanced:
 [[Exponential search]]
 [[Fibonacci search]]
 [[Ubiquitous binary search]]
+
+#cs

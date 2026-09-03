@@ -1,4 +1,4 @@
-
+# Python OOP
 ## Decorators
 	- @final: says that object cant be inherited
 	- @staticmethod: does not requires to get instance passed by
@@ -32,3 +32,5 @@ PdfParser.__mro__
 # -> set of parents
 
 ```
+
+#python #TODO

@@ -1,3 +1,4 @@
+# Behavioral patterns
 They used to define the interaction between objects, increasing the flexibility
 
 <p style='font-size: 32px; font-weight: bold;'> Chain of Responsibility </p>
@@ -159,3 +160,5 @@ Detail info: https://refactoring.guru/design-patterns/visitor
 4.  Each **Concrete Element** must implement the acceptance method. The purpose of this method is to redirect the call to the proper visitor’s method corresponding to the current element class. Be aware that even if a base element class implements this method, all subclasses must still override this method in their own classes and call the appropriate method on the visitor object.
     
 5.  The **Client** usually represents a collection or some other complex object (for example, a [Composite](https://refactoring.guru/design-patterns/composite) tree). Usually, clients aren’t aware of all the concrete element classes because they work with objects from that collection via some abstract interface.
+
+#TODO #cs

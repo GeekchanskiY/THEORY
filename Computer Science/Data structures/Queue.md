@@ -1,3 +1,4 @@
+# Queues
 There are four different types of queues in data structures:
 1. **Simple Queue**:
     - A simple queue is a linear data structure where elements are inserted at the rear (also called the "tail") and removed from the front (also called the "head").

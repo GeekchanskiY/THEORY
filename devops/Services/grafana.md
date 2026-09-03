@@ -8,3 +8,5 @@ Loki - logs
 Grafana - visualization
 Tempo for traces
 Mimir for metrics
+
+#devops #TODO 

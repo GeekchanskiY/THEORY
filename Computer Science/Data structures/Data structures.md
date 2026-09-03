@@ -1,7 +1,9 @@
-[[Arrays]]
-[[Maps]]
-[[Lists]]
-[[Queues]]
-[[Stacks]]
-[[Trees]]
-[[Graphs]]
+[[Array]]
+[[Map]]
+[[List]]
+[[Queue]]
+[[Stack]]
+[[Tree]]
+[[Graph]]
+
+#TODO #cs
