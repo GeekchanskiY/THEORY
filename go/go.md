@@ -30,6 +30,8 @@ What's possible for go:
 [[go_mod and go_work]]
 [[Go standard library]]
 [[Go Diagnostics]]
+[[Go Compiler]]
+[[Go Testing]]
 
 # Useful links
 [Documentation](https://go.dev/doc/)

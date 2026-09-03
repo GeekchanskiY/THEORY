@@ -20,4 +20,7 @@ Computer science is a basics of software development. Contains lots of terms and
 ## Databases
 [[ORM]]
 
+# Communications
+[[Event streaming]]
+
 #cs
