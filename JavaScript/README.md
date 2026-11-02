@@ -1,0 +1,3 @@
+JavaScript is a programming language and core technology of the Web, alongside HTML and CSS. Created by Brendan Eich in 1995, it is maintained by Ecma International's TC39 technical committee, with related Web APIs maintained by W3C and WHATWG. In 2025, JavaScript was the most widely used programming language on GitHub. However, TypeScript, a statically typed superset of JavaScript that is stricter about types, overtook JavaScript on GitHub by August 2025.
+
+JavaScript/TypeScript is used for backend and frontend development. While frontend is being executed directly in browser using on of multiple browser engines, backend is based mostly on NodeJS, which is a framework running on [[V8 Engine]].

@@ -22,3 +22,23 @@ func main() {
 }
 ```
 
+### err != nil
+```go
+type MyError struct{}
+
+func (e *MyError) Error() string {
+    return "my error"
+}
+
+func do() error {
+    var e *MyError = nil
+    return e
+}
+
+func main() {
+    err := do()
+    fmt.Println(err != nil) // true
+}
+```
+
+Internally, an interface is `(type, value)`, which is `(*MyError, nil)` in this case, and if checks equality of both `type` and `value`.
