@@ -1,3 +1,4 @@
+# Python magic methods
 `def __new__(cls)`
 To get called in an object's instantiation.
 
@@ -44,3 +45,5 @@ Used with `**` operator
 Used with `+` operator, but when the instance is a right-hand
 
 Same for all other `__arithmetic__` methods, e.g. `__rsub__`, `__rmul__`, `__rtruediv__`, `__rfloordiv__`, `__rmod__`, `__rpow__`
+
+#python #TODO

@@ -29,3 +29,5 @@ Additionally to what is provided by the runtime, ==Go users can create their cus
 ## Runtime statistics and events
 # Sources
 [Diagnostics](https://go.dev/doc/diagnostics)
+
+#go #TODO

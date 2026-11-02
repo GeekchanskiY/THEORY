@@ -1,7 +1,12 @@
+# Agile glossary
+Agile glossary is a set of terms, which helps to better understand agile ideas and principles
+
 ## Acceptance test driven development
 Acceptance Test Driven Development (ATDD) involves team members with different perspectives (customer, development, testing) collaborating to write acceptance tests in advance of implementing the corresponding functionality.
+
+[[Anti-pattern]]
 ## Acceptance testing
-## AntiPattern
+
 ## Automated build
 ## Backlog refinement
 ## Burndown chart
@@ -75,3 +80,4 @@ Acceptance Test Driven Development (ATDD) involves team members with different p
 ## Velocity
 ## Version control
 
+#agile

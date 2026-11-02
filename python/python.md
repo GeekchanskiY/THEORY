@@ -1,3 +1,4 @@
+# Python
 [[python_libs]]
 [[standard_library]]
 ### Python + Obsidian example
@@ -107,5 +108,6 @@ outer_function()
 
 ## USEFUL STUFF
 [[python_OOP]]
-[[Python networking]]
+
+#python #TODO
 

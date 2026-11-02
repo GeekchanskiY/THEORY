@@ -1,4 +1,4 @@
 [[microservices]]
 [[monolith]]
 [[architecture_types]]
-[[security]]
+[[Software Architecture/security/security]]

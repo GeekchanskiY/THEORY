@@ -1,3 +1,4 @@
+# Testing
 In software development, various types of tests are performed to ensure the quality, functionality, and reliability of the software being developed. Different types of tests serve different purposes and focus on specific aspects of the software. Some common types of tests include:
 
 1. **Unit Tests**: Unit tests focus on testing individual units or components of the software in isolation. These tests ensure that each unit of code (e.g., functions, methods) works correctly and meets its specifications.
@@ -31,3 +32,5 @@ In software development, various types of tests are performed to ensure the qual
 15. **Exploratory Tests**: Exploratory testing involves exploring the software without predefined test cases, allowing testers to discover and report issues organically.
 
 These are just some of the common types of tests used in software development. The selection and extent of testing depend on factors such as the project's requirements, complexity, and the criticality of the application. A comprehensive testing strategy combines multiple types of tests to ensure the software's overall quality and reliability.
+
+#TODO #cs

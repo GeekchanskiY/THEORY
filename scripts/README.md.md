@@ -1,0 +1,1 @@
+Scripts is a folder for vault automations. Nothing useful for non-contributors.

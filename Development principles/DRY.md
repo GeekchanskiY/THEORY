@@ -1,1 +1,3 @@
-DRY – dont repeat yourself.
+# DRY – dont repeat yourself.
+
+#TODO #cs

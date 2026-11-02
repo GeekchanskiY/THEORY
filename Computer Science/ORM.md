@@ -1,3 +1,4 @@
+# ORM
 An ORM, or **Object Relational Mapper**, is a piece of software designed to translate between the data representations used by databases and those used in object-oriented programming.  Provides an object-oriented layer between relational databases and object-oriented programming languages without having to write SQL queries. It standardizes interfaces reducing boilerplate and speeding development time.
 
 
@@ -9,3 +10,5 @@ This strategy maps data within the structure of objects in the code. You manage 
 
 #### Data-mapper patterns
 The data-mapper pattern attempts to decouple the business logic in the objects from the database. This separation can make it easier to change databases and use the same programming logic.
+
+#TODO #cs

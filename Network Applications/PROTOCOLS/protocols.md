@@ -21,13 +21,14 @@ TCP (Transmission Control Protocol)
     - Example: Gmail or Yahoo Mail are mail servers that process and store user emails and provide access to them through a web interface.
 
 Together, these terms describe various aspects of the functioning and interaction of computer systems in modern information technologies.
+
 [[ethernet]]
 [[PPP]]
 [[IPv4]]
 [[IPv6]]
 [[SLIP]]
 [[ICMP]]
-[[ARP_RARP]]
+[[ARP RARP]]
 [[DHCP]]
 [[RPC]]
 [[SOAP]]
